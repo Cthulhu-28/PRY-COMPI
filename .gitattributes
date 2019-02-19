@@ -1,8 +1,8 @@
 # Auto detect text files and perform LF normalization
 * text=auto
 
-*.obj
-*.map
-*.lst
-*.exe
+*.OBJ
+*.MAP
+*.LST
+*.EXE
 
