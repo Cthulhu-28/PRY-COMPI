@@ -1,6 +1,6 @@
 data segment
 	var dw 0
-	intExpected db 13,10,"ERROR LOL",10,13,"$"
+	intExpected db 13,10,"Exceptis: numerus expectata",10,13,"$"
 data ends
 
 sstack segment stack 'stack'
