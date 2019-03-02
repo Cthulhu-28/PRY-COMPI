@@ -19,9 +19,13 @@ code segment
 		xor di,di
 		xor si, si
 		;lee tecla por tecla la entrada. Al dar enter termina el cliclo
+		;En cx guarda la cantidad de caracteres leídos
+		;En di almacena la posición del último | leído
+		;En bx almacena la cantidad de | leídos
 		@@cicle:
 			mov ah,08h
 			int 21h
+			;Comparación con el enter
 			cmp al,13
 		je @@cicleEnd
 			cmp al,'|'
@@ -31,6 +35,7 @@ code segment
 		@@pipe:
 			inc cx
 			xor ah,ah
+			;Cada tecla digitada se almacena en la pila
 			push ax
 			mov ah, 02h
 			mov dl,al	
@@ -38,47 +43,67 @@ code segment
 		jmp @@cicle
 		
 		@@cicleEnd:
+		;Se intenta detectar errores simples en la entrada:
+	
+			;A. Comienza con |
 			cmp di,0
 			je @@errorIInt
+			;B. Que haya más de un |
 			cmp bx,1
 			jne @@errorIInt
+			;C. Que lo ingresado no sea al menos 3 caracteres
 			cmp cx,3
 			jb @@errorIInt
 			inc di
+			;D. Que el | sea el último caracter introducido
 			cmp cx,di
 			je @@errorIInt
 			dec di
+			
+		;En di se guardará el denominador
+		;En cx se cuenta si hay un número negativo
+		;Em bx se trabajará las potencias de 10. Se comienza con 10^0
 		mov bx,1
 		xor di,di		
 		xor cx,cx
+		
 		@@castDen:
+		;Se saca la tecla de la pila y se compara con - y |.
 			pop ax
 			cmp al,'-'
 			je @@SignDen
 			cmp al,'|'
 			je @@next
+			;Se verifica que la tecla esté en el rango de los números
 			cmp al,48
 			jb @@errorIInt
 			cmp al,57
 			ja @@errorIInt
 			jmp @@noErrorDen
 		@@SignDen:
+		;Si hay un menos, luego debe seguir un |, sino es error.
 			pop ax
 			cmp al,'|'
 			jne @@errorIInt
 			;xor di,0ffffh
 			;inc di
+			;Se cuenta que hay un menos
 			inc cx
 			mov bx,1
 			jmp @@castNum
 		@@noErrorDen:	
+			;Se obtiene el valor real
 			sub ax,48
+			;Se multiplica el número por la potencia de 10 respectiva según su valor posicional.
 			mul bx
+			;Se incrementa el di con el nuevo valor.
 			add di,ax
 			mov ax,bx
+			;Se pasa a la siguiente potencia de 10.
 			mov dx,10
 			mul dx
 			mov bx,ax
+			;Se pregunta en caso de overflow.
 			cmp di,8000h
 			ja @@errorOInt
 		jmp @@castDen
