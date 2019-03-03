@@ -146,9 +146,7 @@ code segment
 		push var
 		call write
 		int 21h
-	
-		
-		
+
 		mov ax, 4c4dh
 		int 21h
 code ends

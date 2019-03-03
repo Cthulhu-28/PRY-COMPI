@@ -175,9 +175,6 @@ code segment
 		push ax
 		call write
 
-
-		
-		
 		mov ax, 4c4dh
 		int 21h
 code ends
