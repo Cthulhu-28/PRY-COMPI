@@ -237,19 +237,19 @@ code segment
 	@@noSignNum:	
 		xor cx, cx
 		mov bx, 10
-	@@ciclo1PAXNum: 
+	@@ciclo1Num: 
 		xor dx, dx
 		div bx
 		push dx
 		inc cx
 		cmp ax, 0
-		jne @@ciclo1PAXNum
+		jne @@ciclo1Num
 		mov ah, 02h
-	@@ciclo2PAXNum: 
+	@@ciclo2Num: 
 		pop DX
 		add dl, 30h
 		int 21h
-		loop @@ciclo2PAXNum
+		loop @@ciclo2Num
 		mov ah,02
 		mov dl,"|"
 		int 21h
@@ -270,19 +270,19 @@ code segment
 	@@noSignDen:	
 		xor cx, cx
 		mov bx, 10
-	@@ciclo1PAXDen: 
+	@@ciclo1Den: 
 		xor dx, dx
 		div bx
 		push dx
 		inc cx
 		cmp ax, 0
-		jne @@ciclo1PAXDen
+		jne @@ciclo1Den
 		mov ah, 02h
-	@@ciclo2PAXDen: 
+	@@ciclo2Den: 
 		pop DX
 		add dl, 30h
 		int 21h
-		loop @@ciclo2PAXDen	
+		loop @@ciclo2Den	
 	
 		ret 2*2
 		

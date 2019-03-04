@@ -109,17 +109,19 @@ code segment
 
 		xor cx, cx
 		mov bx, 10
-	ciclo1PAX: xor dx, dx
+	ciclo1: 
+		xor dx, dx
 		div bx
 		push dx
 		inc cx
 		cmp ax, 0
-		jne ciclo1PAX
+		jne ciclo1
 		mov ah, 02h
-	ciclo2PAX: pop DX
+	ciclo2: 
+		pop DX
 		add dl, 30h
 		int 21h
-		loop ciclo2PAX
+		loop ciclo2
 
 		pop DX
 		pop CX
