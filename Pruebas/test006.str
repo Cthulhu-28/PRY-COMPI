@@ -9,7 +9,7 @@ commutabilis
 	ordo [4] autem numerus B est {10,11,9,12} .
 	numerus N est 0, ele .
 firmamentum
-	scribocatena(La suma de los cuadrados de la intersección de los arreglos es: ") .
+	scribocatena("La suma de los cuadrados de la intersección de los arreglos es: ") .
 	decusis A cum B per ele opus
 	initum
 		N += ele * ele .
