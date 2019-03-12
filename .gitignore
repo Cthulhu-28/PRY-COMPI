@@ -3,3 +3,4 @@
 *.exe
 *.obj
 *.tr
+/Sator/Sator/nbproject/private/
