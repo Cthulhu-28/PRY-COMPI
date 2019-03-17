@@ -36,5 +36,4 @@ public enum FinalStates implements FinalState{
     
     @Override
     public abstract State next(String input);
-    
 }

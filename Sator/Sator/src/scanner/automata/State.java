@@ -13,4 +13,5 @@ public interface State {
     public String ALPHABET="";
     
     public State next(String input);
+
 }
