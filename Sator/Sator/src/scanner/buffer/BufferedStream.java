@@ -23,7 +23,7 @@ public class BufferedStream {
     private int readCharacters=BUFFER_SIZE;
     private int idx = BUFFER_SIZE;
     private Queue<Byte> queue;
-    
+    private final FileInfo info = new FileInfo();
     public BufferedStream(String file) throws FileNotFoundException{
         File f = new  File(file);
         if(!f.exists())
@@ -46,7 +46,9 @@ public class BufferedStream {
         } catch (IOException e) {
             throw new IOException("Hubo un error al leer el archivo");
         }
-        return (char) buffer[idx++];
+        char c = (char) buffer[idx++];
+        info.move(c);
+        return c;
     }
     public void returnChar(char c){
         queue.add((byte)c);
@@ -55,6 +57,7 @@ public class BufferedStream {
         idx = idx <=0 ? 0 : idx - 1;
     }
     public void close() throws IOException{
+
         try {
             stream.close();
         } catch (IOException ex) {
