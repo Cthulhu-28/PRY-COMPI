@@ -32,7 +32,7 @@ public class Scanner {
     }
     public Token nextToken() throws IOException{
         StringBuilder builder = new StringBuilder();
-        State initial = States.q0;
+        State initial = States.q201;
         State s = FinalStates.q0;
      
         while(!initial.isFinal()){
