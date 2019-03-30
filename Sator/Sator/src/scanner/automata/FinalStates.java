@@ -172,7 +172,7 @@ public enum FinalStates implements State{
     
     @Override
     public boolean hasLookedAhead(){
-        return this.lookAhead;
+        return Info.lookAhead;
     }
     
     @Override

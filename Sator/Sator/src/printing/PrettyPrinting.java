@@ -73,7 +73,7 @@ public class PrettyPrinting {
         builder.append("<span ");
         builder.append("class=");
         builder.append("\"s");
-        builder.append(token.getCode());
+        builder.append(Color.getCssClass(token.getCode()));
         builder.append("\"");
         builder.append(">");
         builder.append(token.getLexeme());

@@ -16,41 +16,58 @@ import java.util.Queue;
  * Read
  * @author Steven Moya
  */
-public class BufferedStream {
+public final class BufferedStream {
+    private boolean finished=false;
     private FileInputStream stream;
-    private final int BUFFER_SIZE=1048576;
+    private final int BUFFER_SIZE=1024*3;
     private byte[] buffer;
     private int readCharacters=BUFFER_SIZE;
     private int idx = BUFFER_SIZE;
     private Queue<Byte> queue;
     private final FileInfo info = new FileInfo();
-    public BufferedStream(String file) throws FileNotFoundException{
+    
+    public BufferedStream(String file) throws FileNotFoundException, IOException{
         File f = new  File(file);
+        
+        if(!getExtension(file).toLowerCase().equals("str"))
+            throw new IOException("GN-1: Se esperaba un archivo con extensión .str, extension recibida: ."+getExtension(file));
+        
         if(!f.exists())
-            throw new FileNotFoundException("El archivo \""+file+"\" no se pudo encontrar");
+            throw new FileNotFoundException("GN-0: El archivo \""+file+"\" no existe");
+        
+        if(!f.canRead())
+            throw new IOException("GN-2: El archivo \""+file+"\" no puede leerse");
+        
         stream = new FileInputStream(f);
         buffer = new byte[BUFFER_SIZE];
         queue = new LinkedList<>();
     }
     public char readNextChar() throws IOException{
+        if(finished)return 0;
         try {
-            if(!queue.isEmpty())
-                return (char)queue.remove().byteValue();
+            if(!queue.isEmpty()){
+                char c = (char)queue.remove().byteValue();
+                info.move(c);
+                return c;
+            }
             if(idx==readCharacters){
                 idx=0;
                 readCharacters = stream.read(buffer);
-                if(readCharacters==-1)
+                if(readCharacters==-1){
+                    finished=true;
                     return 0;
+                }
                 System.out.println("Reading new chunk");   
             }
         } catch (IOException e) {
-            throw new IOException("Hubo un error al leer el archivo");
+            throw new IOException("GN-3: Ha ocurrido un error al leer la siguiente porción del archivo");
         }
         char c = (char) buffer[idx++];
         info.move(c);
         return c;
     }
     public void returnChar(char c){
+        info.back(c);
         queue.add((byte)c);
     }
     public void returnChar(){
@@ -61,7 +78,20 @@ public class BufferedStream {
         try {
             stream.close();
         } catch (IOException ex) {
-            throw new IOException("No se pudo cerrar el buffer");
+            throw new IOException("GN-4: Ha ocurrido un error al cerrar buffer");
         }
+    }
+    public int getRow(){
+        return info.getColumn();
+    }
+    public int getColumn(){
+        return info.getRow();
+    }
+    
+    public String getExtension(String path){
+        if(path.contains(".")){
+            path = path.substring(path.lastIndexOf(".") + 1);
+        }
+        return path;
     }
 }
