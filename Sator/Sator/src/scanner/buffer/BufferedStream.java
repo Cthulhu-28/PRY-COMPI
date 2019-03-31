@@ -19,7 +19,7 @@ import java.util.Queue;
 public final class BufferedStream {
     private boolean finished=false;
     private FileInputStream stream;
-    private final int BUFFER_SIZE=1024*3;
+    private final int BUFFER_SIZE=1024*1024;
     private byte[] buffer;
     private int readCharacters=BUFFER_SIZE;
     private int idx = BUFFER_SIZE;

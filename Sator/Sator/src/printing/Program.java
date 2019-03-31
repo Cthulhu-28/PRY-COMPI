@@ -7,7 +7,6 @@ package printing;
 
 import java.util.ArrayList;
 import java.util.List;
-import scanner.automata.Info;
 import scanner.reader.Scanner;
 
 import scanner.reader.Token;
@@ -18,11 +17,12 @@ import scanner.reader.Token;
  */
 public class Program {
     public static void main(String args[]){
-       int tabs = 4;
-       String file = "";
+        int tabs = 4;
+        //String file = args[0];
+        //int tabs = Integer.parseInt(args[1]);
         try {
             List<Token> tokens = new ArrayList<>();
-            Scanner scanner = Scanner.initScanner("C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 0\\Pruebas\\test001.str");
+            Scanner scanner = Scanner.initScanner("C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 1\\Pruebas\\test010.str");
             Token token = scanner.nextToken();
             while(token.getCode()!=143){
                 tokens.add(token);
@@ -45,8 +45,5 @@ public class Program {
             ex.printStackTrace();
             System.err.println(ex.getMessage());
         }
-        
-        
-        
     }
 }

@@ -56,6 +56,8 @@ public class PrettyPrinting {
                 checknindent();
             }
             if(action==IndentAction.BREAK_LINE){
+                 if(token.isComment())
+                    builder.append((toSpan(token)));
                 builder.append("<br>");
                 first=true;
                 checknindent();

@@ -65,6 +65,7 @@ public class Scanner {
         boolean romanNumeral=false;
         boolean withSpace=false;
         boolean comment=false;
+        boolean lineComment = false;
         boolean doubleLookAhead=false;
         int blockComments = 0 ;
         StringBuilder builder = new StringBuilder();
@@ -135,13 +136,13 @@ public class Scanner {
             //En caso contrario, lo adjunta al posible lexema
             if(state.hasLookedAhead()){
                 buffer.returnChar(input.charAt(0));
-            }else if (!("\n\r \t").contains(input) || withSpace || comment){
+            }else if (!("\n\r \t").contains(input) || withSpace || comment || lineComment){
                     builder.append(input);
             }
             
             
             if(state.getCode()==632 || state.getCode()==566){
-                comment=true;
+                lineComment=true;
             }
             if(state.getCode()==566){
                 comment=true;
@@ -163,7 +164,7 @@ public class Scanner {
                     state = States.q201;
                 }
             }
-            if(comment && state.getCode()==201 && blockComments==0){
+            if(lineComment && state.getCode()==201 && blockComments==0){
                 return reportarComentario(builder,144);
             }
             
