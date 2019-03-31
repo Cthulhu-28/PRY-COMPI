@@ -14,8 +14,8 @@ class FileInfo {
     private int column;
     private FileInfo previous;
     public FileInfo(){
-        row = 0;
-        column = 1;
+        row = 1;
+        column = 0;
     }
     public void move(char c){
         if(previous==null)previous = new FileInfo();
@@ -24,18 +24,18 @@ class FileInfo {
         switch(c){
             case '\n':
                 row++;
-                column=1;
+                column=0;
                 break;
             case '\r':
-                row = 1;
+                column = 0;
                 break;
             case 0:
                 break;
             case '\t':
-                row+=5;
+                column+=4-(column%4);
                 break;
             default:
-                row++;   
+                column++;   
         }
     }
     public void back(char c){
@@ -46,15 +46,15 @@ class FileInfo {
                 column=previous.getColumn();
                 break;
             case '\r':
-                row = previous.getColumn();
+                column = previous.getColumn();
                 break;
             case 0:
                 break;
             case '\t':
-                row-=5;
+                column-=5;
                 break;
             default:
-                row--;   
+                column--;   
         }
     }
 

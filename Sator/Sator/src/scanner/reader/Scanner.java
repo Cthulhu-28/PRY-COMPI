@@ -24,6 +24,12 @@ public class Scanner {
     private BufferedStream buffer;
     private static Scanner scanner;
     private final Set<Integer> integerCodes = new HashSet<>(Arrays.asList(new Integer[]{608,609,611,614,615,616,617,618}));
+    private final Set<Integer> escapeCodes = new HashSet<>(Arrays.asList(new Integer[]{606,603}));
+    private final Set<Integer> catenaCodes = new HashSet<>(Arrays.asList(new Integer[]{605,607}));
+    private final Set<Integer> imagoCodes = new HashSet<>(Arrays.asList(new Integer[]{602,604}));
+    private final Set<Integer> gregoriusCodes = new HashSet<>(Arrays.asList(new Integer[]{6110,612,613}));
+    private final Set<Integer> fractioCodes = new HashSet<>(Arrays.asList(new Integer[]{610}));
+    private final Set<Integer> identifierCodes = new HashSet<>(Arrays.asList(new Integer[]{601}));
     
     private Scanner(){}
     private Scanner(String path) throws FileNotFoundException{
@@ -87,7 +93,7 @@ public class Scanner {
             }
             //En caso de ser null, encuentra un caracter monstruo
             if(state==null){
-                Token token = reportError(builder, input, last.getCode(), row1, row2, col1, col2)
+                Token token = reportError(builder, input, last.getCode(), row1, row2, col1, col2);
                 recoverFromError(buffer);
                 return token;
             }
@@ -105,10 +111,25 @@ public class Scanner {
                 romanNumeral=true;
             //En caso de haber detectado la lectura de un numerus
             //Si detectó que empezaba con 0r, verifica si es un número romano correcto
-            if(romanNumeral && state == FinalStates.q72){
+            if(romanNumeral && state == FinalStates.q120){
                 boolean f = checkRomanNumeral(builder.toString().replace("0r", ""));
-                if (!checkRomanNumeral(builder.toString().replace("0r", "")))
-                    System.out.println("NR error");
+                if (!checkRomanNumeral(builder.toString().replace("0r", ""))){
+                    Token token;
+                    token = new Token(-2, builder.toString(), "Literal de numerus mal formada");
+                    token.setProperty("row", row1);
+                    token.setProperty("column", col1);
+                    return token;
+                }
+                    
+            }
+            if(state == FinalStates.q101){
+                if(builder.toString().length()>0){
+                    Token token;
+                    token = new Token(-9, builder.toString(), "El identificador "+builder.toString()+" excede el máxmio permitido de 8 caracteres");
+                    token.setProperty("row", row1);
+                    token.setProperty("column", col1);
+                    return token;
+                }
             }
             //En caso de hallar en EOF, termina el ciclo
             if(input.equals("\0") && state.getCode()!=143){
@@ -124,7 +145,32 @@ public class Scanner {
     private Token reportError(StringBuilder builder, String input, int code, int row1, int row2, int column1, int column2){
         Token token = null;
         if(integerCodes.contains(code)){
-            token = new Token(-2, builder.toString(), "Lietral de numerus mal formada");
+            token = new Token(-2, builder.toString(), "Literal de numerus mal formada");
+            token.setProperty("row", row1);
+            token.setProperty("column", column1);
+        }else if(escapeCodes.contains(code)){
+            token = new Token(-3, builder.toString(), "Caracter de escapae inválido");
+            token.setProperty("row", row2);
+            token.setProperty("column", column2);
+        }
+        else if(catenaCodes.contains(code)){
+            token = new Token(-4, builder.toString(), "Literal de catena mal formada");
+            token.setProperty("row", row1);
+            token.setProperty("column", column1);
+        }else if(imagoCodes.contains(code)){
+            token = new Token(-5, builder.toString(), "Literal de imago mal formada");
+            token.setProperty("row", row1);
+            token.setProperty("column", column1);
+        } else if(fractioCodes.contains(code)){
+            token = new Token(-6, builder.toString(), "Literal de fractio mal formada");
+            token.setProperty("row", row1);
+            token.setProperty("column", column1);
+        } else if(gregoriusCodes.contains(code)){
+            token = new Token(-7, builder.toString(), "Literal de gregorius mal formada");
+            token.setProperty("row", row1);
+            token.setProperty("column", column1);
+        } else if(identifierCodes.contains(code)){
+            token = new Token(-8, builder.toString(), "Identificador mal formado");
             token.setProperty("row", row1);
             token.setProperty("column", column1);
         }else{
@@ -137,10 +183,10 @@ public class Scanner {
     public boolean checkRomanNumeral(String pattern){
         return pattern.toUpperCase().matches("^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$");
     }
-    private void recoverFromError(BufferedStream buffer){
+    private void recoverFromError(BufferedStream buffer) throws Exception{
         String recover = " \n\t\r\0.";
         char c = buffer.readNextChar();
-        while(!recover.contains(c))
+        while(!recover.contains(Character.toString(c)))
             c = buffer.readNextChar();
         buffer.returnChar(c);
     }

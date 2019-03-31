@@ -82,10 +82,10 @@ public final class BufferedStream {
         }
     }
     public int getRow(){
-        return info.getColumn();
+        return info.getRow();
     }
     public int getColumn(){
-        return info.getRow();
+        return info.getColumn();
     }
     
     public String getExtension(String path){
