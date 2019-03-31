@@ -93,7 +93,7 @@ public enum States implements State{
 				case "n": return States.q207;
 				case "u": return States.q211;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -109,7 +109,7 @@ public enum States implements State{
 			switch(input){
 				case "g": return States.q204;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -125,7 +125,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q205;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -141,7 +141,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q206;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -160,7 +160,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q63;
 				case "\r": return FinalStates.q63;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -176,7 +176,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q208;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -192,7 +192,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q209;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -208,7 +208,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q210;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -227,7 +227,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q64;
 				case "\r": return FinalStates.q64;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -244,7 +244,7 @@ public enum States implements State{
 				case "c": return States.q212;
 				case "t": return States.q216;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -260,7 +260,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q213;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -276,7 +276,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q214;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -292,7 +292,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q215;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -311,7 +311,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q65;
 				case "\r": return FinalStates.q65;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -332,7 +332,7 @@ public enum States implements State{
 				case "=": return States.q219;
 				case "e": return States.q217;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -348,7 +348,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q218;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -367,7 +367,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q68;
 				case "\r": return FinalStates.q68;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -386,7 +386,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q67;
 				case "\r": return FinalStates.q67;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q67;
 						}
@@ -405,7 +405,7 @@ public enum States implements State{
 				case "o": return States.q240;
 				case "u": return States.q260;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -424,7 +424,7 @@ public enum States implements State{
 				case "s": return States.q222;
 				case "t": return States.q225;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -440,7 +440,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q2213;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -456,7 +456,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q2214;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -472,7 +472,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q2215;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -488,7 +488,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q2216;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -507,7 +507,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q69;
 				case "\r": return FinalStates.q69;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -523,7 +523,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q223;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -539,7 +539,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q224;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -558,7 +558,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q70;
 				case "\r": return FinalStates.q70;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -574,7 +574,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q226;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -590,7 +590,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q227;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -606,7 +606,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q228;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -625,7 +625,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q71;
 				case "\r": return FinalStates.q71;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -641,7 +641,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q230;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -657,7 +657,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q231;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -673,7 +673,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q232;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -689,7 +689,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q233;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -708,7 +708,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q73;
 				case "\r": return FinalStates.q73;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -724,7 +724,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q235;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -740,7 +740,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q236;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -756,7 +756,7 @@ public enum States implements State{
 			switch(input){
 				case "d": return States.q237;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -772,7 +772,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q238;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -788,7 +788,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q239;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -807,7 +807,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q74;
 				case "\r": return FinalStates.q74;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -825,7 +825,7 @@ public enum States implements State{
 				case "n": return States.q251;
 				case "r": return States.q256;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -841,7 +841,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q242;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -857,7 +857,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q243;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -873,7 +873,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q244;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -889,7 +889,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q245;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -905,7 +905,7 @@ public enum States implements State{
 			switch(input){
 				case "b": return States.q246;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -921,7 +921,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q247;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -937,7 +937,7 @@ public enum States implements State{
 			switch(input){
 				case "l": return States.q248;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -953,7 +953,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q249;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -969,7 +969,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q250;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -988,7 +988,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q75;
 				case "\r": return FinalStates.q75;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1004,7 +1004,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q252;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1020,7 +1020,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q253;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1036,7 +1036,7 @@ public enum States implements State{
 			switch(input){
 				case "g": return States.q254;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1052,7 +1052,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q255;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1071,7 +1071,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q76;
 				case "\r": return FinalStates.q76;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1087,7 +1087,7 @@ public enum States implements State{
 			switch(input){
 				case "p": return States.q257;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1103,7 +1103,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q258;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1119,7 +1119,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q259;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1138,7 +1138,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q77;
 				case "\r": return FinalStates.q77;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1154,7 +1154,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q261;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1173,7 +1173,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q78;
 				case "\r": return FinalStates.q78;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1191,7 +1191,7 @@ public enum States implements State{
 				case "i": return States.q286;
 				case "u": return States.q299;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1208,7 +1208,7 @@ public enum States implements State{
 				case "c": return States.q264;
 				case "t": return States.q277;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1225,7 +1225,7 @@ public enum States implements State{
 				case "r": return States.q265;
 				case "u": return States.q273;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1241,7 +1241,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q266;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1257,7 +1257,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q267;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1273,7 +1273,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q268;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1289,7 +1289,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q269;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1305,7 +1305,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q270;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1321,7 +1321,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q271;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1337,7 +1337,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q272;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1356,7 +1356,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q79;
 				case "\r": return FinalStates.q79;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1372,7 +1372,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q274;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1388,7 +1388,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q275;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1404,7 +1404,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q276;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1423,7 +1423,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q80;
 				case "\r": return FinalStates.q80;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1439,7 +1439,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q278;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1455,7 +1455,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q279;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1471,7 +1471,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q280;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1487,7 +1487,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q281;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1503,7 +1503,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q282;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1519,7 +1519,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q283;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1535,7 +1535,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q284;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1551,7 +1551,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q285;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1570,7 +1570,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q81;
 				case "\r": return FinalStates.q81;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1589,7 +1589,7 @@ public enum States implements State{
 				case "t": return States.q295;
 				case "x": return States.q297;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1605,7 +1605,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q288;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1624,7 +1624,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q82;
 				case "\r": return FinalStates.q82;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1640,7 +1640,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q290;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1656,7 +1656,7 @@ public enum States implements State{
 			switch(input){
 				case "c": return States.q291;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1672,7 +1672,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q292;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1688,7 +1688,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q293;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1704,7 +1704,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q294;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1723,7 +1723,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q83;
 				case "\r": return FinalStates.q83;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1739,7 +1739,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q296;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1758,7 +1758,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q84;
 				case "\r": return FinalStates.q84;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1774,7 +1774,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q298;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1793,7 +1793,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q85;
 				case "\r": return FinalStates.q85;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1809,7 +1809,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q300;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1825,7 +1825,7 @@ public enum States implements State{
 			switch(input){
 				case "l": return States.q301;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1841,7 +1841,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q302;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1857,7 +1857,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q303;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1876,7 +1876,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q86;
 				case "\r": return FinalStates.q86;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1895,7 +1895,7 @@ public enum States implements State{
 				case "t": return States.q313;
 				case "x": return States.q315;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1911,7 +1911,7 @@ public enum States implements State{
 			switch(input){
 				case "f": return States.q306;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1927,7 +1927,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q307;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1943,7 +1943,7 @@ public enum States implements State{
 			switch(input){
 				case "c": return States.q308;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1959,7 +1959,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q309;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1975,7 +1975,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q310;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -1994,7 +1994,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q88;
 				case "\r": return FinalStates.q88;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2010,7 +2010,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q312;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2029,7 +2029,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q89;
 				case "\r": return FinalStates.q89;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2049,7 +2049,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q90;
 				case "=": return States.q314;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2068,7 +2068,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q91;
 				case "\r": return FinalStates.q91;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q91;
 						}
@@ -2083,7 +2083,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q316;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2099,7 +2099,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q317;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2115,7 +2115,7 @@ public enum States implements State{
 			switch(input){
 				case "p": return States.q318;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2131,7 +2131,7 @@ public enum States implements State{
 			switch(input){
 				case "l": return States.q319;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2147,7 +2147,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q320;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2163,7 +2163,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q321;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2182,7 +2182,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q92;
 				case "\r": return FinalStates.q92;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2201,7 +2201,7 @@ public enum States implements State{
 				case "u": return States.q3410;
 				case "f": return States.q620;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2218,7 +2218,7 @@ public enum States implements State{
 				case "n": return States.q324;
 				case "r": return States.q327;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2234,7 +2234,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q325;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2250,7 +2250,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q326;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2269,7 +2269,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q93;
 				case "\r": return FinalStates.q93;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2285,7 +2285,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q328;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2301,7 +2301,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q329;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2317,7 +2317,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q330;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2333,7 +2333,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q331;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2349,7 +2349,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q332;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2365,7 +2365,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q333;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2381,7 +2381,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q334;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2397,7 +2397,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q335;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2416,7 +2416,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q94;
 				case "\r": return FinalStates.q94;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2432,7 +2432,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q337;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2448,7 +2448,7 @@ public enum States implements State{
 			switch(input){
 				case "c": return States.q338;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2464,7 +2464,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q339;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2480,7 +2480,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q340;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2496,7 +2496,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q341;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2515,7 +2515,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q95;
 				case "\r": return FinalStates.q95;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2531,7 +2531,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q342;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2547,7 +2547,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q343;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2563,7 +2563,7 @@ public enum States implements State{
 			switch(input){
 				case "b": return States.q344;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2579,7 +2579,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q345;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2595,7 +2595,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q346;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2611,7 +2611,7 @@ public enum States implements State{
 			switch(input){
 				case "d": return States.q347;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2627,7 +2627,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q348;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2643,7 +2643,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q349;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2662,7 +2662,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q97;
 				case "\r": return FinalStates.q97;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2678,7 +2678,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q351;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2695,7 +2695,7 @@ public enum States implements State{
 				case "a": return States.q352;
 				case "e": return States.q356;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2711,7 +2711,7 @@ public enum States implements State{
 			switch(input){
 				case "d": return States.q353;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2727,7 +2727,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q354;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2743,7 +2743,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q355;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2762,7 +2762,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q98;
 				case "\r": return FinalStates.q98;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2778,7 +2778,7 @@ public enum States implements State{
 			switch(input){
 				case "g": return States.q357;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2794,7 +2794,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q358;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2810,7 +2810,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q359;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2826,7 +2826,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q360;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2842,7 +2842,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q361;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2858,7 +2858,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q362;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2877,7 +2877,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q99;
 				case "\r": return FinalStates.q99;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2896,7 +2896,7 @@ public enum States implements State{
 				case "n": return States.q374;
 				case "t": return States.q388;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2912,7 +2912,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q365;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2931,7 +2931,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q102;
 				case "\r": return FinalStates.q102;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2948,7 +2948,7 @@ public enum States implements State{
 				case "a": return States.q367;
 				case "p": return States.q370;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2964,7 +2964,7 @@ public enum States implements State{
 			switch(input){
 				case "g": return States.q368;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2980,7 +2980,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q369;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -2999,7 +2999,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q103;
 				case "\r": return FinalStates.q103;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3015,7 +3015,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q371;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3031,7 +3031,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q372;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3047,7 +3047,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q373;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3066,7 +3066,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q105;
 				case "\r": return FinalStates.q105;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3087,7 +3087,7 @@ public enum States implements State{
 				case "c": return States.q375;
 				case "i": return States.q384;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3103,7 +3103,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q376;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3119,7 +3119,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q377;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3135,7 +3135,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q378;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3151,7 +3151,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q379;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3167,7 +3167,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q380;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3183,7 +3183,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q381;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3199,7 +3199,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q382;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3215,7 +3215,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q383;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3234,7 +3234,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q107;
 				case "\r": return FinalStates.q107;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3250,7 +3250,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q385;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3266,7 +3266,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q386;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3282,7 +3282,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q387;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3301,7 +3301,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q108;
 				case "\r": return FinalStates.q108;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3317,7 +3317,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q389;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3333,7 +3333,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q390;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3349,7 +3349,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q391;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3368,7 +3368,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q109;
 				case "\r": return FinalStates.q109;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3385,7 +3385,7 @@ public enum States implements State{
 				case "e": return States.q393;
 				case "i": return States.q400;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3402,7 +3402,7 @@ public enum States implements State{
 				case "c": return States.q394;
 				case "g": return States.q398;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3418,7 +3418,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q395;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3434,7 +3434,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q396;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3450,7 +3450,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q397;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3469,7 +3469,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q110;
 				case "\r": return FinalStates.q110;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3485,7 +3485,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q399;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3504,7 +3504,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q111;
 				case "\r": return FinalStates.q111;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3521,7 +3521,7 @@ public enum States implements State{
 				case "b": return States.q401;
 				case "g": return States.q404;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3537,7 +3537,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q402;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3553,7 +3553,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q403;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3572,7 +3572,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q112;
 				case "\r": return FinalStates.q112;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3588,7 +3588,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q405;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3607,7 +3607,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q113;
 				case "\r": return FinalStates.q113;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3623,7 +3623,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q407;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3639,7 +3639,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q408;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3656,7 +3656,7 @@ public enum States implements State{
 				case "s": return States.q409;
 				case "t": return States.q412;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3672,7 +3672,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q410;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3688,7 +3688,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q411;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3707,7 +3707,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q114;
 				case "\r": return FinalStates.q114;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3723,7 +3723,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q413;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3739,7 +3739,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q414;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3755,7 +3755,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q415;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3774,7 +3774,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q115;
 				case "\r": return FinalStates.q115;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3792,7 +3792,7 @@ public enum States implements State{
 				case "o": return States.q420;
 				case "u": return States.q425;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3808,7 +3808,7 @@ public enum States implements State{
 			switch(input){
 				case "c": return States.q418;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3824,7 +3824,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q419;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3843,7 +3843,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q116;
 				case "\r": return FinalStates.q116;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3860,7 +3860,7 @@ public enum States implements State{
 				case "m": return States.q421;
 				case "n": return States.q424;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3876,7 +3876,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q422;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3892,7 +3892,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q423;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3911,7 +3911,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q117;
 				case "\r": return FinalStates.q117;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3930,7 +3930,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q118;
 				case "\r": return FinalStates.q118;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3947,7 +3947,7 @@ public enum States implements State{
                                 case "n": return States.q431;
 				case "m": return States.q426;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3963,7 +3963,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q427;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3979,7 +3979,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q428;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -3995,7 +3995,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q429;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4011,7 +4011,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q430;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4030,7 +4030,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q119;
 				case "\r": return FinalStates.q119;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4046,7 +4046,7 @@ public enum States implements State{
 			switch(input){
 				case "c": return States.q432;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4065,7 +4065,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q121;
 				case "\r": return FinalStates.q121;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4082,7 +4082,7 @@ public enum States implements State{
 				case "r": return States.q434;
 				case "p": return States.q437;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4098,7 +4098,7 @@ public enum States implements State{
 			switch(input){
 				case "d": return States.q435;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4114,7 +4114,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q436;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4133,7 +4133,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q122;
 				case "\r": return FinalStates.q122;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4149,7 +4149,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q438;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4165,7 +4165,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q439;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4184,7 +4184,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q123;
 				case "\r": return FinalStates.q123;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4202,7 +4202,7 @@ public enum States implements State{
 				case "e": return States.q453;
 				case "r": return States.q460;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4219,7 +4219,7 @@ public enum States implements State{
 				case "n": return States.q442;
 				case "t": return States.q445;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4235,7 +4235,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q443;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4251,7 +4251,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q444;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4270,7 +4270,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q124;
 				case "\r": return FinalStates.q124;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4286,7 +4286,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q446;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4302,7 +4302,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q447;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4318,7 +4318,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q448;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4334,7 +4334,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q449;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4350,7 +4350,7 @@ public enum States implements State{
 			switch(input){
 				case "b": return States.q450;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4366,7 +4366,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q451;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4382,7 +4382,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q452;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4401,7 +4401,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q125;
 				case "\r": return FinalStates.q125;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4417,7 +4417,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q454;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4438,7 +4438,7 @@ public enum States implements State{
 				case "g": return States.q4530;
 				case "p": return States.q455;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4454,7 +4454,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q4540;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4473,7 +4473,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q127;
 				case "\r": return FinalStates.q127;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4489,7 +4489,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q456;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4505,7 +4505,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q457;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4521,7 +4521,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q458;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4537,7 +4537,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q459;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4556,7 +4556,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q128;
 				case "\r": return FinalStates.q128;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4572,7 +4572,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q461;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4589,7 +4589,7 @@ public enum States implements State{
 				case "b": return States.q462;
 				case "p": return States.q466;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4605,7 +4605,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q463;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4621,7 +4621,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q464;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4637,7 +4637,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q465;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4656,7 +4656,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q129;
 				case "\r": return FinalStates.q129;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4672,7 +4672,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q467;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4691,7 +4691,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q130;
 				case "\r": return FinalStates.q130;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4707,7 +4707,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q469;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4723,7 +4723,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q470;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4739,7 +4739,7 @@ public enum States implements State{
 			switch(input){
 				case "n": return States.q471;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4755,7 +4755,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q472;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4771,7 +4771,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q473;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4787,7 +4787,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q474;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4806,7 +4806,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q131;
 				case "\r": return FinalStates.q131;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4822,7 +4822,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q476;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4840,7 +4840,7 @@ public enum States implements State{
 				case "s": return States.q482;
 				case "v": return States.q488;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4856,7 +4856,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q478;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4872,7 +4872,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q479;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4888,7 +4888,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q480;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4904,7 +4904,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q481;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4923,7 +4923,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q132;
 				case "\r": return FinalStates.q132;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4939,7 +4939,7 @@ public enum States implements State{
 			switch(input){
 				case "c": return States.q483;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4955,7 +4955,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q484;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4971,7 +4971,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q485;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -4987,7 +4987,7 @@ public enum States implements State{
 			switch(input){
 				case "b": return States.q486;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5003,7 +5003,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q487;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5022,7 +5022,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q133;
 				case "\r": return FinalStates.q133;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5038,7 +5038,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q489;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5054,7 +5054,7 @@ public enum States implements State{
 			switch(input){
 				case "l": return States.q490;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5070,7 +5070,7 @@ public enum States implements State{
 			switch(input){
 				case "l": return States.q491;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5086,7 +5086,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q492;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5105,7 +5105,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q134;
 				case "\r": return FinalStates.q134;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5123,7 +5123,7 @@ public enum States implements State{
 				case "i": return States.q582;
 				case "u": return States.q584;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5139,7 +5139,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q495;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5155,7 +5155,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q496;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5172,7 +5172,7 @@ public enum States implements State{
 				case "b": return States.q497;
 				case "p": return States.q499;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5188,7 +5188,7 @@ public enum States implements State{
 			switch(input){
 				case "o": return States.q498;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5207,7 +5207,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q135;
 				case "\r": return FinalStates.q135;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5223,7 +5223,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q577;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -5246,7 +5246,7 @@ public enum States implements State{
 				default: 
                                         if(input.charAt(0)>47 && input.charAt(0)<58)
                                             return States.q608;
-					if (input.charAt(0)>60 && input.charAt(0)<123 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q0;
 						}
@@ -5280,7 +5280,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q1;
 				case "\r": return FinalStates.q1;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q1;
 						}
@@ -5298,7 +5298,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q2;
 				case "\r": return FinalStates.q2;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q2;
 						}
@@ -5316,7 +5316,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q3;
 				case "\r": return FinalStates.q3;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q3;
 						}
@@ -5375,7 +5375,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q4;
 				case "=": return States.q5080;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q4;
 						}
@@ -5393,7 +5393,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q5;
 				case "\r": return FinalStates.q5;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q5;
 						}
@@ -5412,7 +5412,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q6;
 				case "i": return States.q510;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q6;
 						}
@@ -5451,7 +5451,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q7;
 				case "=": return States.q513;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q7;
 						}
@@ -5469,7 +5469,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q8;
 				case "\r": return FinalStates.q8;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q8;
 						}
@@ -5538,7 +5538,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q9;
 				case "=": return States.q5190;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q9;
 						}
@@ -5556,7 +5556,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q10;
 				case "\r": return FinalStates.q10;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q10;
 						}
@@ -5574,7 +5574,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q11;
 				case "\r": return FinalStates.q11;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q11;
 						}
@@ -5593,7 +5593,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q12;
 				case "=": return States.q522;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q12;
 						}
@@ -5611,7 +5611,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q13;
 				case "\r": return FinalStates.q13;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q13;
 						}
@@ -5632,7 +5632,7 @@ public enum States implements State{
 				case "?": return States.q525;
 				case "+": return States.q526;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q14;
 						}
@@ -5650,7 +5650,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q15;
 				case "\r": return FinalStates.q15;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q15;
 						}
@@ -5668,7 +5668,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q16;
 				case "\r": return FinalStates.q16;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q16;
 						}
@@ -5686,7 +5686,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q17;
 				case "\r": return FinalStates.q17;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q17;
 						}
@@ -5705,7 +5705,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q20;
 				case "=": return States.q528;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q20;
 						}
@@ -5723,7 +5723,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q21;
 				case "\r": return FinalStates.q21;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q21;
 						}
@@ -5741,7 +5741,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q22;
 				case "\r": return FinalStates.q22;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q22;
 						}
@@ -5760,7 +5760,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q24;
 				case "=": return States.q531;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q24;
 						}
@@ -5778,7 +5778,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q25;
 				case "\r": return FinalStates.q25;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q25;
 						}
@@ -5797,7 +5797,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q26;
 				case "=": return States.q619;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return FinalStates.q26;
 				return null;
 			}
@@ -5814,7 +5814,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q28;
 				case "@": return States.q5330;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q28;
 						}
@@ -5832,7 +5832,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q29;
 				case "\r": return FinalStates.q29;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q29;
 						}
@@ -5859,11 +5859,14 @@ public enum States implements State{
 				case "<": return States.q541;
 				case ">": return States.q544;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123){
+                                                Info.lookAhead=true;
 						return FinalStates.q30;
-				
-					if (input.charAt(0)>47 && input.charAt(0)<58)
-						return FinalStates.q30;
+                                        }
+					if (input.charAt(0)>47 && input.charAt(0)<58){
+                                                Info.lookAhead=true;
+                                                return FinalStates.q30;
+                                        }
 				return null;
 			}
 		}
@@ -5898,7 +5901,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q31;
 				case "\r": return FinalStates.q31;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q31;
 						}
@@ -5937,7 +5940,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q32;
 				case "\r": return FinalStates.q32;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q32;
 						}
@@ -5975,7 +5978,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q33;
 				case "\r": return FinalStates.q33;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q33;
 						}
@@ -6013,7 +6016,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q34;
 				case "\r": return FinalStates.q34;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q34;
 						}
@@ -6031,7 +6034,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q35;
 				case "\r": return FinalStates.q35;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q35;
 						}
@@ -6052,7 +6055,7 @@ public enum States implements State{
 				case "-": Info.lookAhead=true; return FinalStates.q36;
 				case "{": Info.lookAhead=true; return FinalStates.q36;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return FinalStates.q36;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6089,7 +6092,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q37;
 				case "=": return States.q560;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q37;
 						}
@@ -6108,7 +6111,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q38;
 				case "=": return States.q552;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q38;
 						}
@@ -6126,7 +6129,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q39;
 				case "\r": return FinalStates.q39;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q39;
 						}
@@ -6145,7 +6148,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q40;
 				case "=": return States.q554;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q40;
 						}
@@ -6163,7 +6166,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q41;
 				case "\r": return FinalStates.q41;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q41;
 						}
@@ -6182,7 +6185,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q42;
 				case "=": return States.q556;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q42;
 						}
@@ -6200,7 +6203,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q43;
 				case "\r": return FinalStates.q43;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q43;
 						}
@@ -6219,7 +6222,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q44;
 				case "=": return States.q5560;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q44;
 						}
@@ -6237,7 +6240,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q45;
 				case "\r": return FinalStates.q45;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q45;
 						}
@@ -6256,7 +6259,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q46;
 				case "=": return States.q558;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q46;
 						}
@@ -6274,7 +6277,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q47;
 				case "\r": return FinalStates.q47;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q47;
 						}
@@ -6292,7 +6295,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q48;
 				case "\r": return FinalStates.q48;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q48;
 						}
@@ -6310,7 +6313,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q49;
 				case "\r": return FinalStates.q49;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q49;
 						}
@@ -6328,7 +6331,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q50;
 				case "\r": return FinalStates.q50;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q50;
 						}
@@ -6362,7 +6365,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q52;
 				case "=": return States.q564;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q52;
 						}
@@ -6380,7 +6383,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q53;
 				case "\r": return FinalStates.q53;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q53;
 						}
@@ -6401,7 +6404,7 @@ public enum States implements State{
 				case "-": return States.q569;
 				case "=": return States.q570;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q54;
 						}
@@ -6458,7 +6461,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q55;
 				case "\r": return FinalStates.q55;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q55;
 						}
@@ -6476,7 +6479,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q56;
 				case "\r": return FinalStates.q56;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q56;
 						}
@@ -6494,7 +6497,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q57;
 				case "\r": return FinalStates.q57;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q57;
 						}
@@ -6512,7 +6515,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q58;
 				case "\r": return FinalStates.q58;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q58;
 						}
@@ -6530,7 +6533,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q60;
 				case "\r": return FinalStates.q60;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q60;
 						}
@@ -6550,7 +6553,7 @@ public enum States implements State{
 				case "<": return States.q575;
 				case "=": return States.q576;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q59;
 						}
@@ -6568,7 +6571,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q61;
 				case "\r": return FinalStates.q61;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q61;
 						}
@@ -6586,7 +6589,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q62;
 				case "\r": return FinalStates.q62;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q62;
 						}
@@ -6601,7 +6604,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q578;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6617,7 +6620,7 @@ public enum States implements State{
 			switch(input){
 				case "r": return States.q579;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6633,7 +6636,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q580;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6649,7 +6652,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q581;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6668,7 +6671,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q136;
 				case "\r": return FinalStates.q136;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6684,7 +6687,7 @@ public enum States implements State{
 			switch(input){
 				case "g": return States.q583;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6700,7 +6703,7 @@ public enum States implements State{
 			switch(input){
 				case "l": return States.q5840;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6716,7 +6719,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q5830;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6735,7 +6738,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q137;
 				case "\r": return FinalStates.q137;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6751,7 +6754,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q585;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6770,7 +6773,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q138;
 				case "\r": return FinalStates.q138;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6786,7 +6789,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q587;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6802,7 +6805,7 @@ public enum States implements State{
 			switch(input){
 				case "m": return States.q588;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6818,7 +6821,7 @@ public enum States implements State{
 			switch(input){
 				case "p": return States.q589;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6834,7 +6837,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q590;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6850,7 +6853,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q591;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6869,7 +6872,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q139;
 				case "\r": return FinalStates.q139;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6885,7 +6888,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q593;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6901,7 +6904,7 @@ public enum States implements State{
 			switch(input){
 				case "q": return States.q594;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6917,7 +6920,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q595;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6933,7 +6936,7 @@ public enum States implements State{
 			switch(input){
 				case "e": return States.q5950;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6952,7 +6955,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q140;
 				case "\r": return FinalStates.q140;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6968,7 +6971,7 @@ public enum States implements State{
 			switch(input){
 				case "a": return States.q597;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -6984,7 +6987,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q598;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7000,7 +7003,7 @@ public enum States implements State{
 			switch(input){
 				case "t": return States.q599;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7020,7 +7023,7 @@ public enum States implements State{
 				case "\r": return FinalStates.q141;
 				case "=": return States.q600;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7039,7 +7042,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q142;
 				case "\r": return FinalStates.q142;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q142;
 						}
@@ -7064,7 +7067,7 @@ public enum States implements State{
 				case "$": Info.lookAhead=true; return FinalStates.q101;
 				case "\0": Info.lookAhead=true; return FinalStates.q101;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7400,7 +7403,7 @@ public enum States implements State{
 				case "\t": return FinalStates.q27;
 				case "\r": return FinalStates.q27;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
+					if (input.charAt(0)>96 && input.charAt(0)<123 || input.charAt(0)>47 && input.charAt(0)<58 || NEXT.contains(input)){
 						Info.lookAhead = true;
 							return FinalStates.q27;
 						}
@@ -7425,7 +7428,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q622;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7441,7 +7444,7 @@ public enum States implements State{
 			switch(input){
 				case "i": return States.q623;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7457,7 +7460,7 @@ public enum States implements State{
 			switch(input){
 				case "d": return States.q624;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7483,7 +7486,7 @@ public enum States implements State{
 			switch(input){
 				case "c": return States.q626;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7499,7 +7502,7 @@ public enum States implements State{
 			switch(input){
 				case "u": return States.q627;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7515,7 +7518,7 @@ public enum States implements State{
 			switch(input){
 				case "s": return States.q628;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7540,7 +7543,7 @@ public enum States implements State{
 				case "$": Info.lookAhead=true; return FinalStates.q87;
 				case "\0": Info.lookAhead=true; return FinalStates.q87;
 				default: 
-					if (input.charAt(0)>60 && input.charAt(0)<123)
+					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
 				
 					if (input.charAt(0)>47 && input.charAt(0)<58)
@@ -7591,7 +7594,13 @@ public enum States implements State{
 				return null;
 			}
 		}
-	};
+	},
+        q633(633){
+            @Override
+            public State next(String input){
+                return null;
+            }
+        };
 	public int code;
 	
 	private States(int code){

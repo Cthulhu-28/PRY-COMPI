@@ -18,21 +18,28 @@ import scanner.reader.Token;
  */
 public class Program {
     public static void main(String args[]){
-       
+       int tabs = 4;
+       String file = "";
         try {
-            Info.lookAhead=false;
             List<Token> tokens = new ArrayList<>();
-            Scanner scanner = Scanner.initScanner("C:\\Proyectos\\4.str");
+            Scanner scanner = Scanner.initScanner("C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 0\\Pruebas\\test001.str");
             Token token = scanner.nextToken();
             while(token.getCode()!=143){
                 tokens.add(token);
                 token = scanner.nextToken();
             }
             tokens.add(token);
-            int r =4;
-            for(Token t:tokens){
-                if(t.hasError())
-                    System.err.println(t.getErrorMessage());
+            boolean hasError = false;
+            for(int i=0;i<tokens.size();i++)
+                if(tokens.get(i).hasError()){
+                    System.err.println(tokens.get(i).getErrorMessage());
+                    hasError=true;
+                }else{
+                   
+                }
+            if(!hasError){
+                PrettyPrinting printing = new PrettyPrinting(tokens, tabs);
+                printing.beauty();
             }
         } catch (Exception ex) {
             ex.printStackTrace();

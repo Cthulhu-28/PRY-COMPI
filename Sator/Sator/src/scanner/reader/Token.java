@@ -78,5 +78,8 @@ public class Token {
     public void setProperty(String key, Object value) {
         props.put(key, value);
     }
+    public boolean isComment(){
+        return getCode()>143;
+    }
     
 }

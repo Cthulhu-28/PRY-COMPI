@@ -30,7 +30,8 @@ public class Scanner {
     private final Set<Integer> gregoriusCodes = new HashSet<>(Arrays.asList(new Integer[]{6110,612,613}));
     private final Set<Integer> fractioCodes = new HashSet<>(Arrays.asList(new Integer[]{610}));
     private final Set<Integer> identifierCodes = new HashSet<>(Arrays.asList(new Integer[]{601}));
-    
+    private final Set<Integer> minusAmbiguityCodes = new HashSet<>(Arrays.asList(new Integer[]{19,35,101,72,87,100,104,120,51}));
+    private boolean minus;
     private Scanner(){}
     private Scanner(String path) throws FileNotFoundException{
         scanner = new Scanner();
@@ -63,11 +64,13 @@ public class Scanner {
         row1=row2=col1=col2=0;
         boolean romanNumeral=false;
         boolean withSpace=false;
+        boolean comment=false;
+        boolean doubleLookAhead=false;
+        int blockComments = 0 ;
         StringBuilder builder = new StringBuilder();
         State state = States.q201;
         State last = null;
         
-     
         while(!state.isFinal()){
             String input = Character.toString(buffer.readNextChar());
             if(state == States.q201){
@@ -77,7 +80,16 @@ public class Scanner {
             row2=buffer.getRow();
             col2=buffer.getColumn();
             last = state;
+            
             state = state.next(input.toLowerCase());
+            if(blockComments>0 && comment && state.getCode()!=201 && state.getCode()!=568 && state.getCode()!=566 && state.getCode()!=565){
+                state = States.q567;
+            }
+            if(("\n\r \t").contains(input) && blockComments>0){
+                state = States.q567;
+            }
+//            if(input.equals("#") && blockComments>0)
+//                state = States.q568;
             
             //Revisa una posible transicion hacia identificador
             if(state == null && builder.toString().matches("[A-Za-z]+")){
@@ -91,21 +103,70 @@ public class Scanner {
                     state=FinalStates.q101;
                 }
             }
+            if(state == null && builder.toString().matches("[0-9]+")){
+                String tmp = input;
+                
+                if(("\n\r \t").contains(tmp)){
+                    state = FinalStates.q120;
+                }
+                if(State.NEXT.contains(tmp)){
+                    Info.lookAhead=true;
+                    state=FinalStates.q120;
+                }
+            }
             //En caso de ser null, encuentra un caracter monstruo
             if(state==null){
-                Token token = reportError(builder, input, last.getCode(), row1, row2, col1, col2);
-                recoverFromError(buffer);
-                return token;
+                if(blockComments>0)
+                    state = States.q201;
+                else{
+                    Token token = reportError(builder, input, last.getCode(), row1, row2, col1, col2);
+                    recoverFromError(buffer);
+                    return token;
+                }
             }
+
             if( state.getCode()==602 || state.getCode()==605)
                 withSpace=true;
+            if(state.getCode()==609 || state.getCode()==611){
+                doubleLookAhead=true;
+            }
+            
             //Si hizo una lectura por adelentado, devuelve el caracter la buffer
             //En caso contrario, lo adjunta al posible lexema
             if(state.hasLookedAhead()){
                 buffer.returnChar(input.charAt(0));
-            }else if (!("\n\r \t").contains(input) || withSpace){
+            }else if (!("\n\r \t").contains(input) || withSpace || comment){
                     builder.append(input);
             }
+            
+            
+            if(state.getCode()==632 || state.getCode()==566){
+                comment=true;
+            }
+            if(state.getCode()==566){
+                comment=true;
+                blockComments++;
+            }
+            if(state.getCode()==567||state.getCode()==568){
+                if(builder.toString().endsWith("<#"))
+                    blockComments++;
+            }
+            if(comment && blockComments>=0 && state.getCode()==201){
+                blockComments--;
+                if(blockComments==0){
+                    char c = buffer.readNextChar();
+                    buffer.returnChar(c);
+                    if(c=='\r')c='\n';
+                    if(c=='\n' || c==' ' || c=='\t')builder.append(c+"");
+                    return reportarComentario(builder,145);
+                }else{
+                    state = States.q201;
+                }
+            }
+            if(comment && state.getCode()==201 && blockComments==0){
+                return reportarComentario(builder,144);
+            }
+            
             //Verifica si lo que viene empieza con or(posible numero romano)
             if(state == States.q615)
                 romanNumeral=true;
@@ -119,11 +180,19 @@ public class Scanner {
                     token.setProperty("row", row1);
                     token.setProperty("column", col1);
                     return token;
+                }      
+            }
+            if(state == FinalStates.q100){
+                if(builder.toString().startsWith("-")){
+                    Token token;
+                    token = new Token(-7, builder.toString(), "Literal de gregorius mal formada");
+                    token.setProperty("row", row1);
+                    token.setProperty("column", col1);
+                    return token;
                 }
-                    
             }
             if(state == FinalStates.q101){
-                if(builder.toString().length()>0){
+                if(builder.toString().length()>16){
                     Token token;
                     token = new Token(-9, builder.toString(), "El identificador "+builder.toString()+" excede el máxmio permitido de 8 caracteres");
                     token.setProperty("row", row1);
@@ -135,11 +204,29 @@ public class Scanner {
             if(input.equals("\0") && state.getCode()!=143){
                 break;
             }
-            
-            
+            if(minus && state.getCode()==500){
+                minus=false;
+                state = FinalStates.q0;
+                break;
+            }
+            if(doubleLookAhead && state.getCode()==120){
+                int length = builder.toString().length()-2;
+                buffer.returnChar(builder.toString().charAt(length+1));
+                builder.replace(length, length+2, "");
+            }
         }
         row2 = buffer.getRow();
         col2 = buffer.getColumn();
+        if(!state.isFinal()){
+            Token token = null;
+            token = new Token(-10, builder.toString(), "Final de archivo inesperado");
+            token.setProperty("row", row2);
+            token.setProperty("column", col2);
+            return token;
+        }
+        if(minusAmbiguityCodes.contains(state.getCode()))
+            minus=true;
+        else{minus=false;}
         return new Token(state.getCode(), builder.toString());
     }
     private Token reportError(StringBuilder builder, String input, int code, int row1, int row2, int column1, int column2){
@@ -178,6 +265,10 @@ public class Scanner {
             token.setProperty("row", row2);
             token.setProperty("column", column2);
         }
+        return token;
+    }
+    private Token reportarComentario(StringBuilder builder, int code){
+        Token token = new Token(code, builder.toString());
         return token;
     }
     public boolean checkRomanNumeral(String pattern){
