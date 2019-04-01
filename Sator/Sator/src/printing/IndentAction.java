@@ -59,8 +59,8 @@ public enum IndentAction {
                 return toArray(BREAK_LINE_BEFORE,BREAK_LINE,INDENT);
             case 115:
                 return toArray(SPACE);
-            case 122:
-                return toArray(SPACE,BREAK_LINE,INDENT);
+            case 123:
+                return toArray(SPACE);
             case 128:
                 return toArray(TO_BEGINING,BREAK_LINE,INDENT);   
             case 129:

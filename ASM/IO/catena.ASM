@@ -71,6 +71,9 @@ code segment
 		
 		call read
 		
+		
+
+		
 		;Optional line break, not part of the procedures
 		mov ah, 02h
 		mov dl, 10

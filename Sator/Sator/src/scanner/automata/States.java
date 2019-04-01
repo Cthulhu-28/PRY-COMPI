@@ -2199,7 +2199,7 @@ public enum States implements State{
 				case "i": return States.q323;
 				case "r": return States.q336;
 				case "u": return States.q3410;
-				case "f": return States.q620;
+                                case "a": return States.q620;
 				default: 
 					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
@@ -4128,10 +4128,10 @@ public enum States implements State{
 		public State next(String input){
 			Info.lookAhead=false;
 			switch(input){
-				case " ": return FinalStates.q122;
-				case "\n": return FinalStates.q122;
-				case "\t": return FinalStates.q122;
-				case "\r": return FinalStates.q122;
+				case " ": return FinalStates.q123;
+				case "\n": return FinalStates.q123;
+				case "\t": return FinalStates.q123;
+				case "\r": return FinalStates.q123;
 				default: 
 					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;
@@ -4179,10 +4179,10 @@ public enum States implements State{
 		public State next(String input){
 			Info.lookAhead=false;
 			switch(input){
-				case " ": return FinalStates.q123;
-				case "\n": return FinalStates.q123;
-				case "\t": return FinalStates.q123;
-				case "\r": return FinalStates.q123;
+				case " ": return FinalStates.q122;
+				case "\n": return FinalStates.q122;
+				case "\t": return FinalStates.q122;
+				case "\r": return FinalStates.q122;
 				default: 
 					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;

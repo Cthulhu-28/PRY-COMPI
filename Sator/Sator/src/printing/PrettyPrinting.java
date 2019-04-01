@@ -20,6 +20,9 @@ public class PrettyPrinting {
     int tabSize=1;
     int tabs;
     public boolean first;
+    boolean coniugo = false;
+    boolean opus = false;
+    boolean sigla = true;
     boolean unindentOnFirst = false;
     StringBuilder builder = new StringBuilder();
     public PrettyPrinting(List<Token> tokens, int tabSize){
@@ -43,8 +46,12 @@ public class PrettyPrinting {
     }
     private void processActions(StringBuilder builder, IndentAction[] actions, Token token, Token next,int idx){
         if(idx<actions.length && idx >-1){
+            boolean unTab = false;
             IndentAction action = actions[idx];
-        
+            if(opus){
+                opus = false;
+                unTab = true;
+            }
             if(action==IndentAction.BREAK_LINE_AFTER){
                 builder.append(toSpan(token));
                 if(next!=null && (next.getCode()!=108 && next.getCode()!=23)){
@@ -72,18 +79,43 @@ public class PrettyPrinting {
                 tabs++;
             }
             if(action==IndentAction.UNIDENT){
-                tabs--;
+                if(!sigla){
+                    tabs--;
+                }else{
+                    sigla = false;
+                }
+                
             }
             if(action==IndentAction.SPACE){
+                
                 builder.append(toSpan(token));
-                if(!(next!=null && next.getCode()==19)){               
+                if(!(next!=null && (next.getCode()==19 || next.getCode()==35))){               
                     builder.append("&nbsp");
                 } 
-                if(next!=null && (token.getCode()== 73 || token.getCode()==155) && (next.getCode()!=108)){
+              
+                if(next!=null && (token.getCode()== 73 || token.getCode()==155 || token.getCode()==115) && (next.getCode()!=108)){
                     builder.append("<br>");
                     tabs++;   
                     first=true;
                     unindentOnFirst=true;
+                }
+                
+                if(coniugo){
+                    builder.append("<br>");
+                    tabs++;   
+                    first=true;
+                    coniugo = false;
+                }
+                if(token.getCode()==76)
+                    coniugo=true;
+                if(token.getCode()==122 && next !=null && next.getCode() != 108){
+                    builder.append("<br>");
+                    tabs++;   
+                    first=true;
+                    opus = true;
+                }
+                if(token.getCode()==137){
+                    sigla=true;
                 }
             }
             if(action==IndentAction.TO_BEGINING){
@@ -98,6 +130,12 @@ public class PrettyPrinting {
                 builder.append(toSpan(token));
                 if(token.getCode()==19 && next!=null && next.getCode()!=19)
                     builder.append(" ");
+                if(token.getCode()==35 && next!=null && next.getCode()!=35)
+                    builder.append(" ");
+            }
+            if(unTab){
+                unTab=false;
+                tabs--;
             }
             processActions(builder, actions, token, next, idx+1);
         }

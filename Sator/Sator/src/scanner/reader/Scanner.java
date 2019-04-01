@@ -206,14 +206,22 @@ public class Scanner {
                 break;
             }
             if(minus && state.getCode()==500){
-                minus=false;
-                state = FinalStates.q0;
-                break;
+                String str = Character.toString(buffer.readNextChar());
+               // if(str.equals(">")){
+              //      minus=false;
+             //       buffer.returnChar(str.charAt(0));
+             ///   }else{
+                    minus=false;
+                    state = FinalStates.q0;
+               //}
             }
             if(doubleLookAhead && state.getCode()==120){
                 int length = builder.toString().length()-2;
                 buffer.returnChar(builder.toString().charAt(length+1));
                 builder.replace(length, length+2, "");
+            }
+            if(input.equals(">")){
+                int g =8;
             }
         }
         row2 = buffer.getRow();
@@ -225,8 +233,9 @@ public class Scanner {
             token.setProperty("column", col2);
             return token;
         }
-        if(minusAmbiguityCodes.contains(state.getCode()))
+        if(minusAmbiguityCodes.contains(state.getCode())){
             minus=true;
+        }
         else{minus=false;}
         return new Token(state.getCode(), builder.toString());
     }
@@ -282,6 +291,8 @@ public class Scanner {
             c = buffer.readNextChar();
         buffer.returnChar(c);
     }
-    
+    public int getReadLines(){
+        return buffer.getLines();
+    }
    
 }

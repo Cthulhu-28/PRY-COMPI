@@ -13,6 +13,7 @@ class FileInfo {
     private int row;
     private int column;
     private FileInfo previous;
+    public int lines=0;
     public FileInfo(){
         row = 1;
         column = 0;
@@ -23,6 +24,7 @@ class FileInfo {
         previous.setRow(getRow());
         switch(c){
             case '\n':
+                lines++;
                 row++;
                 column=0;
                 break;
@@ -42,6 +44,7 @@ class FileInfo {
         if(previous==null)previous = new FileInfo();
         switch(c){
             case '\n':
+                lines--;
                 row--;
                 column=previous.getColumn();
                 break;

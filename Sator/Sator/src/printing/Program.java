@@ -22,7 +22,7 @@ public class Program {
         //int tabs = Integer.parseInt(args[1]);
         try {
             List<Token> tokens = new ArrayList<>();
-            Scanner scanner = Scanner.initScanner("C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 1\\Pruebas\\test010.str");
+            Scanner scanner = Scanner.initScanner("C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 1\\Pruebas\\test011.str");
             Token token = scanner.nextToken();
             while(token.getCode()!=143){
                 tokens.add(token);

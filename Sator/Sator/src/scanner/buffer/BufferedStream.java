@@ -94,4 +94,7 @@ public final class BufferedStream {
         }
         return path;
     }
+    public int getLines(){
+        return info.lines;
+    }
 }
