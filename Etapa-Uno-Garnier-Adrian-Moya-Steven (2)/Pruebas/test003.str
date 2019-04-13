@@ -1,0 +1,29 @@
+<#
+Prueba 003
+Lados de un triángulo. Usamos la instrucción creativa probare
+#>
+nomen test003
+commutabilis
+	numerus A,B,C .
+firmamentum
+	scribocatena("Digite lado A: ") .
+	A := legonumerus() .
+	scribocatena("Digite lado B: ") .
+	B := legonumerus() .
+	scribocatena("Digite lado C: ") .
+	C := legonumerus() .
+	
+	probare
+	initum
+		in (A+B) > C mentiri
+			revello ..
+		in (A+C) > B mentiri
+			revello ..
+		in (C+B) > A mentiri
+			revello ..
+		scribocatena ("El triángulo es existe") .
+	finis
+	captare
+		scribocatena ("El triángulo no es existe") .
+		
+	

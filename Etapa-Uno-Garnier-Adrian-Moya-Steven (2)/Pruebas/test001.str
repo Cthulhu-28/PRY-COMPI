@@ -1,0 +1,18 @@
+<#
+Prueba 001
+Fibonacci
+#>
+nomen test001
+commutabilis
+	numerus a est 3 , b est 100, c , d  est 2008$4$4 .
+exemplar
+	efficio fibo (numerus N) : numerus .
+corpus
+	efficio fibo (Numerus N) : numerus .
+	initum
+		in N = 0 aut N =1 certus
+			reditus N .
+		reditus fibo (n-1) + fibo (n-2) .
+	finis
+firmamentum
+	scribonumerus (fibo(5)) .

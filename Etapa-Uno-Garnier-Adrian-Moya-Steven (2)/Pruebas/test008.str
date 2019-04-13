@@ -1,0 +1,14 @@
+<#
+Prueba 008
+Uso de impono
+#>
+nomen test008
+
+commutabilis
+
+    fractio F.
+	numerus  N est 21.
+firmamentum
+	F := N impono imago.
+	scribonumerus ("El resultado de impono fue: ").
+	scribonumerus (F).
