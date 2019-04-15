@@ -304,9 +304,9 @@ code segment
 	fractio proc near
 		mov bp,sp
 		mov ax,[bp+2]
-		mov word ptr [bp+4],1
-		mov word ptr [bp+6],ax
-		ret 2
+		mov word ptr [bp+2],1
+		mov word ptr [bp+4],ax
+		ret
 	fractio endp
 	start:	
 		mov ax, data

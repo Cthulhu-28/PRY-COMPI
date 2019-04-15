@@ -1,284 +1,314 @@
+extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,scriboDualis:far,legoFractio:far,scriboFractio:far
 .model small
 .stack 0ffffh 
 .data
-	var db 3 dup(0)
+	varG db 3 dup(0)
+	varG2 db 3 dup(0)
 	varN dw 0
-	gregoriusExpected db 13,10,"Exceptis: gregorius expectata",10,13,"$"
+	varB db 0
+	varF dw 2 dup(1)
+	msg1 db "+ y -",10,13,"$"
+	msg2 db "d, n y ?",10,13,"$"
+	msg3 db "Partes",10,13,"$"
+	lineBreak db 10,13,"$"
 .code
-	check proc
+	.386
+	toDays proc near
 		locals @@
 		mov bp,sp
 		
-		;di será 1 si el año es bisiesto
-		mov ax,word ptr [bp+2*3]
-		mov cx,ax
-		xor di,di
+		;Año
+		mov dx,[bp+2]
+		xor eax,eax
+		shl dx,7
+		mov ax,dx
+		mov dx,[bp+4]
+		shr dx,9
+		add ax,dx
+		mov esi,eax
+		;Mes
+		xor eax,eax
+		mov ax,[bp+4]
+		shr ax,5
+		xor ah,ah
+		and al,0fh
+		mov edi,eax
+		;Dia
+		xor eax,eax
+		mov ax,[bp+4]
+		and ax,1fh
+		mov ecx,eax
 		
-		;Divisibiliad por 400
-		mov bx,400
-		xor dx,dx
-		div bx
-		cmp dx,0
-		jne @@LeapA
-		mov di,1
+		;m = (m + 9) % 12
+		mov eax,edi
+		add eax,9
+		mov ebx,12
+		xor edx,edx
+		div ebx
+		mov edi,edx
+		
+		;y = y - m/10
+		mov eax,edi
+		mov ebx,10
+		xor edx,edx
+		div ebx
+		sub esi,eax
+		
+		mov dword ptr [bp+2],0
+		;365*y + y/4 - y/100 + y/400 + (m*306 + 5)/10 + ( d - 1 )
+		
+		;365*y
+		mov ebx,365
+		xor edx,edx
+		mov eax,esi
+		mul ebx
+		add dword ptr [bp+2],eax
+		
+		;y/4
+		xor edx,edx
+		mov ebx,4
+		mov eax,esi
+		div ebx
+		add dword ptr [bp+2],eax
+		
+		;y/100
+		xor edx,edx
+		mov ebx,100
+		mov eax,esi
+		div ebx
+		sub dword ptr [bp+2],eax
+		
+		;y/400
+		xor edx,edx
+		mov ebx,400
+		mov eax,esi
+		div ebx
+		add dword ptr [bp+2],eax
+		
+		;(m*306 + 5)/10
+		xor edx,edx
+		mov ebx,306
+		mov eax,edi
+		mul ebx
+		add eax,5
+		
+		xor edx,edx
+		mov ebx,10
+		div ebx
+		add dword ptr [bp+2],eax
+		
+		;( d - 1 )
+		mov eax,ecx
+		dec eax
+		add dword ptr [bp+2],eax
+		
+		ret
+	toDays endp
+	toDate proc
+		locals @@
+		mov bp,sp
+		;y = (10000*g + 14780)/3652425
+		mov eax, dword ptr [bp+2]
+		xor edx,edx
+		mov ebx,10000
+		mul ebx
+		add eax,14780
+		;xor edx,edx
+		mov ebx,3652425
+		div ebx
+		mov esi,eax
+		
+		xor ecx,ecx
+		mov eax,esi
+		xor edx,edx
+		mov ebx,365
+		
+	@@dayCalc:	
+		;ddd = g - (365*y + y/4 - y/100 + y/400)
+		
+		;365*y
+		mov ebx,365
+		xor edx,edx
+		mov eax,esi
+		mul ebx
+		add ecx,eax
+		
+		;y/4
+		xor edx,edx
+		mov ebx,4
+		mov eax,esi
+		div ebx
+		add ecx,eax
+		
+		;y/100
+		xor edx,edx
+		mov ebx,100
+		mov eax,esi
+		div ebx
+		sub ecx,eax
+		
+		;y/400
+		xor edx,edx
+		mov ebx,400
+		mov eax,esi
+		div ebx
+		add ecx,eax
+		
+		mov ebx,ecx
+		mov ecx,dword ptr [bp+2]
+		sub ecx,ebx
+		js @@isNegative
 		jmp @@next
-	@@LeapA:
-		mov ax,word ptr [bp+2*3]
-		;No divisibiliad por 100
-		mov bx,100
-		xor dx,dx
-		div bx
-		cmp dx,0
-		je @@next
-		mov ax,word ptr [bp+2*3]
-		;Divisibiliad por 4
-		mov bx,4
-		xor dx,dx
-		div bx
-		cmp dx,0
-		jne @@next
-		mov di,1
+	@@isNegative:
+		dec esi
+		jmp @@dayCalc
 	@@next:
-		;Comparación de que febrero tenga max 29 días, o 29 si es bisiesto
-		cmp word ptr [bp+2*2],2
-		jne @@nextB
-		cmp di,1
-		jne @@checkFeb
-		cmp word ptr [bp+2],29
-		ja @@error
-		jmp @@nextC
-	@@checkFeb:
-		cmp word ptr [bp+2],28
-		ja @@error
-	@@nextB:	
-		;Se buscan los meses que tengan 30 días.
-		cmp word ptr [bp+2*2],4
-		je @@checkDay
-		cmp word ptr [bp+2*2],6
-		je @@checkDay
-		cmp word ptr [bp+2*2],9
-		je @@checkDay
-		cmp word ptr [bp+2*2],11
-		je @@checkDay
-		jmp @@nextC
-	@@checkDay:
-		;Se compara la regla de los 30 días.
-		cmp word ptr [bp+2],30
-		ja @@error
-	@@nextC:
-		;Se pregunta por mes y día distintos de cero
-		cmp word ptr [bp+2*2],0
-		je @@error
-		cmp word ptr [bp+2],0
-		je @@error
-		;Se compara con el incio del calendario gregoriano, 1582/10/15
-		cmp word ptr [bp+2*3],1582
-		jb @@error
-		cmp word ptr [bp+2*3],1582
-		jne @@return
-		cmp word ptr [bp+2*2],10
-		jb @@error
-		cmp word ptr [bp+2*2],10
-		jne @@return
-		cmp word ptr [bp+2],15
-		jb @@error
-	@@return:
-		ret 2*3
-	@@error:
-		lea dx,gregoriusExpected
-		mov ah,09h
-		int 21h
-		mov ax, 4c4dh
-		int 21h
-	check endp
-	read proc near
+		;mi = (100*ddd + 52)/3060
+		mov eax,ecx
+		xor edx,edx
+		mov ebx,100
+		mul ebx
+		add eax,52
+		xor edx,edx
+		mov ebx,3060
+		div ebx
+		mov edi,eax
+		
+		
+		;mm = (mi + 2)%12 + 1
+		mov dword ptr [bp+2],0
+		mov eax,edi
+		add eax,2
+		xor edx,edx
+		mov ebx,12
+		div ebx
+		inc edx
+		mov dword ptr [bp+2],edx
+		
+		;y = y + (mi + 2)/12
+		mov eax,edi
+		add eax,2
+		xor edx,edx
+		mov ebx,12
+		div ebx
+		add esi,eax
+		
+		;dd = ddd - (mi*306 + 5)/10 + 1
+		mov eax,edi
+		xor edx,edx
+		mov ebx,306
+		mul ebx
+		add eax,5
+		xor edx,edx
+		mov ebx,10
+		div ebx
+		sub ecx,eax
+		inc ecx
+		
+		mov edi, dword ptr [bp+2]
+		mov dword ptr [bp+2],0
+		
+		;year in si
+		;month in di
+		;day in cx
+		
+		;Operaciones sobre bits para retonar con el formato de la fecha
+		xor ax,ax
+		xor dx,dx
+		
+		;El día es el valor más a la derecha, no ocupa mayor tratamiento, solo se mueve.
+		mov ax,cx
+		
+		;El día ocupa 5 bits. Al mes se le hace un corrimiento de 5 bits a la izquierda.
+		;Se suma a los bits del día.
+		mov bx,di
+		shl bx,5
+		add ax,bx
+		
+		;El año ocupa los primeros 7 bits del segundo byte.
+		;Se hace un corrrimiento de 9 bits a la izquierda y se suma.
+		mov bx,si
+		shl bx,9
+		add ax,bx
+		
+		;Queda el último byte. El año ocupa 7 bits del 1 byte más a la izquierda.
+		;Se hace un corrimiento de 7 bits a la derecha para almacenarlo en el tercer byte.
+		mov bx,si
+		shr bx,7
+		mov dx,bx
+		;Se retorna
+		mov bp,sp
+		mov [bp+2],ax ;2do y 3er byte
+		mov [bp+4],dx ;1er byte
+		ret
+	toDate endp
+	
+	addDays proc near
 		locals @@
 		mov bp,sp
-		xor cx,cx
-		xor bx,bx
-		xor di,di
-		xor si, si
-		mov si,1
-		;lee tecla por tecla la entrada. Al dar enter termina el cliclo
-		;En cx guarda la cantidad de caracteres leídos
-		;En di almacena la posición del último | leído
-		;En bx almacena la cantidad de | leídos
-		@@cicle:
-			mov ah,08h
-			int 21h
-			;Comparación con el enter
-			cmp al,13
-		je @@cicleEnd
-			cmp al,'$'
-			jne @@dollar
-			inc bx
-			mov di,cx
-			cmp cx,0
-			jne @@dollar
-			mov si,0
-		@@dollar:
-			inc cx
-			xor ah,ah
-			;Cada tecla digitada se almacena en la pila
-			push ax
-			mov ah, 02h
-			mov dl,al	
-			int 21h
-		jmp @@cicle
 		
-		@@cicleEnd:
-		;Se intenta detectar errores simples en la entrada:
-	
-			;A. Comienza con $
-			cmp si,0
-			je @@errorIInt
-			;B. Que haya más de dos $
-			cmp bx,2
-			jne @@errorIInt
-			;C. Que lo ingresado no sea al menos 9 caracteres
-			cmp cx,8
-			jb @@errorIInt
-			inc di
-			;D. Que el $ sea el último caracter introducido
-			cmp cx,di
-			je @@errorIInt
-			dec di
-			
-		;En di se guardará el dia
-		;En cx se cuenta si hay un número negativo
-		;Em bx se trabajará las potencias de 10. Se comienza con 10^0
-		mov bx,1
-		xor di,di		
-		xor cx,cx
-		xor si,si
-	
+		mov ax,[bp+6]
+		mov bx,[bp+4]
+		push ax
+		push bx
+		call toDays
+		pop eax
+		mov bp,sp
+		xor ebx,ebx
+		mov bx,[bp+2]
+		cmp bx,7FFFh
+		jbe @@isPostive
+		dec bx
+		xor bx,0ffffh
+		sub eax,ebx
+		jmp @@castToDate
+	@@isPostive:
+		add eax,ebx
+	@@castToDate:
+		push eax
+		call toDate
+		pop ax
+		pop dx
+		mov bp,sp
 		
-		@@castDay:
-			pop ax
-			cmp al,'$'
-			je @@next
-			;Se verifica que la tecla esté en el rango de los números
-			cmp al,48
-			jb @@errorIInt
-			cmp al,57
-			ja @@errorIInt
-			
-			sub ax,48
-			mul bx
-			add di,ax
-			mov ax,bx
-			mov dx,10
-			mul dx
-			mov bx,ax
-			cmp di,31
-			ja @@errorIInt
-		jmp @@castDay
-		@@errorIInt: jmp @@errorI
-		@@next:
-			mov bx,1
-		@@castMonth:
-			pop ax
-			cmp al,'$'
-			je @@nextB
-			cmp al,48
-			jb @@errorIInt
-			cmp al,57
-			ja @@errorIInt
-			
-			sub ax,48
-			mul bx
-			add si,ax
-			mov ax,bx
-			mov dx,10
-			mul dx
-			mov bx,ax
-			cmp si,12
-			ja @@errorIInt
-		jmp @@castMonth
-		@@nextB:
-			mov bx,1
-		@@castYear:
-			pop ax
-			cmp al,48
-			jb @@errorI
-			cmp al,57
-			ja @@errorI
-			
-			sub ax,48
-			mul bx
-			add cx,ax
-			mov ax,bx
-			mov dx,10
-			mul dx
-			mov bx,ax
-			cmp cx,9999;270f
-			ja @@errorI
-			cmp bp,sp
-			je @@nextC
-		jmp @@castYear
+		mov word ptr [bp+4],ax
+		mov word ptr [bp+6],dx
 		
-		@@nextC: 
+		ret 2
+	addDays endp
+	subDays proc near
+		locals @@
+		mov bp,sp
 		
-			push cx
-			push si
-			push di
-			
-			push cx
-			push si
-			push di
-			
-			;CX contiene el año
-			;DI el día
-			;SI el mes
-			call check
-			
-			pop di
-			pop si
-			pop cx
-			
-			;0000 0000  0000 0000  0000 0000
-			; |       año      || mes|| día|  
-			; |        14      ||  4 ||  5 |
-			;El primer bit queda libre
-			
-			;Operaciones sobre bits para retonar con el formato de la fecha
-			xor ax,ax
-			xor dx,dx
-			
-			;El día es el valor más a la derecha, no ocupa mayor tratamiento, solo se mueve.
-			mov ax,di
-			
-			;El día ocupa 5 bits. Al mes se le hace un corrimiento de 5 bits a la izquierda.
-			;Se suma a los bits del día.
-			mov bx,si
-			shl bx,5
-			add ax,bx
-			
-			;El año ocupa los primeros 7 bits del segundo byte.
-			;Se hace un corrrimiento de 9 bits a la izquierda y se suma.
-			mov bx,cx
-			shl bx,9
-			add ax,bx
-			
-			;Queda el último byte. El año ocupa 7 bits del 1 byte más a la izquierda.
-			;Se hace un corrimiento de 7 bits a la derecha para almacenarlo en el tercer byte.
-			mov bx,cx
-			shr bx,7
-			mov dx,bx
-			;Se retorna
-			mov bp,sp
-			mov [bp+2],ax ;2do y 3er byte
-			mov [bp+4],dx ;1er byte
-		return:
-			ret
-		@@errorI:
-			lea dx,gregoriusExpected
-			mov ah,09h
-			int 21h
-			mov ax, 4c4dh
-			int 21h
-	read endp
-	
+		mov ax,[bp+6]
+		mov bx,[bp+4]
+		push ax
+		push bx
+		call toDays
+		pop eax
+		mov bp,sp
+		xor ebx,ebx
+		mov bx,[bp+2]
+		cmp bx,7FFFh
+		jbe @@isPostive
+		dec bx
+		xor bx,0ffffh
+		add eax,ebx
+		jmp @@castToDate
+	@@isPostive:
+		sub eax,ebx
+	@@castToDate:
+		push eax
+		call toDate
+		pop ax
+		pop dx
+		mov bp,sp
+		
+		mov word ptr [bp+4],ax
+		mov word ptr [bp+6],dx
+		
+		ret 2
+	subDays endp
 	weekDay proc near
 		locals @@
 		
@@ -367,85 +397,277 @@
 		mov word ptr [bp+6],dx
 		ret 2*2
 	weekDay endp
-	write proc near
+	isLeap proc near
+		locals @@
+		
 		mov bp,sp
-		mov ax,[bp+2]
-		
-		push bx
-		
-		mov bx,ax
-		and bx ,8000h
-		cmp bx,8000h
-		jne noSign
-		push ax
-		mov ah,02
-		mov dl,"-"
-		int 21h
-		pop ax
-		dec ax
-		xor ax,0ffffh
+		;Año
+		mov dx,[bp+2]
+		xor ax,ax
+		shl dx,7
+		mov ax,dx
+		mov dx,[bp+4]
+		shr dx,9
+		add ax,dx
+		mov si,ax
 		
 		
-	noSign:	
-		pop bx
-		push AX
-		push BX
-		push CX
-		push DX
-
-		xor cx, cx
-		mov bx, 10
-	ciclo1: 
-		xor dx, dx
+		;di será 1 si el año es bisiesto
+		mov ax,si
+		mov cx,ax
+		xor di,di
+		
+		;Divisibiliad por 400
+		mov bx,400
+		xor dx,dx
 		div bx
-		push dx
-		inc cx
-		cmp ax, 0
-		jne ciclo1
-		mov ah, 02h
-	ciclo2: 
-		pop DX
-		add dl, 30h
-		int 21h
-		loop ciclo2
-
-		pop DX
-		pop CX
-		pop BX
-		pop AX
-		
+		cmp dx,0
+		jne @@LeapA
+		mov di,1
+		jmp @@next
+	@@LeapA:
+		mov ax,si
+		;No divisibiliad por 100
+		mov bx,100
+		xor dx,dx
+		div bx
+		cmp dx,0
+		je @@next
+		mov ax,si
+		;Divisibiliad por 4
+		mov bx,4
+		xor dx,dx
+		div bx
+		cmp dx,0
+		jne @@next
+		mov di,1
+	@@next:	
+		mov word ptr [bp+4],di
 		ret 2
-	write endp
+	isLeap endp
+	
+	dayInMonth proc near
+		locals @@
+		mov bp,sp
+		mov ax,[bp+4]
+		mov bx,[bp+2]
+		push ax
+		push bx
+		call isLeap
+		pop si
+		mov bp,sp
+		
+		;Mes
+		xor eax,eax
+		mov ax,[bp+4]
+		shr ax,5
+		xor ah,ah
+		and al,0fh
+		mov edi,eax
+		;Dia
+		xor eax,eax
+		mov ax,[bp+4]
+		and ax,1fh
+		mov ecx,eax
+		
+		;m = (m + 9) % 12
+		mov eax,edi
+		add eax,9
+		mov ebx,12
+		xor edx,edx
+		div ebx
+		mov edi,edx
+		
+		
+		
+		;(m*306 + 5)/10
+		xor edx,edx
+		mov ebx,306
+		mov eax,edi
+		mul ebx
+		add eax,5
+		
+		xor edx,edx
+		mov ebx,10
+		div ebx
+		mov edi,eax
+		
+		;( d - 1 )
+		mov eax,ecx
+		dec eax
+		add edi,eax
+		
+		
+		add edi,59
+		add edi,esi
+		
+		mov ebx,365
+		add ebx,esi
+		xor edx,edx
+		mov eax,edi
+		div ebx
+		inc edx
+		
+		mov word ptr [bp+2],1
+		mov word ptr [bp+4],dx	
+		ret
+		
+	dayInMonth endp
 
 	start:
 		mov ax,@data 
 		mov ds,ax 
+		
+		
+		lea dx,msg1
+		mov ah,09h
+		int 21h
 
-		call read
+		call legoGregorius
+		pop ax
+		pop dx		
+		mov byte ptr varG[0],dl
+		mov byte ptr varG[1],ah
+		mov byte ptr varG[2],al
+		
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		call legoNumerus
+		pop varN
+		
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]	
+		push ax
+		push dx
+		push varN
+		call addDays
 		pop ax
 		pop dx
+		mov byte ptr varG2[0],dl
+		mov byte ptr varG2[1],ah
+		mov byte ptr varG2[2],al
 		
-		mov byte ptr var[0],dl
-		mov byte ptr var[1],ah
-		mov byte ptr var[2],al
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		xor dx,dx
+		mov dl,byte ptr varG2[0]
+		mov ah,byte ptr varG2[1]
+		mov al,byte ptr varG2[2]
+		push ax
+		push dx
+		call scriboGregorius
 		
 		
 		xor dx,dx
-		mov dl,byte ptr var[0]
-		mov ah,byte ptr var[1]
-		mov al,byte ptr var[2]
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]	
+		push ax
+		push dx
+		push varN
+		call subDays
+		pop ax
+		pop dx
+		mov byte ptr varG2[0],dl
+		mov byte ptr varG2[1],ah
+		mov byte ptr varG2[2],al
 		
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		xor dx,dx
+		mov dl,byte ptr varG2[0]
+		mov ah,byte ptr varG2[1]
+		mov al,byte ptr varG2[2]
+		push ax
+		push dx
+		call scriboGregorius
+		
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		lea dx,msg2
+		mov ah,09h
+		int 21h
+		
+		call legoGregorius
+		pop ax
+		pop dx		
+		mov byte ptr varG[0],dl
+		mov byte ptr varG[1],ah
+		mov byte ptr varG[2],al
+		
+		
+		
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
 		push ax
 		push dx
 		call weekDay
-		
 		pop varN
 		
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
 		push varN
-		call write
+		call scriboNumerus
+		
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		push ax
+		push dx
+		call isLeap
+		pop ax
+		mov varB,al
+		
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		mov al,varB
+		xor ah,ah
+		push ax
+		call scriboDualis
 		
 		
-
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		push ax
+		push dx
+		
+		call dayInMonth
+		
+		pop cx;numerado
+		pop ax;denominador
+		mov word ptr varF[0],cx
+		mov word ptr varF[2],ax
+		
+		mov ax,varF[2]
+		mov cx,varF[0]
+		push ax
+		push cx
+		
+		call scriboFractio
+		
 		mov ax,4c00h
 		int 21h
 	end start

@@ -1,4 +1,4 @@
-extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,scriboDualis:far
+extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,scriboDualis:far,legoFractio:far,scriboFractio:far
 .model small
 .stack 0ffffh 
 .data
@@ -6,6 +6,7 @@ extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,sc
 	varG2 db 3 dup(0)
 	varN dw 0
 	varB db 0
+	varF dw 2 dup(1)
 	msg1 db "+ y -",10,13,"$"
 	msg2 db "d, n y ?",10,13,"$"
 	msg3 db "Partes",10,13,"$"
@@ -51,9 +52,9 @@ extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,sc
 		mov ebx,10
 		xor edx,edx
 		div ebx
-		sub esi,eax
-		
+		sub esi,eax	
 		mov dword ptr [bp+2],0
+		
 		;365*y + y/4 - y/100 + y/400 + (m*306 + 5)/10 + ( d - 1 )
 		
 		;365*y
@@ -441,9 +442,77 @@ extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,sc
 		jne @@next
 		mov di,1
 	@@next:	
-		mov word ptr [bp+6],di
-		ret 2*2
+		mov word ptr [bp+4],di
+		ret 2
 	isLeap endp
+	
+	dayInMonth proc near
+		locals @@
+		mov bp,sp
+		mov ax,[bp+4]
+		mov bx,[bp+2]
+		push ax
+		push bx
+		call isLeap
+		pop si
+		mov bp,sp
+		
+		;Mes
+		xor eax,eax
+		mov ax,[bp+4]
+		shr ax,5
+		xor ah,ah
+		and al,0fh
+		mov edi,eax
+		;Dia
+		xor eax,eax
+		mov ax,[bp+4]
+		and ax,1fh
+		mov ecx,eax
+		
+		;m = (m + 9) % 12
+		mov eax,edi
+		add eax,9
+		mov ebx,12
+		xor edx,edx
+		div ebx
+		mov edi,edx
+		
+		
+		
+		;(m*306 + 5)/10
+		xor edx,edx
+		mov ebx,306
+		mov eax,edi
+		mul ebx
+		add eax,5
+		
+		xor edx,edx
+		mov ebx,10
+		div ebx
+		mov edi,eax
+		
+		;( d - 1 )
+		mov eax,ecx
+		dec eax
+		add edi,eax
+		
+		
+		add edi,59
+		add edi,esi
+		
+		mov ebx,365
+		add ebx,esi
+		xor edx,edx
+		mov eax,edi
+		div ebx
+		inc edx
+		
+		mov word ptr [bp+2],1
+		mov word ptr [bp+4],dx	
+		ret
+		
+	dayInMonth endp
 
 	start:
 		mov ax,@data 
@@ -574,7 +643,31 @@ extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,sc
 		call scriboDualis
 		
 		
-
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		push ax
+		push dx
+		
+		call dayInMonth
+		
+		pop cx;numerado
+		pop ax;denominador
+		mov word ptr varF[0],cx
+		mov word ptr varF[2],ax
+		
+		mov ax,varF[2]
+		mov cx,varF[0]
+		push ax
+		push cx
+		
+		call scriboFractio
+		
 		mov ax,4c00h
 		int 21h
 	end start
