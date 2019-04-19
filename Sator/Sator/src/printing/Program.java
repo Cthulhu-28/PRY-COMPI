@@ -17,6 +17,7 @@ import scanner.reader.Token;
  */
 public class Program {
     public static void main(String args[]){
+        
         try {
             if(args.length<2){
                 throw new Exception("Dos parámetros esperados");
