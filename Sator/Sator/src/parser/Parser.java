@@ -41,14 +41,18 @@ public class Parser {
             if(Gramatica.esTerminal(EAP)){
                 if(EAP == CT.getCode())
                     nextToken(CT);
-                else
-                    errorTokenExpected(CT, Gramatica.getNombresTerminales(EAP));
+                else{
+                    if(CT.hasError())
+                        errorLexico(CT);
+                    else
+                        errorTokenExpected(CT, Gramatica.getNombresTerminales(EAP));
+                }
             }
-            else{
+            else{                
                 int rule = Gramatica.getTablaParsing(EAP-initial, CT.getCode());
                 if(rule < 0){
                     error(rule,CT);
-                    recoverFromError(rule, CT);
+                    recoverFromError(EAP, CT);
                 }
                 else{
                     int i = 0;
@@ -57,11 +61,17 @@ public class Parser {
                 }
             }
         }
+        if(!stack.isEmpty())
+            error(24);
     }
     private void nextToken(Token CT) throws Exception{
         CT = scanner.nextToken();
-        if(CT.isComment() || CT.hasError())
+        if(CT.isComment())
             nextToken(CT);
+    }
+    public void error(int code){
+        String msg = SyntacticErrors.getError(code);
+        System.err.println(msg);
     }
     public void error(int code, Token token) throws Exception{
         String msg = SyntacticErrors.getError(code, token.getIntegerProperty("row"), token.getIntegerProperty("column"));
@@ -71,7 +81,7 @@ public class Parser {
         String msg = SyntacticErrors.getError(-1, token.getIntegerProperty("row"), token.getIntegerProperty("column"), expected , token.getLexeme());
         System.err.println(msg);
     }
-    private void errorSintactico(Token token){
+    private void errorLexico(Token token){
         System.err.println(token.getErrorMessage());
     }
     private void recoverFromError(int rule, Token token){
@@ -80,6 +90,8 @@ public class Parser {
         else{
             while(!Gramatica.isSynchToken(rule-Gramatica.NO_TERMINAL_INICIAL, token.getCode()) && !stack.isEmpty()){
                 rule = stack.pop();
+                while(Gramatica.esTerminal(rule) && !stack.isEmpty())
+                    rule = stack.pop();
             }
         }         
     }
