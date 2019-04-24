@@ -11,6 +11,9 @@
 
 package parser.grammar;
 
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
+
 /**
  * Esta clase contiene:
  * - Constantes necesarias para el driver de parsing
@@ -131,4 +134,7 @@ public abstract class Gramatica
 	{
 		return GTablaFollows.getTablaFollows(numNoTerminal, numColumna);
 	}
+        public static boolean isSynchToken(int noTerminal, int terminal){
+            return IntStream.of(GTablaFollows.getFollows(noTerminal)).anyMatch( x -> x==terminal);
+        }
 }

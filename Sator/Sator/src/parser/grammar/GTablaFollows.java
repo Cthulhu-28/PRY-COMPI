@@ -125,4 +125,8 @@ abstract class GTablaFollows
 	{
 		return TablaFollows[numNoTerminal][numColumna];
 	}
+        
+        static final int[] getFollows(int numNoTerminal){
+            return TablaFollows[numNoTerminal];
+        }
 }

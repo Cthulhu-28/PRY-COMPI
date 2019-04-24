@@ -32,6 +32,7 @@ public class Scanner {
     private final Set<Integer> identifierCodes = new HashSet<>(Arrays.asList(new Integer[]{601}));
     private final Set<Integer> minusAmbiguityCodes = new HashSet<>(Arrays.asList(new Integer[]{19,35,101,72,87,100,104,120,51}));
     private boolean minus;
+    private Token returnedToken=null;
     private Scanner(){}
     private Scanner(String path) throws FileNotFoundException{
         scanner = new Scanner();
@@ -60,6 +61,11 @@ public class Scanner {
     //Falta lo de toble lectura adelantada, null con sig (ya), validar menos en fecha, largo identificadores
     //Comentarios
     public Token nextToken() throws IOException, Exception{
+        if(returnedToken!=null){
+            Token token = returnedToken;
+            returnedToken =null;
+            return token;
+        }
         int row1,col1,row2,col2;
         row1=row2=col1=col2=0;
         boolean romanNumeral=false;
@@ -233,11 +239,14 @@ public class Scanner {
             token.setProperty("column", col2);
             return token;
         }
-        if(minusAmbiguityCodes.contains(state.getCode())){
-            minus=true;
-        }
-        else{minus=false;}
-        return new Token(state.getCode(), builder.toString());
+        minus = minusAmbiguityCodes.contains(state.getCode());
+        Token token = new Token(state.getCode(), builder.toString());
+        token.setProperty("row", row1);
+        token.setProperty("column", col1);
+        return token ;
+    }
+    public void returnToken(Token token){
+        returnedToken = token;
     }
     private Token reportError(StringBuilder builder, String input, int code, int row1, int row2, int column1, int column2){
         Token token = null;
