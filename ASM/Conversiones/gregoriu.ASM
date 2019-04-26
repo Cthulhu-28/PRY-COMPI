@@ -1,4 +1,6 @@
-data segment
+.model small
+.stack 0ffffh 
+.data
 	varI db 0
 	varN dw 0
 	varD db 0
@@ -6,16 +8,34 @@ data segment
     varF dw 2 dup(1)
     varG db 3 dup(0)
     boolExpected db 13,10,"Exceptis: gregoriu expectata",10,13,"$"
-data ends
 
-sstack segment stack 'stack'
-    dw 256 dup (?)
-sstack ends
-
-code segment
-    assume cs:code, ds:data,ss:sstack
+.code
+	.386
     catena proc near
 		locals @@
+		;Año
+		mov dx,[bp+2]
+		xor eax,eax
+		shl dx,7
+		mov ax,dx
+		mov dx,[bp+4]
+		shr dx,9
+		add ax,dx
+		mov esi,eax
+		;Mes
+		xor eax,eax
+		mov ax,[bp+4]
+		shr ax,5
+		xor ah,ah
+		and al,0fh
+		mov edi,eax
+		;Dia
+		xor eax,eax
+		mov ax,[bp+4]
+		and ax,1fh
+		mov ecx,eax
+
+
         mov bp,sp
         mov di, 4
         mov ax, [bp+2]
@@ -69,27 +89,64 @@ code segment
 
 	imago proc near
 		locals @@
-		mov bp,sp
-		mov ax,[bp+2]
-		cmp ax,0
-		je @@false
-		mov word ptr [bp+4], "V"
+		;Año
+		mov dx,[bp+2]
+		shl dx,7
+		mov ax,dx
+		mov dx,[bp+4]
+		shr dx,9
+		add ax,dx
+		mov si,ax
+		;Mes
+		mov ax,[bp+4]
+		shr ax,5
+		xor ah,ah
+		and al,0fh
+		mov di,ax
+		;Dia
+		mov ax,[bp+4]
+		and ax,1fh
+		mov cx,ax
+
+		add cx, si
+		add cx, di
+
+		xor dx, dx   
+		mov ax, cx
+		mov bx, 256
+		div bx   
+
+		mov [bp+4], dx
 		ret 2
-	@@false:	    
-		mov word ptr [bp+4], "F"
-		ret 2
+
 	imago endp
 
 	numerus proc near
-        mov bp,sp
-        mov ax,[bp+2]
-        cmp ax,0
-        je @@false
-        mov word ptr [bp+4],1
-        ret 2
-    @@false:	    
-        mov word ptr [bp+4],0
-        ret 2
+	locals @@
+	;Año
+	mov dx,[bp+2]
+	shl dx,7
+	mov ax,dx
+	mov dx,[bp+4]
+	shr dx,9
+	add ax,dx
+	mov si,ax
+	;Mes
+	mov ax,[bp+4]
+	shr ax,5
+	xor ah,ah
+	and al,0fh
+	mov di,ax
+	;Dia
+	mov ax,[bp+4]
+	and ax,1fh
+	mov cx,ax
+
+	add cx, si
+	add cx, di
+
+	mov [bp+4], cx
+	ret 2
     numerus endp
 
 	fractio proc near
@@ -255,6 +312,46 @@ code segment
 		ret 2*2
 		
 	writef endp
+
+	writeD proc near
+	locals @@
+		mov bp,sp
+		mov dx,[bp+2]
+		mov ah,02h
+		cmp dx,0
+		je @@false
+	@@true:
+		mov dl,'v'
+		int 21h
+		mov dl,'e'
+		int 21h
+		mov dl,'r'
+		int 21h
+		jmp @@return
+	@@false:
+		mov dl,'f'
+		int 21h
+		mov dl,'a'
+		int 21h
+		mov dl,'l'
+		int 21h
+		mov dl,'s'
+		int 21h
+	@@return:
+		mov dl,'i'
+		int 21h
+		mov dl,'d'
+		int 21h
+		mov dl,'i'
+		int 21h
+		mov dl,'c'
+		int 21h
+		mov dl,'u'
+		int 21h
+		mov dl,'s'
+		int 21h
+		ret 2
+	writeD endp
 
     read proc near
 		locals @@
@@ -444,6 +541,55 @@ code segment
 			int 21h
 	read endp
 
+	dualis proc near
+		locals @@
+		
+		mov bp,sp
+		;Año
+		mov dx,[bp+2]
+		xor ax,ax
+		shl dx,7
+		mov ax,dx
+		mov dx,[bp+4]
+		shr dx,9
+		add ax,dx
+		mov si,ax
+		
+		
+		;di será 1 si el año es bisiesto
+		mov ax,si
+		mov cx,ax
+		xor di,di
+		
+		;Divisibiliad por 400
+		mov bx,400
+		xor dx,dx
+		div bx
+		cmp dx,0
+		jne @@LeapA
+		mov di,1
+		jmp @@next
+	@@LeapA:
+		mov ax,si
+		;No divisibiliad por 100
+		mov bx,100
+		xor dx,dx
+		div bx
+		cmp dx,0
+		je @@next
+		mov ax,si
+		;Divisibiliad por 4
+		mov bx,4
+		xor dx,dx
+		div bx
+		cmp dx,0
+		jne @@next
+		mov di,1
+	@@next:	
+		mov word ptr [bp+4],di
+		ret 2
+	dualis endp
+	
     start:
     
 
@@ -469,9 +615,9 @@ code segment
 		
 
 		xor dx,dx
-		mov dl,byte ptr var[0]
-		mov ah,byte ptr var[1]
-		mov al,byte ptr var[2]
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
 		
 		push ax
 		push dx
@@ -506,9 +652,9 @@ code segment
 		
 
 		xor dx,dx
-		mov dl,byte ptr var[0]
-		mov ah,byte ptr var[1]
-		mov al,byte ptr var[2]
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
 		
 		push ax
 		push dx
@@ -529,9 +675,9 @@ code segment
 		
 
 		xor dx,dx
-		mov dl,byte ptr var[0]
-		mov ah,byte ptr var[1]
-		mov al,byte ptr var[2]
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
 		
 		push ax
 		push dx
@@ -550,9 +696,9 @@ code segment
 		
 
 		xor dx,dx
-		mov dl,byte ptr var[0]
-		mov ah,byte ptr var[1]
-		mov al,byte ptr var[2]
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
 		
 		push ax
 		push dx
@@ -567,6 +713,29 @@ code segment
 		push bx
 		push cx
 		call writef
+
+		mov ah, 02h
+		mov dl, 10
+		int 21h
+		mov dl, 13
+		int 21h
+		
+
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		
+		push ax
+		push dx
+		call dualis
+		pop ax
+		mov varD,al
+
+		mov al,varD
+		xor ah,ah
+		push ax
+		call writeD
 
         mov ax, 4c4dh
 		int 21h
