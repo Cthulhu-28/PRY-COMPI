@@ -40,7 +40,7 @@ public class SyntacticErrors {
         return "ST"+Math.abs(code)+": "+ERRORS[Math.abs(code)-1];
     }
     public static String getError(int code, int row, int col){
-        return "ST"+Math.abs(code)+": "+ERRORS[Math.abs(code)-1] + "en la línea " + row + " columna "+col;
+        return "ST"+Math.abs(code)+": "+ERRORS[Math.abs(code)-1] + " en la línea " + row + " columna "+col;
     }
     public static String getError(int code, int row, int col, String tkn1, String tkn2){
         String error = getError(code, row, col);

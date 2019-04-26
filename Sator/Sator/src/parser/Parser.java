@@ -18,7 +18,7 @@ public class Parser {
     private Scanner scanner;
     private Stack<Integer> stack;
     private static Parser parser=null;
-    
+    private Token CT;
     private Parser(){}
     
     private Parser(String path) throws Exception{
@@ -34,18 +34,21 @@ public class Parser {
     
     public void parse() throws Exception{
         int initial = 144;
-        Token CT = scanner.nextToken();
+        CT = scanner.nextToken();
         stack.push(initial);
         while(CT.getCode() != Gramatica.MARCA_DERECHA && !stack.isEmpty()){
             int EAP = stack.pop();
             if(Gramatica.esTerminal(EAP)){
                 if(EAP == CT.getCode())
-                    nextToken(CT);
+                    nextToken();
                 else{
                     if(CT.hasError())
                         errorLexico(CT);
-                    else
-                        errorTokenExpected(CT, Gramatica.getNombresTerminales(EAP));
+                    else{
+                        nextToken();
+                        if(EAP!=CT.getCode())
+                            scanner.returnToken(CT);
+                    }
                 }
             }
             else{                
@@ -55,19 +58,27 @@ public class Parser {
                     recoverFromError(EAP, CT);
                 }
                 else{
+                    if(rule==-16)
+                        System.out.print("");
                     int i = 0;
                     while (Gramatica.getLadosDerechos(rule, i)>-1 && i < Gramatica.MAX_LADO_DER)
                         stack.push(Gramatica.getLadosDerechos(rule, i++));
                 }
             }
         }
-        if(!stack.isEmpty())
-            error(24);
+        
+        if(!stack.isEmpty()){
+            int rule = stack.pop();
+            if(Gramatica.getTablaParsing(rule-initial, Gramatica.MARCA_DERECHA)<0)
+                stack.push(rule);
+            if(!stack.isEmpty())
+                error(24);
+        }
     }
-    private void nextToken(Token CT) throws Exception{
+    private void nextToken() throws Exception{
         CT = scanner.nextToken();
         if(CT.isComment())
-            nextToken(CT);
+            nextToken();
     }
     public void error(int code){
         String msg = SyntacticErrors.getError(code);
@@ -86,13 +97,25 @@ public class Parser {
     }
     private void recoverFromError(int rule, Token token){
         if(stack.isEmpty())
-            stack.push(rule);
+            System.out.print("");
         else{
+            if(Gramatica.isSynchTokenOfExpression(rule-Gramatica.NO_TERMINAL_INICIAL, token.getCode())){
+                rule = stack.pop();
+                while(!stack.isEmpty() && rule != 217)
+                    rule = stack.pop();
+                if(rule==217)
+                    stack.push(rule);
+                return;
+            }
             while(!Gramatica.isSynchToken(rule-Gramatica.NO_TERMINAL_INICIAL, token.getCode()) && !stack.isEmpty()){
                 rule = stack.pop();
                 while(Gramatica.esTerminal(rule) && !stack.isEmpty())
                     rule = stack.pop();
+                if(rule-Gramatica.NO_TERMINAL_INICIAL==173 || rule==173)
+                    System.out.println("");
+                
             }
+            System.out.println("");
         }         
     }
 }  
