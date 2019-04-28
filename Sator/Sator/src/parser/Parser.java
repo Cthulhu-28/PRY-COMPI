@@ -5,7 +5,7 @@
  */
 package parser;
 
-import parser.grammar.Gramatica;
+import parser.grammar.Grammar;
 import scanner.reader.Scanner;
 import scanner.reader.Token;
 import utils.Stack;
@@ -36,15 +36,16 @@ public class Parser {
         int initial = 144;
         CT = scanner.nextToken();
         stack.push(initial);
-        while(CT.getCode() != Gramatica.MARCA_DERECHA && !stack.isEmpty()){
+        while(CT.getCode() != Grammar.END_MARKER && !stack.isEmpty()){
             int EAP = stack.pop();
-            if(Gramatica.esTerminal(EAP)){
+            if(Grammar.isTerminal(EAP)){
                 if(EAP == CT.getCode())
                     nextToken();
-                else{
+                else{  
                     if(CT.hasError())
                         errorLexico(CT);
                     else{
+                        errorTokenExpected(CT, Grammar.getTerminalName(EAP));
                         nextToken();
                         if(EAP!=CT.getCode())
                             scanner.returnToken(CT);
@@ -52,7 +53,7 @@ public class Parser {
                 }
             }
             else{                
-                int rule = Gramatica.getTablaParsing(EAP-initial, CT.getCode());
+                int rule = Grammar.getParsingTable(EAP-initial, CT.getCode());
                 if(rule < 0){
                     error(rule,CT);
                     recoverFromError(EAP, CT);
@@ -61,15 +62,15 @@ public class Parser {
                     if(rule==-16)
                         System.out.print("");
                     int i = 0;
-                    while (Gramatica.getLadosDerechos(rule, i)>-1 && i < Gramatica.MAX_LADO_DER)
-                        stack.push(Gramatica.getLadosDerechos(rule, i++));
+                    while (Grammar.getRightSides(rule, i)>-1 && i < Grammar.MAX_RIGHT_SIDE)
+                        stack.push(Grammar.getRightSides(rule, i++));
                 }
             }
         }
         
         if(!stack.isEmpty()){
             int rule = stack.pop();
-            if(Gramatica.getTablaParsing(rule-initial, Gramatica.MARCA_DERECHA)<0)
+            if(Grammar.getParsingTable(rule-initial, Grammar.END_MARKER)<0)
                 stack.push(rule);
             if(!stack.isEmpty())
                 error(24);
@@ -99,7 +100,7 @@ public class Parser {
         if(stack.isEmpty())
             System.out.print("");
         else{
-            if(Gramatica.isSynchTokenOfExpression(rule-Gramatica.NO_TERMINAL_INICIAL, token.getCode())){
+            if(Grammar.isSynchTokenOfExpression(rule-Grammar.INITIAL_NON_TERMINAL, token.getCode())){
                 rule = stack.pop();
                 while(!stack.isEmpty() && rule != 217)
                     rule = stack.pop();
@@ -107,11 +108,11 @@ public class Parser {
                     stack.push(rule);
                 return;
             }
-            while(!Gramatica.isSynchToken(rule-Gramatica.NO_TERMINAL_INICIAL, token.getCode()) && !stack.isEmpty()){
+            while(!Grammar.isSynchToken(rule-Grammar.INITIAL_NON_TERMINAL, token.getCode()) && !stack.isEmpty()){
                 rule = stack.pop();
-                while(Gramatica.esTerminal(rule) && !stack.isEmpty())
+                while(Grammar.isTerminal(rule) && !stack.isEmpty())
                     rule = stack.pop();
-                if(rule-Gramatica.NO_TERMINAL_INICIAL==173 || rule==173)
+                if(rule-Grammar.INITIAL_NON_TERMINAL==173 || rule==173)
                     System.out.println("");
                 
             }

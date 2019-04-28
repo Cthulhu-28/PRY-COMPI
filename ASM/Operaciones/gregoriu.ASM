@@ -10,6 +10,7 @@ extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,sc
 	msg1 db "+ y -",10,13,"$"
 	msg2 db "d, n y ?",10,13,"$"
 	msg3 db "Partes",10,13,"$"
+	msg4 db "Hoy",10,13,"$"
 	lineBreak db 10,13,"$"
 .code
 	.386
@@ -513,10 +514,107 @@ extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,sc
 		ret
 		
 	dayInMonth endp
+	
+	nunc proc near
+		mov bp,sp
+		mov ah,2ah
+		int 21h
+		xor ax,ax
+		mov al,dh
+		mov si,ax
+		xor ax,ax
+		mov al,dl
+		mov di,ax
+		
+		
+		;CX contiene el año
+		;DI el día
+		;SI el mes
+		
+		
+		;0000 0000  0000 0000  0000 0000
+		; |       año      || mes|| día|  
+		; |        14      ||  4 ||  5 |
+		;El primer bit queda libre
+		
+		;Operaciones sobre bits para retonar con el formato de la fecha
+		xor ax,ax
+		xor dx,dx
+		
+		;El día es el valor más a la derecha, no ocupa mayor tratamiento, solo se mueve.
+		mov ax,di
+		
+		;El día ocupa 5 bits. Al mes se le hace un corrimiento de 5 bits a la izquierda.
+		;Se suma a los bits del día.
+		mov bx,si
+		shl bx,5
+		add ax,bx
+		
+		;El año ocupa los primeros 7 bits del segundo byte.
+		;Se hace un corrrimiento de 9 bits a la izquierda y se suma.
+		mov bx,cx
+		shl bx,9
+		add ax,bx
+		
+		;Queda el último byte. El año ocupa 7 bits del 1 byte más a la izquierda.
+		;Se hace un corrimiento de 7 bits a la derecha para almacenarlo en el tercer byte.
+		mov bx,cx
+		shr bx,7
+		mov dx,bx
+		;Se retorna
+		mov bp,sp
+		mov [bp+2],ax ;2do y 3er byte
+		mov [bp+4],dx ;1er byte
+		
+		ret
+	nunc endp
+	
+	getYear proc near
+		locals @@
+		
+		mov bp,sp
+		;Año
+		mov dx,[bp+2]
+		xor ax,ax
+		shl dx,7
+		mov ax,dx
+		mov dx,[bp+4]
+		shr dx,9
+		add ax,dx
+		mov si,ax
+		mov word ptr [bp+4],si
+		ret 2
+	getYear endp
+	getMonth proc near
+		locals @@
+		
+		mov bp,sp
+		;Mes
+		mov ax,[bp+4]
+		shr ax,5
+		xor ah,ah
+		and al,0fh
+		mov di,ax
+		mov word ptr [bp+4],di
+		ret 2
+	getMonth endp
+	getDay proc near
+		locals @@
+		
+		mov bp,sp
+		;Dia
+		mov ax,[bp+4]
+		and ax,1fh
+		mov cx,ax
+		mov word ptr [bp+4],cx
+		ret 2
+	getDay endp
 
 	start:
 		mov ax,@data 
 		mov ds,ax 
+		
+		
 		
 		
 		lea dx,msg1
@@ -667,6 +765,86 @@ extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,sc
 		push cx
 		
 		call scriboFractio
+		
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		lea dx,msg4
+		mov ah,09h
+		int 21h
+		
+		call nunc
+		
+		pop ax
+		pop dx		
+		mov byte ptr varG[0],dl
+		mov byte ptr varG[1],ah
+		mov byte ptr varG[2],al
+		
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		
+		push ax
+		push dx
+		call scriboGregorius
+		
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		
+		push ax
+		push dx
+		call getYear
+		
+		pop varN
+		push varN
+		
+		call scriboNumerus
+		
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		
+		push ax
+		push dx
+		call getMonth
+		
+		pop varN
+		push varN
+		
+		call scriboNumerus
+		
+		lea dx,lineBreak
+		mov ah,09h
+		int 21h
+		
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		
+		push ax
+		push dx
+		call getDay
+		
+		pop varN
+		push varN
+		
+		call scriboNumerus
+		
 		
 		mov ax,4c00h
 		int 21h

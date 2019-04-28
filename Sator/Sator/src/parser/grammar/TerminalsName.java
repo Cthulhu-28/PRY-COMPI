@@ -1,5 +1,5 @@
 /*
- * GNombresTerminales.java
+ * TerminalsName.java
  *
  * 2019/04/18 10:55:45
  *
@@ -15,12 +15,12 @@ package parser.grammar;
  * Esta clase contiene los nombres de los terminales
  * y los m�todos necesarios para acceder a ella
  */
-abstract class GNombresTerminales
+abstract class TerminalsName
 {
 	/**
 	 * Contiene los nombres de los terminales
 	 */
-	private static final String[] NombresTerminales =
+	private static final String[] TERMINAL_NAMES =
 	{
 		"-",
 		"$-",
@@ -169,13 +169,13 @@ abstract class GNombresTerminales
 	};
 
 	/**
-	 * M�todo getNombresTerminales
+	 * M�todo getTerminalsName
 			Obtiene el nombre del terminal
-	 * @param numTerminal
+	 * @param terminal
 			N�mero del terminal
 	 */
-	static final String getNombresTerminales(int numTerminal)
+	static final String getTerminalsName(int terminal)
 	{
-		return NombresTerminales[numTerminal];
+		return TERMINAL_NAMES[terminal];
 	}
 }

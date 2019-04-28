@@ -1,5 +1,5 @@
 /*
- * GLadosDerechos.java
+ * RightSides.java
  *
  * 2019/04/18 10:55:45
  *
@@ -15,13 +15,13 @@ package parser.grammar;
  * Esta clase contiene la tabla de lados derechos
  * y los m�todos necesarios para acceder a ella
  */
-abstract class GLadosDerechos
+abstract class RightSides
 {
 	/**
 	 * Tabla de lados derechos
 	 * Contiene el lado derecho de las reglas de la gram�tica
 	 */
-	private static final int[][] LadosDerechos =
+	private static final int[][] RIGHT_SIDES =
 	{
 		{217,94,163,157,151,148,145,23,101,117,-1},
 		{146,128,-1,-1,-1,-1,-1,-1,-1,-1,-1},
@@ -250,15 +250,15 @@ abstract class GLadosDerechos
 	};
 
 	/**
-	 * M�todo getLadosDerechos
+	 * M�todo getRightSides
 			Obtiene un s�mbolo del lado derecho de la regla
-	 * @param numRegla
+	 * @param numRule
 			N�mero de regla
-	 * @param numColumna
+	 * @param column
 			N�mero de columna
 	 */
-	static final int getLadosDerechos(int numRegla, int numColumna)
+	static final int getRightSides(int numRule, int column)
 	{
-		return LadosDerechos[numRegla][numColumna];
+		return RIGHT_SIDES[numRule][column];
 	}
 }

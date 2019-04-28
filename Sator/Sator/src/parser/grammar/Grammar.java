@@ -1,5 +1,5 @@
 /*
- * Gramatica.java
+ * Grammar.java
  *
  * 2019/04/18 10:55:45
  *
@@ -21,26 +21,26 @@ import java.util.stream.IntStream;
  * - Constantes con las rutinas sem�nticas
  * - Y los m�todos necesarios para el driver de parsing
  */
-public abstract class Gramatica
+public abstract class Grammar
 {
         private static HashSet<Integer> set = new HashSet<>(Arrays.asList(new Integer[]{124,139,109,80,116,127,74,132,134,106,63,129}));
-	/* Esta es la �nica clase que se accede fuera del paquete Gramatica */
+	/* Esta es la �nica clase que se accede fuera del paquete Grammar */
 
 	/**
 	 * Constante que contiene el c�digo de familia del terminal de fin de archivo
 	 */
-	public static final int MARCA_DERECHA = 143;
+	public static final int END_MARKER = 143;
 
 	/**
 	 * Constante que contiene el n�mero del no-terminal inicial
 	 * (el primer no-terminal que aparece en la gram�tica)
 	 */
-	public static final int NO_TERMINAL_INICIAL = 144;
+	public static final int INITIAL_NON_TERMINAL = 144;
 
 	/**
 	 * Constante que contiene el n�mero m�ximo de columnas que tiene los lados derechos
 	 */
-	public static final int MAX_LADO_DER = 11;
+	public static final int MAX_RIGHT_SIDE = 11;
 
 	/**
 	 * Constante que contiene el n�mero m�ximo de follows
@@ -51,95 +51,95 @@ public abstract class Gramatica
 	/* NO SE DETECTARON S�MBOLOS SEM�NTICOS EN LA GRAM�TICA */
 
 	/**
-	 * M�todo esTerminal
+	 * M�todo isTerminal
 			Devuelve true si el s�mbolo es un terminal
 			o false de lo contrario
 	 * @param numSimbolo
 			N�mero de s�mbolo
 	 */
-	public static final boolean esTerminal(int numSimbolo)
+	public static final boolean isTerminal(int numSimbolo)
 	{
 		return ((0 <= numSimbolo) && (numSimbolo <= 143));
 	}
 
 	/**
-	 * M�todo esNoTerminal
+	 * M�todo isNonTerminal
 			Devuelve true si el s�mbolo es un no-terminal
 			o false de lo contrario
 	 * @param numSimbolo
 			N�mero de s�mbolo
 	 */
-	public static final boolean esNoTerminal(int numSimbolo)
+	public static final boolean isNonTerminal(int numSimbolo)
 	{
 		return ((144 <= numSimbolo) && (numSimbolo <= 230));
 	}
 
 	/**
-	 * M�todo esSimboloSemantico
+	 * M�todo isSemanticSymbol
 			Devuelve true si el s�mbolo es un s�mbolo sem�ntico
 			(incluyendo los s�mbolos de generaci�n de c�digo)
 			o false de lo contrario
 	 * @param numSimbolo
 			N�mero de s�mbolo
 	 */
-	public static final boolean esSimboloSemantico(int numSimbolo)
+	public static final boolean isSemanticSymbol(int numSimbolo)
 	{
 		return ((231 <= numSimbolo) && (numSimbolo <= 230));
 	}
 
 	/**
-	 * M�todo getTablaParsing
+	 * M�todo getParsingTable
 			Devuelve el n�mero de regla contenida en la tabla de parsing
 	 * @param numNoTerminal
 			N�mero del no-terminal
 	 * @param numTerminal
 			N�mero del terminal
 	 */
-	public static final int getTablaParsing(int numNoTerminal, int numTerminal)
+	public static final int getParsingTable(int numNoTerminal, int numTerminal)
 	{
-		return GTablaParsing.getTablaParsing(numNoTerminal, numTerminal);
+		return ParsingTable.getParsingTable(numNoTerminal, numTerminal);
 	}
 
 	/**
-	 * M�todo getLadosDerechos
+	 * M�todo getRightSides
 			Obtiene un s�mbolo del lado derecho de la regla
 	 * @param numRegla
 			N�mero de regla
 	 * @param numColumna
 			N�mero de columna
 	 */
-	public static final int getLadosDerechos(int numRegla, int numColumna)
+	public static final int getRightSides(int numRegla, int numColumna)
 	{
-		return GLadosDerechos.getLadosDerechos(numRegla, numColumna);
+		return RightSides.getRightSides(numRegla, numColumna);
 	}
 
 	/**
-	 * M�todo getNombresTerminales
+	 * M�todo getTerminalName
 			Obtiene el nombre del terminal
 	 * @param numTerminal
 			N�mero del terminal
 	 */
-	public static final String getNombresTerminales(int numTerminal)
+	public static final String getTerminalName(int numTerminal)
 	{
-		return GNombresTerminales.getNombresTerminales(numTerminal);
+		return TerminalsName.getTerminalsName(numTerminal);
 	}
 
 	/**
-	 * M�todo getTablaFollows
+	 * M�todo getFollowsTable
 			Obtiene el n�mero de terminal del follow del no-terminal
 	 * @param numNoTerminal
 			N�mero de no-terminal
 	 * @param numColumna
 			N�mero de columna
 	 */
-	public static final int getTablaFollows(int numNoTerminal, int numColumna)
+	public static final int getFollowsTable(int numNoTerminal, int numColumna)
 	{
-		return GTablaFollows.getTablaFollows(numNoTerminal, numColumna);
+		return FollowsTable.getFollowsTable(numNoTerminal, numColumna);
 	}
         public static boolean isSynchToken(int noTerminal, int terminal){
             if(noTerminal==173)
                 System.out.println("");
-            return IntStream.of(GTablaFollows.getFollows(noTerminal)).anyMatch( x -> x==terminal) || GTablaFirsts.getFirsts(noTerminal, terminal);
+            return IntStream.of(FollowsTable.getFollows(noTerminal)).anyMatch( x -> x==terminal) || FirstsTable.getFirsts(noTerminal, terminal);
         }
         public static boolean isSynchTokenOfExpression(int nonTerminal, int terminal){
             
