@@ -214,7 +214,7 @@ code segment
 		ret 2
 	writed endp
 
-writeg proc near
+	writeg proc near
 		locals @@
 		mov bp,sp
 		mov dx,[bp+2]

@@ -3,7 +3,8 @@ data segment
 	varN dw 0
 	varD db 0
 	varC db 32 dup(0)
-	varF dw 2 dup(1)
+    varF dw 2 dup(1)
+    varG db 3 dup(0)
 	stringExpected db 13,10,"Exceptis: catena expectata",10,13,"$"
 data ends
 
@@ -166,7 +167,146 @@ code segment
 	@@false:	
 		mov word ptr [bp+66],0
 		ret 2*32
-	dualis endp
+    dualis endp
+    
+    gregoriu proc near
+		mov bp,sp
+		xor ax, ax
+		mov ax,[bp+2]
+		;(12*i) + 1583
+		mov bl, 12
+		mul bl
+		add ax, 1583
+		mov cx, ax
+
+		xor ax, ax
+		;(i%12)+1
+		mov ax, [bp+4]
+		mov bx, 12
+		xor dx, dx
+		div bx
+
+		inc dx
+		mov si, dx
+
+		;(i%28)+1
+		mov ax, [bp+6]
+		xor dx, dx
+		mov bx, 28
+		div bx
+		inc dx
+		mov di, dx
+
+
+		;Operaciones sobre bits para retonar con el formato de la fecha
+		xor ax,ax
+		xor dx,dx
+		
+		;El día es el valor más a la derecha, no ocupa mayor tratamiento, solo se mueve.
+		mov ax,di
+		
+		;El día ocupa 5 bits. Al mes se le hace un corrimiento de 5 bits a la izquierda.
+		;Se suma a los bits del día.
+		mov bx,si
+		shl bx,5
+		add ax,bx
+		
+		;El año ocupa los primeros 7 bits del segundo byte.
+		;Se hace un corrrimiento de 9 bits a la izquierda y se suma.
+		mov bx,cx
+		shl bx,9
+		add ax,bx
+		
+		;Queda el último byte. El año ocupa 7 bits del 1 byte más a la izquierda.
+		;Se hace un corrimiento de 7 bits a la derecha para almacenarlo en el tercer byte.
+		mov bx,cx
+		shr bx,7
+		mov dx,bx
+		;Se retorna
+		mov bp,sp
+		mov [bp+2],ax ;2do y 3er byte
+		mov [bp+4],dx ;1er byte
+		ret 
+    gregoriu endp
+    
+    writeg proc near
+		locals @@
+		mov bp,sp
+		mov dx,[bp+2]
+		xor ax,ax
+		shl dx,7
+		mov ax,dx
+		mov dx,[bp+4]
+		shr dx,9
+		add ax,dx
+		
+	
+		xor cx, cx
+		mov bx, 10
+	@@ciclo1Year: 
+		xor dx, dx
+		div bx
+		push dx
+		inc cx
+		cmp ax, 0
+		jne @@ciclo1Year
+		mov ah, 02h
+	@@ciclo2Year: 
+		pop DX
+		add dl, 30h
+		int 21h
+	loop @@ciclo2Year
+	
+		mov ah, 02h
+		mov dl, "$"
+		int 21h
+		mov ax,[bp+4]
+		shr ax,5
+		xor ah,ah
+		and al,0fh
+	
+		xor cx, cx
+		mov bx, 10
+	@@ciclo1Month: 
+		xor dx, dx
+		div bx
+		push dx
+		inc cx
+		cmp ax, 0
+		jne @@ciclo1Month
+		mov ah, 02h
+	@@ciclo2Month: 
+		pop DX
+		add dl, 30h
+		int 21h
+	loop @@ciclo2Month
+		mov ah, 02h
+		mov dl, "$"
+		int 21h
+		
+		mov ax,[bp+4]
+		and ax,1fh
+		
+		xor cx, cx
+		mov bx, 10
+	@@ciclo1Day: 
+		xor dx, dx
+		div bx
+		push dx
+		inc cx
+		cmp ax, 0
+		jne @@ciclo1Day
+		mov ah, 02h
+	@@ciclo2Day: 
+		pop DX
+		add dl, 30h
+		int 21h
+	loop @@ciclo2Day
+	
+		ret 2*2
+		
+	writeg endp
+
 
 	numerus proc near
 	locals @@
@@ -692,50 +832,80 @@ code segment
 		
 		call writed
 		
-		mov bx,33
-        sendN:
+		;mov bx,33
+        ;sendN:
+		;	dec bx
+		;	mov al,varC[bx]
+		;	xor ah,ah
+		;	push ax
+		;	cmp bx,0
+		;ja sendN
+        ;call numerus
+        ;pop ax
+        ;mov varN, ax
+		;mov ax,varN
+		;push ax
+		;mov ah, 02h
+		;mov dl, 10
+		;int 21h
+		;mov dl, 13
+		;int 21h
+		;call writeN
+		
+        ;mov bx,33
+        ;sendF:
+		;	dec bx
+		;	mov al,varC[bx]
+		;	xor ah,ah
+		;	push ax
+		;	cmp bx,0
+        ;ja sendF
+        ;mov ah, 02h
+		;mov dl, 10
+		;int 21h
+		;mov dl, 13
+		;int 21h
+        ;call fractio
+        ;pop ax
+		;mov word ptr varF[0],ax
+		;pop ax
+        ;mov word ptr varF[2],ax
+        
+        ;mov bx, varF[0]
+		;mov cx, varF[2]
+		;push bx
+		;push cx
+        ;call writef
+        
+        mov bx,33
+        sendG:
 			dec bx
 			mov al,varC[bx]
 			xor ah,ah
 			push ax
 			cmp bx,0
-		ja sendN
-        call numerus
+		ja sendG
+        call gregoriu
         pop ax
-        mov varN, ax
-		mov ax,varN
+		pop dx
+		
+		mov byte ptr varG[0],dl
+		mov byte ptr varG[1],ah
+		mov byte ptr varG[2],al
+
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		
 		push ax
+		push dx
 		mov ah, 02h
 		mov dl, 10
 		int 21h
 		mov dl, 13
 		int 21h
-		call writeN
-		
-        mov bx,33
-        sendF:
-			dec bx
-			mov al,varC[bx]
-			xor ah,ah
-			push ax
-			cmp bx,0
-        ja sendF
-        mov ah, 02h
-		mov dl, 10
-		int 21h
-		mov dl, 13
-		int 21h
-        call fractio
-        pop ax
-		mov word ptr varF[0],ax
-		pop ax
-        mov word ptr varF[2],ax
-        
-        mov bx, varF[0]
-		mov cx, varF[2]
-		push bx
-		push cx
-		call writef
+		call writeg
 
         mov ax, 4c4dh
 		int 21h
