@@ -97,7 +97,9 @@ public abstract class Grammar
 	 */
 	public static final int getParsingTable(int numNoTerminal, int numTerminal)
 	{
-		return ParsingTable.getParsingTable(numNoTerminal, numTerminal);
+            return ParsingTable.getParsingTable(numNoTerminal, numTerminal);
+
+		
 	}
 
 	/**

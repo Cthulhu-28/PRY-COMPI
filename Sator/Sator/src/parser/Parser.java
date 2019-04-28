@@ -52,17 +52,17 @@ public class Parser {
                     }
                 }
             }
-            else{                
+            else{
                 int rule = Grammar.getParsingTable(EAP-initial, CT.getCode());
                 if(rule < 0){
                     error(rule,CT);
                     recoverFromError(EAP, CT);
                 }
                 else{
-                    if(rule==-16)
-                        System.out.print("");
                     int i = 0;
-                    while (Grammar.getRightSides(rule, i)>-1 && i < Grammar.MAX_RIGHT_SIDE)
+                    if(rule==11)
+                        System.out.println("");
+                    while (i < Grammar.MAX_RIGHT_SIDE && Grammar.getRightSides(rule, i)>-1)
                         stack.push(Grammar.getRightSides(rule, i++));
                 }
             }
