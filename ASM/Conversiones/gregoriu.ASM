@@ -64,7 +64,7 @@
 		add ax, di
 
 		xor dx, dx   
-		mov bx, 256
+		mov bx, 128
 		div bx   
 
 		mov [bp+4], dx
@@ -825,15 +825,4 @@
         mov ax, 4c4dh
 		int 21h
 	end start
-
-
-
-
-
-
-
-
-
-
-
 
