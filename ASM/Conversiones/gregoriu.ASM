@@ -35,53 +35,6 @@
 		and ax,1fh
 		mov ecx,eax
 
-
-        mov bp,sp
-        mov di, 4
-        mov ax, [bp+2]
-        cmp ax, 0
-        je @@false
-        mov word ptr [bp+di], 09h
-        add di,2
-        mov word ptr [bp+di], "v"
-        add di,2
-        mov word ptr [bp+di], "e"
-        add di,2
-        mov word ptr [bp+di], "r"
-        jmp @@rest
-
-    @@false:
-        mov word ptr [bp+di], 0Ah
-        add di, 2
-        mov word ptr [bp+di], "f"
-        add di, 2
-        mov word ptr [bp+di], "a"
-        add di, 2
-        mov word ptr [bp+di], "l"
-        add di, 2
-        mov word ptr [bp+di], "s"
-
-    @@rest:
-        add di, 2
-        mov word ptr [bp+di], "i"
-        add di, 2
-        mov word ptr [bp+di], "d"
-        add di, 2
-        mov word ptr [bp+di], "i"
-        add di, 2
-        mov word ptr [bp+di], "c"
-        add di, 2
-        mov word ptr [bp+di], "u"
-        add di, 2
-        mov word ptr [bp+di], "s"
-        add di, 2
-
-	@@fill:
-		mov word ptr [bp+di],0
-		add di,2
-		cmp di,68
-		jbe @@fill
-		
 	@@return:
 		ret 2
 	catena endp
@@ -106,13 +59,11 @@
 		;Dia
 		mov ax,[bp+4]
 		and ax,1fh
-		mov cx,ax
 
-		add cx, si
-		add cx, di
+		add ax, si
+		add ax, di
 
 		xor dx, dx   
-		mov ax, cx
 		mov bx, 256
 		div bx   
 
@@ -122,45 +73,101 @@
 	imago endp
 
 	numerus proc near
-	locals @@
-	;Año
-	mov dx,[bp+2]
-	shl dx,7
-	mov ax,dx
-	mov dx,[bp+4]
-	shr dx,9
-	add ax,dx
-	mov si,ax
-	;Mes
-	mov ax,[bp+4]
-	shr ax,5
-	xor ah,ah
-	and al,0fh
-	mov di,ax
-	;Dia
-	mov ax,[bp+4]
-	and ax,1fh
-	mov cx,ax
+		locals @@
+		xor ax,ax
+		;Año
+		mov dx,[bp+2]
+		shl dx,7
+		mov ax,dx
+		mov dx,[bp+4]
+		shr dx,9
+		add ax,dx
+		mov si,ax
+		;Mes
+		mov ax,[bp+4]
+		shr ax,5
+		xor ah,ah
+		and al,0fh
+		mov di,ax
+		;Dia
+		mov ax,[bp+4]
+		and ax,1fh
 
-	add cx, si
-	add cx, di
 
-	mov [bp+4], cx
-	ret 2
+		add ax, si
+		add ax, di
+
+		mov [bp+4], ax
+		ret 2
     numerus endp
 
 	fractio proc near
-        mov bp,sp
-        mov ax,[bp+2]
-        cmp ax,0
-        je @@false
-        mov word ptr [bp+4],1
-		mov word ptr [bp+6],1
-        ret 2
-    @@false:	    
-        mov word ptr [bp+4],1
-        mov word ptr [bp+6],0
-		ret 2
+		
+	locals @@
+		mov bp,sp
+		mov ax,[bp+4]
+		mov bx,[bp+2]
+		push ax
+		push bx
+		call dualis
+		pop si
+		mov bp,sp
+		
+		;Mes
+		xor eax,eax
+		mov ax,[bp+4]
+		shr ax,5
+		xor ah,ah
+		and al,0fh
+		mov edi,eax
+		;Dia
+		xor eax,eax
+		mov ax,[bp+4]
+		and ax,1fh
+		mov ecx,eax
+		
+		;m = (m + 9) % 12
+		mov eax,edi
+		add eax,9
+		mov ebx,12
+		xor edx,edx
+		div ebx
+		mov edi,edx
+		
+		
+		
+		;(m*306 + 5)/10
+		xor edx,edx
+		mov ebx,306
+		mov eax,edi
+		mul ebx
+		add eax,5
+		
+		xor edx,edx
+		mov ebx,10
+		div ebx
+		mov edi,eax
+		
+		;( d - 1 )
+		mov eax,ecx
+		dec eax
+		add edi,eax
+		
+		
+		add edi,59
+		add edi,esi
+		
+		mov ebx,365
+		add ebx,esi
+		xor edx,edx
+		mov eax,edi
+		div ebx
+		inc edx
+		
+		mov word ptr [bp+2],1
+		mov word ptr [bp+4],dx	
+		ret
+
 	fractio endp
     
     writec proc near
@@ -534,12 +541,94 @@
 		return:
 			ret
 		@@errorI:
-			lea dx,gregoriusExpected
-			mov ah,09h
-			int 21h
+
 			mov ax, 4c4dh
 			int 21h
 	read endp
+	check proc
+		locals @@
+		mov bp,sp
+		
+		;di será 1 si el año es bisiesto
+		mov ax,word ptr [bp+2*3]
+		mov cx,ax
+		xor di,di
+		
+		;Divisibiliad por 400
+		mov bx,400
+		xor dx,dx
+		div bx
+		cmp dx,0
+		jne @@LeapA
+		mov di,1
+		jmp @@next
+	@@LeapA:
+		mov ax,word ptr [bp+2*3]
+		;No divisibiliad por 100
+		mov bx,100
+		xor dx,dx
+		div bx
+		cmp dx,0
+		je @@next
+		mov ax,word ptr [bp+2*3]
+		;Divisibiliad por 4
+		mov bx,4
+		xor dx,dx
+		div bx
+		cmp dx,0
+		jne @@next
+		mov di,1
+	@@next:
+		;Comparación de que febrero tenga max 29 días, o 29 si es bisiesto
+		cmp word ptr [bp+2*2],2
+		jne @@nextB
+		cmp di,1
+		jne @@checkFeb
+		cmp word ptr [bp+2],29
+		ja @@error
+		jmp @@nextC
+	@@checkFeb:
+		cmp word ptr [bp+2],28
+		ja @@error
+	@@nextB:	
+		;Se buscan los meses que tengan 30 días.
+		cmp word ptr [bp+2*2],4
+		je @@checkDay
+		cmp word ptr [bp+2*2],6
+		je @@checkDay
+		cmp word ptr [bp+2*2],9
+		je @@checkDay
+		cmp word ptr [bp+2*2],11
+		je @@checkDay
+		jmp @@nextC
+	@@checkDay:
+		;Se compara la regla de los 30 días.
+		cmp word ptr [bp+2],30
+		ja @@error
+	@@nextC:
+		;Se pregunta por mes y día distintos de cero
+		cmp word ptr [bp+2*2],0
+		je @@error
+		cmp word ptr [bp+2],0
+		je @@error
+		;Se compara con el incio del calendario gregoriano, 1582/10/15
+		cmp word ptr [bp+2*3],1582
+		jb @@error
+		cmp word ptr [bp+2*3],1582
+		jne @@return
+		cmp word ptr [bp+2*2],10
+		jb @@error
+		cmp word ptr [bp+2*2],10
+		jne @@return
+		cmp word ptr [bp+2],15
+		jb @@error
+	@@return:
+		ret 2*3
+	@@error:
+
+		mov ax, 4c4dh
+		int 21h
+	check endp
 
 	dualis proc near
 		locals @@
@@ -590,14 +679,10 @@
 		ret 2
 	dualis endp
 	
-    start:
-    
-
-		mov ax, data
-        mov ds, ax
-
-        mov ax, sstack
-        mov ss, ax
+	start:
+	
+		mov ax,@data 
+		mov ds,ax 
 
         call read
 		pop ax
@@ -739,9 +824,7 @@
 
         mov ax, 4c4dh
 		int 21h
-		
-code ends
-end start
+	end start
 
 
 
