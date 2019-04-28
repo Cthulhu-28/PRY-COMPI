@@ -49,6 +49,7 @@ public class Parser {
                         nextToken();
                         if(EAP!=CT.getCode())
                             scanner.returnToken(CT);
+                        nextToken();
                     }
                 }
             }
@@ -60,8 +61,6 @@ public class Parser {
                 }
                 else{
                     int i = 0;
-                    if(rule==11)
-                        System.out.println("");
                     while (i < Grammar.MAX_RIGHT_SIDE && Grammar.getRightSides(rule, i)>-1)
                         stack.push(Grammar.getRightSides(rule, i++));
                 }
@@ -97,8 +96,8 @@ public class Parser {
         System.err.println(token.getErrorMessage());
     }
     private void recoverFromError(int rule, Token token){
-        if(stack.isEmpty())
-            System.out.print("");
+        if(stack.isEmpty() && rule == 0)
+            stack.push(rule);
         else{
             if(Grammar.isSynchTokenOfExpression(rule-Grammar.INITIAL_NON_TERMINAL, token.getCode())){
                 rule = stack.pop();
@@ -111,12 +110,8 @@ public class Parser {
             while(!Grammar.isSynchToken(rule-Grammar.INITIAL_NON_TERMINAL, token.getCode()) && !stack.isEmpty()){
                 rule = stack.pop();
                 while(Grammar.isTerminal(rule) && !stack.isEmpty())
-                    rule = stack.pop();
-                if(rule-Grammar.INITIAL_NON_TERMINAL==173 || rule==173)
-                    System.out.println("");
-                
+                    rule = stack.pop();               
             }
-            System.out.println("");
         }         
     }
 }  
