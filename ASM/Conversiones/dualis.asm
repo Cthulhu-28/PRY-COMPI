@@ -3,7 +3,8 @@ data segment
 	varN dw 0
 	varD db 0
 	varC db 32 dup(0)
-    varF dw 2 dup(1)
+	varF dw 2 dup(1)
+	varG db 3 dup(0)
     boolExpected db 13,10,"Exceptis: dualis expectata",10,13,"$"
 data ends
 
@@ -78,6 +79,21 @@ code segment
 		mov word ptr [bp+4], "F"
 		ret 2
 	imago endp
+
+	gregoriu proc near
+		locals @@
+		mov bp,sp
+		mov ax,[bp+2]
+		cmp ax,0
+		je @@false
+		mov word ptr [bp+4], 000fh
+		mov word ptr [bp+2], 9eefh
+		ret 
+	@@false:	    
+		mov word ptr [bp+4], 000fh
+		mov word ptr [bp+2], 9d3ch
+		ret 
+	gregoriu endp
 
 	numerus proc near
         mov bp,sp
@@ -184,6 +200,84 @@ code segment
 		
 		ret 2
 	writen endp
+
+	writeg proc near
+		locals @@
+		mov bp,sp
+		mov dx,[bp+2]
+		xor ax,ax
+		shl dx,7
+		mov ax,dx
+		mov dx,[bp+4]
+		shr dx,9
+		add ax,dx
+		
+	
+		xor cx, cx
+		mov bx, 10
+	@@ciclo1Year: 
+		xor dx, dx
+		div bx
+		push dx
+		inc cx
+		cmp ax, 0
+		jne @@ciclo1Year
+		mov ah, 02h
+	@@ciclo2Year: 
+		pop DX
+		add dl, 30h
+		int 21h
+	loop @@ciclo2Year
+	
+		mov ah, 02h
+		mov dl, "$"
+		int 21h
+		mov ax,[bp+4]
+		shr ax,5
+		xor ah,ah
+		and al,0fh
+	
+		xor cx, cx
+		mov bx, 10
+	@@ciclo1Month: 
+		xor dx, dx
+		div bx
+		push dx
+		inc cx
+		cmp ax, 0
+		jne @@ciclo1Month
+		mov ah, 02h
+	@@ciclo2Month: 
+		pop DX
+		add dl, 30h
+		int 21h
+	loop @@ciclo2Month
+		mov ah, 02h
+		mov dl, "$"
+		int 21h
+		
+		mov ax,[bp+4]
+		and ax,1fh
+		
+		xor cx, cx
+		mov bx, 10
+	@@ciclo1Day: 
+		xor dx, dx
+		div bx
+		push dx
+		inc cx
+		cmp ax, 0
+		jne @@ciclo1Day
+		mov ah, 02h
+	@@ciclo2Day: 
+		pop DX
+		add dl, 30h
+		int 21h
+	loop @@ciclo2Day
+	
+		ret 2*2
+		
+	writeg endp
 
 	writef proc near
 		locals @@
@@ -457,6 +551,32 @@ code segment
 		push bx
 		push cx
 		call writef
+
+		mov ah, 02h
+		mov dl, 10
+		int 21h
+		mov dl, 13
+		int 21h
+
+		xor ax, ax
+		mov al, varD
+		push ax
+		call gregoriu
+		pop ax
+		pop dx
+		
+		mov byte ptr varG[0],dl
+		mov byte ptr varG[1],ah
+		mov byte ptr varG[2],al
+
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		
+		push ax
+		push dx
+		call writeG
 
         mov ax, 4c4dh
 		int 21h
