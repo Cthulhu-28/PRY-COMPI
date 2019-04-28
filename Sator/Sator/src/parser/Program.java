@@ -16,6 +16,7 @@ public class Program {
             Parser parser = Parser.initParser(path);
             parser.parse();
         } catch (Exception e) {
+            e.printStackTrace();
             System.err.println(e.getMessage());
         }
     }

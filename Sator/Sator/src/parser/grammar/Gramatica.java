@@ -11,8 +11,9 @@
 
 package parser.grammar;
 
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 /**
  * Esta clase contiene:
@@ -22,6 +23,7 @@ import java.util.stream.Stream;
  */
 public abstract class Gramatica
 {
+        private static HashSet<Integer> set = new HashSet<>(Arrays.asList(new Integer[]{124,139,109,80,116,127,74,132,134,106,63,129}));
 	/* Esta es la �nica clase que se accede fuera del paquete Gramatica */
 
 	/**
@@ -135,6 +137,13 @@ public abstract class Gramatica
 		return GTablaFollows.getTablaFollows(numNoTerminal, numColumna);
 	}
         public static boolean isSynchToken(int noTerminal, int terminal){
-            return IntStream.of(GTablaFollows.getFollows(noTerminal)).anyMatch( x -> x==terminal);
+            if(noTerminal==173)
+                System.out.println("");
+            return IntStream.of(GTablaFollows.getFollows(noTerminal)).anyMatch( x -> x==terminal) || GTablaFirsts.getFirsts(noTerminal, terminal);
         }
+        public static boolean isSynchTokenOfExpression(int nonTerminal, int terminal){
+            
+            return nonTerminal<=72 && nonTerminal>=27 && set.contains(terminal);
+        }
+        
 }
