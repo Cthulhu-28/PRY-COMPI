@@ -36,7 +36,7 @@
 		mov ecx,eax
 
 	@@return:
-		ret 2
+		ret 2*2
 	catena endp
 
 
@@ -74,6 +74,8 @@
 
 	numerus proc near
 		locals @@
+		mov bp,sp
+		
 		xor ax,ax
 		;Año
 		mov dx,[bp+2]
@@ -699,41 +701,41 @@
 		int 21h
 		
 
-		xor dx,dx
-		mov dl,byte ptr varG[0]
-		mov ah,byte ptr varG[1]
-		mov al,byte ptr varG[2]
+		; xor dx,dx
+		; mov dl,byte ptr varG[0]
+		; mov ah,byte ptr varG[1]
+		; mov al,byte ptr varG[2]
 		
-		push ax
-		push dx
-		call catena
+		; push ax
+		; push dx
+		; call catena
 
-        xor bx,bx
+        ; xor bx,bx
 		;Reads every byte returned by the read procedure top-to-bottom
-		pam:
-			pop ax
-			mov varC[bx],al
-			inc bx
-			cmp bx,32
-        jbe pam
+		; pam:
+			; pop ax
+			; mov varC[bx],al
+			; inc bx
+			; cmp bx,32
+        ; jbe pam
         
-        mov bx,33
+        ; mov bx,33
 		
 		;Moves into the stack the string var, bottom-to-top
-		send:
-			dec bx
-			mov al,varC[bx]
-			xor ah,ah
-			push ax
-			cmp bx,0
-		ja send
-        call writec
+		; send:
+			; dec bx
+			; mov al,varC[bx]
+			; xor ah,ah
+			; push ax
+			; cmp bx,0
+		; ja send
+        ; call writec
         
-        mov ah, 02h
-		mov dl, 10
-		int 21h
-		mov dl, 13
-		int 21h
+        ; mov ah, 02h
+		; mov dl, 10
+		; int 21h
+		; mov dl, 13
+		; int 21h
 		
 
 		xor dx,dx
