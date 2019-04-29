@@ -45,11 +45,15 @@ public class Parser {
                     if(CT.hasError())
                         errorLexico(CT);
                     else{
+                        Token last = CT;
                         errorTokenExpected(CT, Grammar.getTerminalName(EAP));
                         nextToken();
-                        if(EAP!=CT.getCode())
+                        if(EAP!=CT.getCode()){
                             scanner.returnToken(CT);
-                        nextToken();
+                            CT = last;
+                        }
+                        else
+                            nextToken();
                     }
                 }
             }
@@ -95,22 +99,26 @@ public class Parser {
     private void errorLexico(Token token){
         System.err.println(token.getErrorMessage());
     }
-    private void recoverFromError(int rule, Token token){
+    private void recoverFromError(int rule, Token token) throws Exception{
         if(stack.isEmpty() && rule == 0)
             stack.push(rule);
         else{
             if(Grammar.isSynchTokenOfExpression(rule-Grammar.INITIAL_NON_TERMINAL, token.getCode())){
                 rule = stack.pop();
-                while(!stack.isEmpty() && rule != 217)
+                while(!stack.isEmpty() && rule != Grammar.LIST_STATEMENT && rule!= Grammar.IMPONO_EXPRESSION )
                     rule = stack.pop();
-                if(rule==217)
+                if(rule==Grammar.LIST_STATEMENT || rule == Grammar.IMPONO_EXPRESSION)
                     stack.push(rule);
+                if(token.getCode()==23)
+                    nextToken();
                 return;
             }
-            while(!Grammar.isSynchToken(rule-Grammar.INITIAL_NON_TERMINAL, token.getCode()) && !stack.isEmpty()){
-                rule = stack.pop();
-                while(Grammar.isTerminal(rule) && !stack.isEmpty())
-                    rule = stack.pop();               
+            else{
+                while(!Grammar.isSynchToken(rule-Grammar.INITIAL_NON_TERMINAL, token.getCode()) && !stack.isEmpty()){
+                    rule = stack.pop();
+                    while(Grammar.isTerminal(rule) && !stack.isEmpty())
+                        rule = stack.pop();               
+                }
             }
         }         
     }

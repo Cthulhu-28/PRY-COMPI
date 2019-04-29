@@ -1,5 +1,5 @@
 code segment
-	public legoNumerus,scriboNumerus,legoGregorius,scriboGregorius,legoDualis,scriboDualis,legoFractio,scriboFractio
+	public legoNumerus,scriboNumerus,legoGregorius,scriboGregorius,legoDualis,scriboDualis,legoFractio,scriboFractio,legoCatena,scriboImago
 	assume cs:code
 	intExpected db 13,10,"Exceptis: numerus expectata",10,13,"$"
 	gregoriusExpected db 13,10,"Exceptis: gregorius expectata",10,13,"$"
@@ -7,6 +7,7 @@ code segment
 	fractioExpected db 13,10,"Exceptis: fractio expectata",10,13,"$"
 	overflow db 13,10,"Exceptis: superfundo",10,13,"$"
 	zero db 13,10,"Exceptis: nullus numerus dividatur",10,13,"$"
+	stringExpected db 13,10,"Exceptis: catena expectata",10,13,"$"
 	legoNumerus proc far
 		mov bp,sp
 		add bp,2
@@ -915,5 +916,50 @@ code segment
 		retf 2*2
 		
 	scriboFractio endp
+	legoCatena proc near
+	locals @@
+		mov bp,sp
+		add bp,2
+		mov di,6
+	;Saves memory for the first byte of the string
+		mov [bp+2],0
+	@@cicle:
+		mov ah,08h
+		int 21h
+		cmp al,13
+	je @@endCicle ;keeps reading the string until the "enter" key
+		cmp di,514
+	je @@printchar ;If the number of characters entered is bigger than the string capacity, it does not save it, but print it.
+		inc byte ptr [bp+2]
+		mov byte ptr [bp+di],al
+		add di,2
+	@@printchar:
+		mov dl,al
+		mov ah,02h
+		int 21h
+	jmp @@cicle	
+	@@endCicle:
+		cmp di,514
+	je @@return ;If the strinf is full, returns.
+	@@fill:
+		mov [bp+di],0
+		add di,2
+		cmp di,516
+		jne @@fill ;In order to return a full string, it fills the left bytes with 0
+	@@return:
+		retf
+		
+	legoCatena endp
+	scriboImago proc near
+	locals @@
+		mov bp,sp
+		add bp,2
+		mov ax, [bp+2]
+		mov ah, 02h
+		mov dl, al
+		int 21h
+
+		retf 2*1 ;Cleans the parameters
+	scriboImago endp
 code ends
 end
