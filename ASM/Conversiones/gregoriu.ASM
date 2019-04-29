@@ -13,30 +13,80 @@
 	.386
     catena proc near
 		locals @@
-		;Año
+		mov bp,sp
 		mov dx,[bp+2]
-		xor eax,eax
+		xor ax,ax
 		shl dx,7
 		mov ax,dx
 		mov dx,[bp+4]
 		shr dx,9
 		add ax,dx
-		mov esi,eax
-		;Mes
-		xor eax,eax
+		
+	
+		xor cx, cx
+		mov bx, 10
+	@@ciclo1Year: 
+		xor dx, dx
+		div bx
+		push dx
+		inc cx
+		cmp ax, 0
+		jne @@ciclo1Year
+		mov ah, 02h
+	@@ciclo2Year: 
+		pop DX
+		add dl, 30h
+		int 21h
+	loop @@ciclo2Year
+	
+		mov ah, 02h
+		mov dl, "/"
+		int 21h
 		mov ax,[bp+4]
 		shr ax,5
 		xor ah,ah
 		and al,0fh
-		mov edi,eax
-		;Dia
-		xor eax,eax
+	
+		xor cx, cx
+		mov bx, 10
+	@@ciclo1Month: 
+		xor dx, dx
+		div bx
+		push dx
+		inc cx
+		cmp ax, 0
+		jne @@ciclo1Month
+		mov ah, 02h
+	@@ciclo2Month: 
+		pop DX
+		add dl, 30h
+		int 21h
+	loop @@ciclo2Month
+		mov ah, 02h
+		mov dl, "/"
+		int 21h
+		
 		mov ax,[bp+4]
 		and ax,1fh
-		mov ecx,eax
-
-	@@return:
+		
+		xor cx, cx
+		mov bx, 10
+	@@ciclo1Day: 
+		xor dx, dx
+		div bx
+		push dx
+		inc cx
+		cmp ax, 0
+		jne @@ciclo1Day
+		mov ah, 02h
+	@@ciclo2Day: 
+		pop DX
+		add dl, 30h
+		int 21h
+	loop @@ciclo2Day
+	
 		ret 2*2
+		
 	catena endp
 
 
@@ -823,6 +873,22 @@
 		xor ah,ah
 		push ax
 		call writeD
+
+		mov ah, 02h
+		mov dl, 10
+		int 21h
+		mov dl, 13
+		int 21h
+		
+
+		xor dx,dx
+		mov dl,byte ptr varG[0]
+		mov ah,byte ptr varG[1]
+		mov al,byte ptr varG[2]
+		
+		push ax
+		push dx
+		call catena
 
         mov ax, 4c4dh
 		int 21h
