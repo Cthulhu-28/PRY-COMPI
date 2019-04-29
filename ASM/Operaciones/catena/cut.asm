@@ -25,8 +25,7 @@
         mov dx, [bp+6]
         mov ax, [bp+6]
         mov si, di
-        sub si, 2
-        dec cx
+        inc bx
     @@ciclo2:
         cmp bx, cx
         je @@fin2
@@ -239,7 +238,9 @@
 		mov dl, 10
 		int 21h
 		mov dl, 13
-		int 21h
+        int 21h
+        
+        xor bx, bx
         
         pam2:
 			pop ax
