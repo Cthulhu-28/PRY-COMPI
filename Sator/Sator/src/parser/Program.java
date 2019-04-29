@@ -12,7 +12,7 @@ package parser;
 public class Program {
     public static void main(String[] args){
         try {
-            String path = "C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 2\\Pruebas\\test015.str";
+            String path = "C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 2\\Pruebas\\test019.str";
             Parser parser = Parser.initParser(path);
             parser.parse();
         } catch (Exception e) {

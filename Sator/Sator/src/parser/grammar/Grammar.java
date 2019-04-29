@@ -23,7 +23,7 @@ import java.util.stream.IntStream;
  */
 public abstract class Grammar
 {
-        private static HashSet<Integer> set = new HashSet<>(Arrays.asList(new Integer[]{124,139,109,80,116,127,74,132,134,106,63,129}));
+        private static HashSet<Integer> set = new HashSet<>(Arrays.asList(new Integer[]{124,139,109,80,116,127,74,132,134,106,63,129, 23}));
 	/* Esta es la �nica clase que se accede fuera del paquete Grammar */
 
 	/**
@@ -46,6 +46,9 @@ public abstract class Grammar
 	 * Constante que contiene el n�mero m�ximo de follows
 	 */
 	public static final int MAX_FOLLOWS = 110;
+        
+        public static final int LIST_STATEMENT = 217;
+        public static final int IMPONO_EXPRESSION = 210;
 
 	/* Constantes con las rutinas sem�nticas */
 	/* NO SE DETECTARON S�MBOLOS SEM�NTICOS EN LA GRAM�TICA */
@@ -145,7 +148,7 @@ public abstract class Grammar
         }
         public static boolean isSynchTokenOfExpression(int nonTerminal, int terminal){
             
-            return nonTerminal<=72 && nonTerminal>=27 && set.contains(terminal);
+            return nonTerminal<=72 && nonTerminal>=27 && (set.contains(terminal) || FirstsTable.getFirsts(LIST_STATEMENT-INITIAL_NON_TERMINAL, terminal));
         }
         
 }
