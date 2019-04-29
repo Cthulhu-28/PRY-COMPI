@@ -2,517 +2,143 @@ extrn scriboGregorius:far,legoGregorius:far,legoNumerus:far,scriboNumerus:far,sc
 .model small
 .stack 0ffffh 
 .data
-	varG db 3 dup(0)
-	varG2 db 3 dup(0)
+	varC db 32 dup(0)
+	varC db 32 dup(0)
 	varN dw 0
-	varB db 0
-	varF dw 2 dup(1)
-	msg1 db "+ y -",10,13,"$"
-	msg2 db "d, n y ?",10,13,"$"
-	msg3 db "Partes",10,13,"$"
+	varN dw 0
+	varI db 0
+	varD db 0
+	msg1 db "largo",10,13,"$"
+	msg2 db "contiene",10,13,"$"
+	msg3 db "indexar",10,13,"$"
+	msg4 db "concatenar",10,13,"$"
+	msg5 db "cortar y recortar",10,13,"$"
 	lineBreak db 10,13,"$"
+
 .code
 	.386
-	toDays proc near
-		locals @@
-		mov bp,sp
-		
-		;Año
-		mov dx,[bp+2]
-		xor eax,eax
-		shl dx,7
-		mov ax,dx
-		mov dx,[bp+4]
-		shr dx,9
-		add ax,dx
-		mov esi,eax
-		;Mes
-		xor eax,eax
-		mov ax,[bp+4]
-		shr ax,5
-		xor ah,ah
-		and al,0fh
-		mov edi,eax
-		;Dia
-		xor eax,eax
-		mov ax,[bp+4]
-		and ax,1fh
-		mov ecx,eax
-		
-		;m = (m + 9) % 12
-		mov eax,edi
-		add eax,9
-		mov ebx,12
-		xor edx,edx
-		div ebx
-		mov edi,edx
-		
-		;y = y - m/10
-		mov eax,edi
-		mov ebx,10
-		xor edx,edx
-		div ebx
-		sub esi,eax
-		
-		mov dword ptr [bp+2],0
-		;365*y + y/4 - y/100 + y/400 + (m*306 + 5)/10 + ( d - 1 )
-		
-		;365*y
-		mov ebx,365
-		xor edx,edx
-		mov eax,esi
-		mul ebx
-		add dword ptr [bp+2],eax
-		
-		;y/4
-		xor edx,edx
-		mov ebx,4
-		mov eax,esi
-		div ebx
-		add dword ptr [bp+2],eax
-		
-		;y/100
-		xor edx,edx
-		mov ebx,100
-		mov eax,esi
-		div ebx
-		sub dword ptr [bp+2],eax
-		
-		;y/400
-		xor edx,edx
-		mov ebx,400
-		mov eax,esi
-		div ebx
-		add dword ptr [bp+2],eax
-		
-		;(m*306 + 5)/10
-		xor edx,edx
-		mov ebx,306
-		mov eax,edi
-		mul ebx
-		add eax,5
-		
-		xor edx,edx
-		mov ebx,10
-		div ebx
-		add dword ptr [bp+2],eax
-		
-		;( d - 1 )
-		mov eax,ecx
-		dec eax
-		add dword ptr [bp+2],eax
-		
-		ret
-	toDays endp
-	toDate proc
-		locals @@
-		mov bp,sp
-		;y = (10000*g + 14780)/3652425
-		mov eax, dword ptr [bp+2]
-		xor edx,edx
-		mov ebx,10000
-		mul ebx
-		add eax,14780
-		;xor edx,edx
-		mov ebx,3652425
-		div ebx
-		mov esi,eax
-		
-		xor ecx,ecx
-		mov eax,esi
-		xor edx,edx
-		mov ebx,365
-		
-	@@dayCalc:	
-		;ddd = g - (365*y + y/4 - y/100 + y/400)
-		
-		;365*y
-		mov ebx,365
-		xor edx,edx
-		mov eax,esi
-		mul ebx
-		add ecx,eax
-		
-		;y/4
-		xor edx,edx
-		mov ebx,4
-		mov eax,esi
-		div ebx
-		add ecx,eax
-		
-		;y/100
-		xor edx,edx
-		mov ebx,100
-		mov eax,esi
-		div ebx
-		sub ecx,eax
-		
-		;y/400
-		xor edx,edx
-		mov ebx,400
-		mov eax,esi
-		div ebx
-		add ecx,eax
-		
-		mov ebx,ecx
-		mov ecx,dword ptr [bp+2]
-		sub ecx,ebx
-		js @@isNegative
-		jmp @@next
-	@@isNegative:
-		dec esi
-		jmp @@dayCalc
-	@@next:
-		;mi = (100*ddd + 52)/3060
-		mov eax,ecx
-		xor edx,edx
-		mov ebx,100
-		mul ebx
-		add eax,52
-		xor edx,edx
-		mov ebx,3060
-		div ebx
-		mov edi,eax
-		
-		
-		;mm = (mi + 2)%12 + 1
-		mov dword ptr [bp+2],0
-		mov eax,edi
-		add eax,2
-		xor edx,edx
-		mov ebx,12
-		div ebx
-		inc edx
-		mov dword ptr [bp+2],edx
-		
-		;y = y + (mi + 2)/12
-		mov eax,edi
-		add eax,2
-		xor edx,edx
-		mov ebx,12
-		div ebx
-		add esi,eax
-		
-		;dd = ddd - (mi*306 + 5)/10 + 1
-		mov eax,edi
-		xor edx,edx
-		mov ebx,306
-		mul ebx
-		add eax,5
-		xor edx,edx
-		mov ebx,10
-		div ebx
-		sub ecx,eax
-		inc ecx
-		
-		mov edi, dword ptr [bp+2]
-		mov dword ptr [bp+2],0
-		
-		;year in si
-		;month in di
-		;day in cx
-		
-		;Operaciones sobre bits para retonar con el formato de la fecha
-		xor ax,ax
-		xor dx,dx
-		
-		;El día es el valor más a la derecha, no ocupa mayor tratamiento, solo se mueve.
-		mov ax,cx
-		
-		;El día ocupa 5 bits. Al mes se le hace un corrimiento de 5 bits a la izquierda.
-		;Se suma a los bits del día.
-		mov bx,di
-		shl bx,5
-		add ax,bx
-		
-		;El año ocupa los primeros 7 bits del segundo byte.
-		;Se hace un corrrimiento de 9 bits a la izquierda y se suma.
-		mov bx,si
-		shl bx,9
-		add ax,bx
-		
-		;Queda el último byte. El año ocupa 7 bits del 1 byte más a la izquierda.
-		;Se hace un corrimiento de 7 bits a la derecha para almacenarlo en el tercer byte.
-		mov bx,si
-		shr bx,7
-		mov dx,bx
-		;Se retorna
-		mov bp,sp
-		mov [bp+2],ax ;2do y 3er byte
-		mov [bp+4],dx ;1er byte
-		ret
-	toDate endp
 	
-	addDays proc near
+	len proc near
+		mov bp,sp
+		mov [bp+64], [bp+2]
+		ret 2*31
+	len endp
+
+	cont proc near
 		locals @@
-		mov bp,sp
-		
-		mov ax,[bp+6]
-		mov bx,[bp+4]
-		push ax
-		push bx
-		call toDays
-		pop eax
-		mov bp,sp
-		xor ebx,ebx
-		mov bx,[bp+2]
-		cmp bx,7FFFh
-		jbe @@isPostive
-		dec bx
-		xor bx,0ffffh
-		sub eax,ebx
-		jmp @@castToDate
-	@@isPostive:
-		add eax,ebx
-	@@castToDate:
-		push eax
-		call toDate
-		pop ax
-		pop dx
-		mov bp,sp
-		
-		mov word ptr [bp+4],ax
-		mov word ptr [bp+6],dx
-		
-		ret 2
-	addDays endp
-	subDays proc near
-		locals @@
-		mov bp,sp
-		
-		mov ax,[bp+6]
-		mov bx,[bp+4]
-		push ax
-		push bx
-		call toDays
-		pop eax
-		mov bp,sp
-		xor ebx,ebx
-		mov bx,[bp+2]
-		cmp bx,7FFFh
-		jbe @@isPostive
-		dec bx
-		xor bx,0ffffh
-		add eax,ebx
-		jmp @@castToDate
-	@@isPostive:
-		sub eax,ebx
-	@@castToDate:
-		push eax
-		call toDate
-		pop ax
-		pop dx
-		mov bp,sp
-		
-		mov word ptr [bp+4],ax
-		mov word ptr [bp+6],dx
-		
-		ret 2
-	subDays endp
-	weekDay proc near
-		locals @@
-		
-		mov bp,sp
-		;Año
-		mov dx,[bp+2]
-		xor ax,ax
-		shl dx,7
-		mov ax,dx
-		mov dx,[bp+4]
-		shr dx,9
-		add ax,dx
-		mov si,ax
-		;Mes
-		mov ax,[bp+4]
-		shr ax,5
-		xor ah,ah
-		and al,0fh
-		mov di,ax
-		;Dia
-		mov ax,[bp+4]
-		and ax,1fh
-		mov cx,ax
-		
-		xor ax,ax
-		xor dx,dx
-		xor bx,bx
-		
-		;y = year - (14 - month) / 12;
-		;si = si - (14 - di) / 12;
-		mov ax,14
-		sub ax,di
-		mov bx,12
-		div bx
-		sub si,ax ;En si queda el nuevo cálculo de y
-		
-		xor ax,ax
-		xor dx,dx
-		
-		mov word ptr [bp+6],si
-		mov ax,si
-		mov bx,4
-		div bx
-		add word ptr [bp+6],ax
-		
-		xor dx,dx
-		mov ax,si
-		mov bx,100
-		div bx
-		sub word ptr [bp+6],ax
-		
-		xor dx,dx
-		mov ax,si
-		mov bx,400
-		div bx
-		add word ptr [bp+6],ax
-		
-		mov si,[bp+6]
-		mov word ptr [bp+6],0
-		
-		;m = month + 12 * ((14 - month) / 12) - 2;
-		mov ax,14
-		sub ax,di
-		mov bx,12
-		xor dx,dx
-		div bx
-		xor dx,dx
-		mul bx
-		add ax,di
-		sub ax,2
-		mov di,ax
-		
-		mov ax,di
-		mov bx,31
-		xor dx,dx
-		mul bx
-		xor dx,dx
-		mov bx,12
-		div bx
-		
-		add ax,cx
-		add ax,si
-		mov bx,7
-		xor dx,dx
-		div bx
-		mov word ptr [bp+6],dx
+		mov bp, sp
+		mov di, 4
+		mov cx, [bp+2];nuemro
+		mov bx, [bp+66];char
+	@@revisa:
+		mov ax, [bp+di]
+		cmp ax, bx
+		je @@true
+		add di, 2
+		loop @@revisa
+		mov [bp+66], 1
+		ret 2*32
+	@@true:
+		mov [bp+66], 0
+		ret 2*32
+	cont endp
+
+	index proc near
+		locasl@@
+
+		mov bp, sp
+		mov di, 4
+		mov ax, [bp+66];pos
+		cmp ax, 32
+		jge @@outR
+		add ax, [bp+66]
+		add di, ax
+		mov ax, [bp+di]
+		mov word ptr [bp+66], ax
+		ret 2*32
+
+	@@outR:
+		;print out of range
+		mov word ptr [bp+66], 0
+		ret 2*32
+	cont endp
+
+	concat proc near
+		locals@@
+
+		mov bp, sp
+		mov ax, [bp+2]
+		add ax, [bp+66];A el segundo se le agrega el primero
+		cmp ax, 32
+		jge @@outR
+		mov cx, [bp+2]
+		mov di, 68
+		add di, [bp+66]
+		add di, [bp+66]
+		add [bp+66], cx
+		mov si, 4
+	@@ciclo:
+		mov ax, [bp+si]
+		mov word ptr [bp+di]
+		add si, 2
+		add di, 2
+		loop @@ciclo
+		ret 2*32
+
+
+	@@outR:
+		mov word ptr [bp+66], 0
+		ret 2*32
+	concat endp
+
+	cut proc near
+		locals@@
+		mov bp, sp
+
+		mov ax, [bp+2]
+		mov bx, [bp+4]
+		cmp ax, 32
+		jge @@outR
+		cmp bx, 32
+		jge @@outR
+		cmp ax, bx
+		jge @@outR
+		sub bx, ax
+		inc bx
+		mov cx, bx
+		mov word ptr [bp+6], cx
+		mov di, 6
+		mov si, 6
+		add ax, ax
+		add di, ax
+	@@cic:
+		mov ax, [bp+di]
+		mov word ptr [bp+si], ax
+		add di, 2
+		add si, 2
+		loop @@cic
+		mov cx, 31
+		sub cx, [bp+6]
+		cmp cx, 0
+		je @@fin
+	@@fill:
+		mov word ptr [bp+si], 0
+		add si, 2
+		loop @@fill
+	@@fin
 		ret 2*2
-	weekDay endp
-	isLeap proc near
-		locals @@
+
+	@@outR
+		ret 2*2
+
+	cut endp
+
+	recut proc near
+		locals@@
+
 		
-		mov bp,sp
-		;Año
-		mov dx,[bp+2]
-		xor ax,ax
-		shl dx,7
-		mov ax,dx
-		mov dx,[bp+4]
-		shr dx,9
-		add ax,dx
-		mov si,ax
-		
-		
-		;di será 1 si el año es bisiesto
-		mov ax,si
-		mov cx,ax
-		xor di,di
-		
-		;Divisibiliad por 400
-		mov bx,400
-		xor dx,dx
-		div bx
-		cmp dx,0
-		jne @@LeapA
-		mov di,1
-		jmp @@next
-	@@LeapA:
-		mov ax,si
-		;No divisibiliad por 100
-		mov bx,100
-		xor dx,dx
-		div bx
-		cmp dx,0
-		je @@next
-		mov ax,si
-		;Divisibiliad por 4
-		mov bx,4
-		xor dx,dx
-		div bx
-		cmp dx,0
-		jne @@next
-		mov di,1
-	@@next:	
-		mov word ptr [bp+4],di
-		ret 2
-	isLeap endp
-	
-	dayInMonth proc near
-		locals @@
-		mov bp,sp
-		mov ax,[bp+4]
-		mov bx,[bp+2]
-		push ax
-		push bx
-		call isLeap
-		pop si
-		mov bp,sp
-		
-		;Mes
-		xor eax,eax
-		mov ax,[bp+4]
-		shr ax,5
-		xor ah,ah
-		and al,0fh
-		mov edi,eax
-		;Dia
-		xor eax,eax
-		mov ax,[bp+4]
-		and ax,1fh
-		mov ecx,eax
-		
-		;m = (m + 9) % 12
-		mov eax,edi
-		add eax,9
-		mov ebx,12
-		xor edx,edx
-		div ebx
-		mov edi,edx
-		
-		
-		
-		;(m*306 + 5)/10
-		xor edx,edx
-		mov ebx,306
-		mov eax,edi
-		mul ebx
-		add eax,5
-		
-		xor edx,edx
-		mov ebx,10
-		div ebx
-		mov edi,eax
-		
-		;( d - 1 )
-		mov eax,ecx
-		dec eax
-		add edi,eax
-		
-		
-		add edi,59
-		add edi,esi
-		
-		mov ebx,365
-		add ebx,esi
-		xor edx,edx
-		mov eax,edi
-		div ebx
-		inc edx
-		
-		mov word ptr [bp+2],1
-		mov word ptr [bp+4],dx	
-		ret
-		
-	dayInMonth endp
+	recut endp
+
 
 	start:
 		mov ax,@data 
