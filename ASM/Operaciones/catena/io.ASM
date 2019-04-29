@@ -1,5 +1,5 @@
 code segment
-	public legoNumerus,scriboNumerus,legoGregorius,scriboGregorius,legoDualis,scriboDualis,legoFractio,scriboFractio,legoCatena,scriboImago
+	public legoNumerus,scriboNumerus,legoGregorius,scriboGregorius,legoDualis,scriboDualis,legoFractio,scriboFractio,legoCatena,scriboImago,scriboCatena
 	assume cs:code
 	intExpected db 13,10,"Exceptis: numerus expectata",10,13,"$"
 	gregoriusExpected db 13,10,"Exceptis: gregorius expectata",10,13,"$"
@@ -950,7 +950,7 @@ code segment
 		retf
 		
 	legoCatena endp
-	scriboImago proc near
+	scriboImago proc far
 	locals @@
 		mov bp,sp
 		add bp,2
@@ -961,5 +961,24 @@ code segment
 
 		retf 2*1 ;Cleans the parameters
 	scriboImago endp
+	scriboCatena proc fat
+	locals @@
+		mov bp,sp
+		add bp,2
+		add bp,2
+		mov cx,[bp]
+		cmp cx,0
+		je @@return
+		
+	print:
+		add bp,2
+		mov dx,[bp]
+		mov ah,02h
+		int 21h
+	loop print
+	
+	@@return:
+		retf 2*32 ;Cleans the parameters
+	scriboCatena endp
 code ends
 end
