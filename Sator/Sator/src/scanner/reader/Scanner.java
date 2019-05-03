@@ -213,13 +213,13 @@ public class Scanner {
             }
             if(minus && state.getCode()==500){
                 String str = Character.toString(buffer.readNextChar());
-               // if(str.equals(">")){
-              //      minus=false;
-             //       buffer.returnChar(str.charAt(0));
-             ///   }else{
+                if(str.equals(">")){
+                    minus=false;
+                    buffer.returnChar(str.charAt(0));
+                }else{
                     minus=false;
                     state = FinalStates.q0;
-               //}
+               }
             }
             if(doubleLookAhead && state.getCode()==120){
                 int length = builder.toString().length()-2;

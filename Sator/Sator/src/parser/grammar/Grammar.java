@@ -56,6 +56,11 @@ public abstract class Grammar
 	public static final int REC_TYPE = 236;
 	public static final int REC_ID = 237;
 	public static final int REC_END = 238;
+        public static final int VAR_TYPE = 239;
+	public static final int VAR_DEF = 240;
+	public static final int VAR_LIT = 241;
+        public static final int REG_LIT = 242;
+	public static final int REG_LIT_END = 243;
         
         public static final int LIST_STATEMENT = 217;
         public static final int IMPONO_EXPRESSION = 210;
@@ -97,7 +102,7 @@ public abstract class Grammar
 	 */
 	public static final boolean isSemanticSymbol(int numSimbolo)
 	{
-		return ((231 <= numSimbolo) && (numSimbolo <= 238));
+		return ((231 <= numSimbolo) && (numSimbolo <= 243));
 	}
 
 	/**

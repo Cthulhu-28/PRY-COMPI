@@ -5,6 +5,8 @@
  */
 package semantics;
 
+import java.util.ArrayList;
+import java.util.List;
 import parser.grammar.Grammar;
 import scanner.reader.Token;
 import semantics.table.Category;
@@ -18,6 +20,10 @@ import semantics.table.TypeTable;
  * @author admin
  */
 public class SemanticAnalyzer {
+    
+    private int row;
+    private int col;
+    
     private final SymbolTable globalTable = new SymbolTable();
     private final SymbolTable localTable = new SymbolTable();
     private final TypeTable typeTable = new TypeTable();
@@ -25,6 +31,7 @@ public class SemanticAnalyzer {
     
     private Type currentType;
     private Type attr;
+    private List<Type> recordLiteral = new ArrayList<>();
     
     public void analyze(int symbol, Token token){
         switch(symbol){
@@ -52,6 +59,21 @@ public class SemanticAnalyzer {
             case Grammar.REC_END:
                 insertRecord();
                 break;
+            case Grammar.VAR_TYPE:
+                saveVariableType(token);
+                break;
+            case Grammar.VAR_DEF:
+                defineVariable(token);
+                break;
+            case Grammar.VAR_LIT:
+                saveVariableLiteral(token);
+                break;
+            case Grammar.REG_LIT:
+                addRecordAttrLiteral(token);
+                break;
+            case Grammar.REG_LIT_END:
+                saveRecordLiteral();
+                break;
         }
     }
     
@@ -72,7 +94,7 @@ public class SemanticAnalyzer {
     }
     private void saveConstantLiteral(Token token){
         if(currentType != null){
-            if(typeMatch(currentType, token))
+            if(typeMatchLiteral(currentType, token))
                 globalTable.modify(lastIdentifier, token.getLexeme());
             else
                 semanticErrorType(3, token);
@@ -108,15 +130,57 @@ public class SemanticAnalyzer {
         if(currentType.constainsAttribute(token.getLexeme())){
             semanticError(4, token);
         }else{
-            attr = new Type();
             attr.setName(token.getLexeme());
             currentType.addAtrribute(attr);
             attr = null;
         }
     }
     private void insertRecord(){
-        typeTable.put(currentType.toString(), currentType);
+        typeTable.put(currentType.getName(), currentType);
         currentType = null;
+    }
+    private void saveVariableType(Token token){
+        currentType = typeTable.get(token.getLexeme());
+        if(currentType == null){
+            semanticError(1, token);
+        }
+    }
+    private void defineVariable(Token token){
+        if(globalTable.contains(token.getLexeme())){
+            semanticError(2, token);
+        }else{
+            lastIdentifier = token.getLexeme();
+            globalTable.insert(token.getLexeme(), Category.VARIABLE,currentType);
+            
+        }
+    }
+    private void saveVariableLiteral(Token token){
+        if(currentType != null){
+            if(currentType.isRecord()){
+                row = token.getIntegerProperty("row");
+                col = token.getIntegerProperty("column");
+            }else{
+                if(typeMatchLiteral(currentType, token))
+                    globalTable.modify(lastIdentifier, token.getLexeme());
+                else
+                    semanticErrorType(3, token);
+            }
+        }
+        lastIdentifier = "";
+    }
+    private void addRecordAttrLiteral(Token token){
+        if(currentType != null){
+            Type t = typeTable.get(Type.typeName(token.getCode()));
+            recordLiteral.add(t);
+        }
+    }
+    private void saveRecordLiteral(){
+        if(currentType != null){
+            boolean matched = currentType.matchType(recordLiteral);
+            if(!matched)
+                semanticErrorType(3);
+        }
+        recordLiteral.clear();
     }
     private void semanticError(int code, Token token){
         System.out.println(SemanticErrors.getError(code, token.getIntegerProperty("row"), token.getIntegerProperty("column"), token.getLexeme()));
@@ -126,9 +190,23 @@ public class SemanticAnalyzer {
         Type received = typeTable.get(Type.typeName(token.getCode()));
         System.out.println(SemanticErrors.getError(code, token.getIntegerProperty("row"), token.getIntegerProperty("column"), received.toString(),expected.toString()));
     }
-    private boolean typeMatch(Type type, Token token){
-        if(type.getCode()<7)
-            return Type.TYPE_TO_TOKEN[type.getCode()] == token.getCode();
+    private void semanticErrorType(int code){
+        Type expected = currentType;
+        String str = "<-";
+        int i=0;
+        for(;i<recordLiteral.size()-1;i++){
+            str += recordLiteral.get(i).toString() + ",";
+        }
+        str += recordLiteral.get(i) +  "->";
+        System.out.println(SemanticErrors.getError(code,row,col,str,expected.toString()));
+    }
+    private boolean typeMatchLiteral(Type type, Token token){
+        Type tmp = type;
+        while(tmp.getCode()>=7){
+            tmp = tmp.getBaseType();
+        }
+        if(tmp.getCode()<7)
+            return Type.TYPE_TO_TOKEN[tmp.getCode()] == token.getCode();
         return false;
     }
 }

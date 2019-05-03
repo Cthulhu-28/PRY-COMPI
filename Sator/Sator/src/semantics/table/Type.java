@@ -7,6 +7,7 @@ package semantics.table;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.IntStream;
 import utils.HashMap;
 
 /**
@@ -21,7 +22,7 @@ public class Type {
     private Type Parent;
     private List<Integer> dimension;
     private HashMap<String,Type> attributes;
-    
+    private List<Type> typeOrder;
     public Type(){
         code = -1;
     }
@@ -89,6 +90,7 @@ public class Type {
     }
     public void addAtrribute(Type type){
         if(attributes==null){
+            typeOrder = new ArrayList<>();
             attributes = new HashMap<String, Type>() {
                 @Override
                 public int hashCode(String key) {
@@ -101,7 +103,16 @@ public class Type {
                 }
             };
         }
-        attributes.put(type.toString(), type);
+        attributes.put(type.getName(), type);
+        typeOrder.add(type);
+    }
+    public boolean matchType(List<Type> list){
+        boolean matched = true;
+        if(typeOrder != null && typeOrder.size() != list.size())
+            return false;
+        for(int i=0;i<typeOrder.size();i++)
+            matched = matched && typeOrder.get(i) == list.get(i);
+        return matched;
     }
     public boolean constainsAttribute(String name){
         return attributes != null && attributes.contains(name);
@@ -109,11 +120,25 @@ public class Type {
     public Type getAttribute(String name){
         return attributes == null ? null : attributes.get(name);
     }
+    public boolean isRecord(){
+        return attributes != null;
+    }
+    public boolean isArray(){
+        return dimension != null;
+    }
     @Override
     public String toString(){
         String str = this.name;
         if(dimension != null)
             str = this.dimension.stream().map((i) -> "["+i+"]").reduce(str, String::concat);
+        if(typeOrder != null){
+            str = "<-";
+            int i=0;
+            for(;i<typeOrder.size()-1;i++){
+                str += typeOrder.get(i).getBaseType().toString() + ",";
+            }
+            str += typeOrder.get(i).getBaseType().toString() +  "->";
+        }           
         return str;
     }
     public static int nextCode(){
