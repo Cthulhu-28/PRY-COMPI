@@ -186,14 +186,14 @@
 		
 
 
-		;call lcat
-		;xor bx,bx
-		;pam:
-		;	pop ax
-		;	mov varC[bx],al
-		;	inc bx
-		;	cmp bx,256
-        ;jbe pam
+		call lcat
+		xor bx,bx
+		pam:
+			pop ax
+			mov varC[bx],al
+			inc bx
+			cmp bx,256
+        jbe pam
 
         mov ah, 02h
 		mov dl, 10
@@ -201,9 +201,9 @@
 		mov dl, 13
         int 21h
         
-        ;call lnum
-        ;pop ax
-        ;mov varN, ax
+        call lnum
+        pop ax
+        mov varN, ax
 
         mov ah, 02h
 		mov dl, 10
@@ -211,9 +211,9 @@
 		mov dl, 13
         int 21h
         
-        ;call lnum
-        ;pop ax
-        ;mov varN2, ax
+        call lnum
+        pop ax
+        mov varN2, ax
 
         mov bx, 33
         

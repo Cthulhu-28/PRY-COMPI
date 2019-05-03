@@ -2,13 +2,7 @@
 .stack 0ffffh 
 .data
 	varC db 32 dup(0) 
-	varI db 0
 	varN dw 0
-	msg1 db "largo",10,13,"$"
-	msg2 db "contiene",10,13,"$"
-	msg3 db "indexar",10,13,"$"
-	msg4 db "concatenar",10,13,"$"
-	msg5 db "cortar y recortar",10,13,"$"
     lineBreak db 10,13,"$"
 
 
@@ -17,6 +11,7 @@
 
 	cont proc near
 		locals @@
+		mov bp,sp
 		mov ax, [bp+2]
 		mov  word ptr [bp+66], ax
 		ret 2*32
@@ -55,8 +50,6 @@
 		ret
 		
 	lcat endp
-
-
     
     snum proc far
 		mov bp,sp
@@ -108,54 +101,9 @@
 		
 		ret 2
 	snum endp
-
-	sdual proc near
-	locals @@
-		mov bp,sp
-		mov dx,[bp+2]
-		mov ah,02h
-		cmp dx,0
-		je @@false
-	@@true:
-		mov dl,'v'
-		int 21h
-		mov dl,'e'
-		int 21h
-		mov dl,'r'
-		int 21h
-		jmp @@return
-	@@false:
-		mov dl,'f'
-		int 21h
-		mov dl,'a'
-		int 21h
-		mov dl,'l'
-		int 21h
-		mov dl,'s'
-		int 21h
-	@@return:
-		mov dl,'i'
-		int 21h
-		mov dl,'d'
-		int 21h
-		mov dl,'i'
-		int 21h
-		mov dl,'c'
-		int 21h
-		mov dl,'u'
-		int 21h
-		mov dl,'s'
-		int 21h
-		ret 2
-	sdual endp
-
-
-
 	start:
 		mov ax,@data 
 		mov ds,ax 
-		
-		
 
 		call lcat
 		xor bx,bx
@@ -170,9 +118,6 @@
 		int 21h
 		mov dl, 13
 		int 21h
-		
-
-		
         mov bx,33
         
 		;Moves into the stack the string var, bottom-to-top
@@ -184,18 +129,12 @@
 			cmp bx,0
         ja send
         
-        xor ax, ax
-		mov al, varI
-		push ax
-		
-		
         call cont
         pop ax
 
 		mov varN, ax
 		push ax
 		call snum
-        ;escribir dualis
         
 
         mov ah, 02h
@@ -203,57 +142,6 @@
 		int 21h
 		mov dl, 13
         int 21h
-        
-        
-
-
-        
-        ;lea dx,msg2
-		;mov ah,09h
-        ;int 21h
-
-       
-        ;mov bx,257
-		
-		;Moves into the stack the string var, bottom-to-top
-	;	send2:
-	;		dec bx
-	;		mov al,varC[bx]
-	;		xor ah,ah
-	;		push ax
-	;		cmp bx,0
-		;ja send2
-        ;xor ax, ax
-        ;mov al, varI
-        ;push ax
-        ;call cont
-        ;pop ax
-        ;mov varD, al
-
-        ;xor ax, ax
-
-        ;mov al, varD
-        ;push ax
-        ;call writed
-
-      
-
-
-
-
-
-        
-        ;lea dx,msg3
-		;mov ah,09h
-        ;int 21h
-        
-        ;lea dx,msg4
-		;mov ah,09h
-        ;int 21h
-        
-        ;lea dx,msg5
-		;mov ah,09h
-        ;int 21h
         
 		mov ax,4c00h
 		int 21h

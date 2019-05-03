@@ -8,6 +8,7 @@ package parser;
 import parser.grammar.Grammar;
 import scanner.reader.Scanner;
 import scanner.reader.Token;
+import semantics.SemanticAnalyzer;
 import utils.Stack;
 
 /**
@@ -19,6 +20,8 @@ public class Parser {
     private Stack<Integer> stack;
     private static Parser parser=null;
     private Token CT;
+    private boolean noErrors = true;
+    private SemanticAnalyzer semanticAnalyzer = new SemanticAnalyzer();
     private Parser(){}
     
     private Parser(String path) throws Exception{
@@ -42,12 +45,15 @@ public class Parser {
                 if(EAP == CT.getCode())
                     nextToken();
                 else{  
-                    if(CT.hasError())
+                    if(CT.hasError()){
                         errorLexico(CT);
+                        noErrors=false;
+                    }
                     else{
                         Token last = CT;
                         errorTokenExpected(CT, Grammar.getTerminalName(EAP));
                         nextToken();
+                        noErrors=false;
                         if(EAP!=CT.getCode()){
                             scanner.returnToken(CT);
                             CT = last;
@@ -56,10 +62,13 @@ public class Parser {
                             nextToken();
                     }
                 }
+            }else if(Grammar.isSemanticSymbol(EAP)){
+                semanticAnalyzer.analyze(EAP, CT);
             }
             else{
                 int rule = Grammar.getParsingTable(EAP-initial, CT.getCode());
                 if(rule < 0){
+                    noErrors=false;
                     error(rule,CT);
                     recoverFromError(EAP, CT);
                 }
@@ -75,9 +84,13 @@ public class Parser {
             int rule = stack.pop();
             if(Grammar.getParsingTable(rule-initial, Grammar.END_MARKER)<0)
                 stack.push(rule);
-            if(!stack.isEmpty())
+            if(!stack.isEmpty()){
+                noErrors=false;
                 error(24);
+            }
         }
+        if(noErrors)
+            System.out.println("Compilación exitosa");
     }
     private void nextToken() throws Exception{
         CT = scanner.nextToken();

@@ -12,7 +12,10 @@ package parser;
 public class Program {
     public static void main(String[] args){
         try {
-            String path = "C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 2\\Pruebas\\test020.str";
+//            if(args.length<1){
+//                throw new Exception("Un parámetro esperados");
+//            }
+            String path = "C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 3\\Pruebas\\test022.str";//args[0];
             Parser parser = Parser.initParser(path);
             parser.parse();
         } catch (Exception e) {

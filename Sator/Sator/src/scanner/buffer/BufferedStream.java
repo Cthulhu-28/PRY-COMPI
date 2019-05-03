@@ -57,7 +57,7 @@ public final class BufferedStream {
                     finished=true;
                     return 0;
                 }
-                System.out.println("Reading new chunk");   
+                //System.out.println("Reading new chunk");   
             }
         } catch (IOException e) {
             throw new IOException("GN-3: Ha ocurrido un error al leer la siguiente porción del archivo");

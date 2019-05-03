@@ -47,6 +47,16 @@ public abstract class Grammar
 	 */
 	public static final int MAX_FOLLOWS = 110;
         
+        
+        public static final int CONS_TYPE = 231;
+	public static final int CONS_DEF = 232;
+	public static final int CONS_LIT = 233;
+        public static final int TYPE_DEF = 234;
+	public static final int TYPE_NORM = 235;
+	public static final int REC_TYPE = 236;
+	public static final int REC_ID = 237;
+	public static final int REC_END = 238;
+        
         public static final int LIST_STATEMENT = 217;
         public static final int IMPONO_EXPRESSION = 210;
 
@@ -87,7 +97,7 @@ public abstract class Grammar
 	 */
 	public static final boolean isSemanticSymbol(int numSimbolo)
 	{
-		return ((231 <= numSimbolo) && (numSimbolo <= 230));
+		return ((231 <= numSimbolo) && (numSimbolo <= 238));
 	}
 
 	/**
