@@ -40,7 +40,7 @@ public abstract class Grammar
 	/**
 	 * Constante que contiene el n�mero m�ximo de columnas que tiene los lados derechos
 	 */
-	public static final int MAX_RIGHT_SIDE = 11;
+	public static final int MAX_RIGHT_SIDE = 15;
 
 	/**
 	 * Constante que contiene el n�mero m�ximo de follows
@@ -51,16 +51,22 @@ public abstract class Grammar
         public static final int CONS_TYPE = 231;
 	public static final int CONS_DEF = 232;
 	public static final int CONS_LIT = 233;
-        public static final int TYPE_DEF = 234;
+	public static final int TYPE_DEF = 234;
 	public static final int TYPE_NORM = 235;
 	public static final int REC_TYPE = 236;
 	public static final int REC_ID = 237;
 	public static final int REC_END = 238;
-        public static final int VAR_TYPE = 239;
+	public static final int VAR_TYPE = 239;
 	public static final int VAR_DEF = 240;
-	public static final int VAR_LIT = 241;
-        public static final int REG_LIT = 242;
-	public static final int REG_LIT_END = 243;
+	public static final int ARR_DEF = 241;
+	public static final int ARR_SIZE = 242;
+	public static final int ARR_TYPE = 243;
+	public static final int ARR_VAR = 244;
+	public static final int VAR_LIT = 245;
+	public static final int REG_LIT = 246;
+	public static final int REG_LIT_END = 247;
+	public static final int ARR_LIT = 248;
+	public static final int ARR_LIT_END = 249;
         
         public static final int LIST_STATEMENT = 217;
         public static final int IMPONO_EXPRESSION = 210;
@@ -102,7 +108,7 @@ public abstract class Grammar
 	 */
 	public static final boolean isSemanticSymbol(int numSimbolo)
 	{
-		return ((231 <= numSimbolo) && (numSimbolo <= 243));
+            return ((231 <= numSimbolo) && (numSimbolo <= 249));
 	}
 
 	/**

@@ -66,6 +66,9 @@ public class Parser {
                 semanticAnalyzer.analyze(EAP, CT);
             }
             else{
+                if((EAP-initial)<0 ||CT.getCode()<0 ){
+                    System.out.println("");
+                }
                 int rule = Grammar.getParsingTable(EAP-initial, CT.getCode());
                 if(rule < 0){
                     noErrors=false;

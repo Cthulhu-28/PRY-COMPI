@@ -7,7 +7,6 @@ package semantics.table;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.IntStream;
 import utils.HashMap;
 
 /**
@@ -111,7 +110,7 @@ public class Type {
         if(typeOrder != null && typeOrder.size() != list.size())
             return false;
         for(int i=0;i<typeOrder.size();i++)
-            matched = matched && typeOrder.get(i) == list.get(i);
+            matched = matched && typeOrder.get(i).equals(list.get(i));
         return matched;
     }
     public boolean constainsAttribute(String name){
@@ -129,8 +128,10 @@ public class Type {
     @Override
     public String toString(){
         String str = this.name;
-        if(dimension != null)
+        if(dimension != null){
+            str = baseType.toString();
             str = this.dimension.stream().map((i) -> "["+i+"]").reduce(str, String::concat);
+        }
         if(typeOrder != null){
             str = "<-";
             int i=0;
@@ -166,4 +167,46 @@ public class Type {
         }
         return null;
     }
+
+    @Override
+    public int hashCode() {
+        int hash = 5;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Type other = (Type) obj;
+        if(this.code == other.code)
+            return true;
+        if(this.typeOrder!=null){
+            if(other.typeOrder==null)
+                return false;
+            if(this.typeOrder.equals(other.typeOrder))
+                return this.baseType.equals(other.baseType);
+        }else{
+            if(other.typeOrder != null)
+                return false;
+        }
+        if(this.dimension!=null){
+            if(other.dimension==null)
+                return false;
+            if(this.dimension.equals(other.dimension))
+                return this.baseType.equals(other.baseType);
+        }else{
+            if(other.dimension != null)
+                return false;
+        }
+        return this.equals(other.baseType) || other.equals(this.baseType);
+    }
+    
 }
