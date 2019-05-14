@@ -21,7 +21,12 @@ public class SemanticErrors {
         /* 6  */ "Arreglo inválido: se esparaba un arreglo de tipo {token}",
         /* 7  */ "El parámetro {token1} ya se encuentra definido",
         /* 8  */ "El identificador {token1} no existe",
-        /* 9  */ "Acceso incorrecto: {token1} no posee el atributo {token2}"
+        /* 9  */ "Acceso incorrecto: {token1} no posee el atributo {token2}",
+        /* 10 */ "Uso incorrecto: el identificador {token1} no es una rutina",
+        /* 11 */ "Uso incorrecto: la rutina no se puede llamar con los tipos dados. Se recibió {token1} y se esperaba {token2}",
+        /* 12 */ "{token1} no posee valor de retorno",
+        /* 13 */ "La definición de la rutina {token1} no coincide con su protoipo",
+        /* 14 */ "Inicio ilegal de expresión: la sentencia reditus solo usarse dentro de funciones"
     };
     private static String getError(int code, int row, int col){
         return "SM-"+Math.abs(code)+": "+ERRORS[Math.abs(code)-1] + " en la línea " + row + " columna "+col;

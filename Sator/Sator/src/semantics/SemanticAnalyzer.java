@@ -14,6 +14,7 @@ import semantics.literals.Literal;
 import semantics.literals.SimpleLiteral;
 import semantics.identifiers.Category;
 import semantics.identifiers.Identifier;
+import semantics.identifiers.Parameter;
 import semantics.table.SymbolTable;
 import semantics.identifiers.Type;
 import semantics.table.TypeTable;
@@ -28,6 +29,7 @@ public class SemanticAnalyzer {
     private int row;
     private int col;
     
+    
     private boolean isReferenced=false;
     
     private final SymbolTable globalTable = new SymbolTable();
@@ -41,8 +43,18 @@ public class SemanticAnalyzer {
     
     private Identifier currentIdentifier;
     
-    private Stack<ArrayLiteral> arrayStack = new Stack<>();
-    private Stack<Type> parallelStack = new Stack<>();
+    private final Stack<ArrayLiteral> arrayStack = new Stack<>();
+    private final Stack<Type> parallelStack = new Stack<>();
+    private final Stack<Identifier> invocations = new Stack<>();
+    private final Stack<List<Type>> parameterOrder = new Stack<>();
+    
+    private boolean methodBody = false;
+    
+    private final Stack<Boolean> breakStack = new Stack<>();
+    private final Stack<Boolean> continueStack = new Stack<>();
+    private boolean returnFlag = false;
+    private boolean canUseReturn = false;
+    private final Stack<Boolean> revelloStack = new Stack<>();
     
     private Stack<Token> positions = new Stack<>();
     
@@ -125,11 +137,23 @@ public class SemanticAnalyzer {
             case Grammar.PARAM_TYPE:
                 saveParameterType(token);
                 break;
+            case Grammar.FUNC_RET:
+                saveReturnType(token);
+                break;
             case Grammar.ID_STACK:
                 findSymbol(token);
                 break;
             case Grammar.ID_STACK_PUT:
-                putIdentifierOnStack();
+                putIdentifierOnStack(token);
+                break;
+            case Grammar.CHECK_PROC:
+                checkProc(token);
+                break;
+            case Grammar.CHECK_PARAM:
+                checkParameters(token);
+                break;
+            case Grammar.POP_PARAM:
+                popParameter(token);
                 break;
             case Grammar.ATTR_NEXT:
                 accessAttribute(token);
@@ -185,67 +209,15 @@ public class SemanticAnalyzer {
             case Grammar.PUSH_GREGORIUS:
                 pushGregorius();
                 break;
-//            case Grammar.INC:
-//                incrementum();
-//                break;
-//            case Grammar.DEC:
-//                decrementum();
-//                break;
-//            case Grammar.NON:
-//                non();
-//                break;
-//            case Grammar.CANT:
-//                break;
-//            case Grammar.TO_UPER:
-//                upperCase();
-//                break;
-//            case Grammar.TO_LOWER:
-//                lowerCase();
-//                break;
-//            case Grammar.IS_ALPHA:
-//                isAlpha();
-//                break;
-//            case Grammar.IS_DIGIT:
-//                isDigit();
-//                break;
-//            case Grammar.LENGTH:
-//                length();
-//                break;
-//            case Grammar.INT_PART:
-//                integerPart();
-//                break;
-//            case Grammar.ROUND:
-//                round();
-//                break;
-//            case Grammar.GET_YEAR:
-//                annus();
-//                break;
-//            case Grammar.GET_MONTH:
-//                mensis();
-//                break;
-//            case Grammar.GET_DAY:
-//                dies();
-//                break;
-//            case Grammar.WEEK_DAY:
-//                weekDay();
-//                break;
-//            case Grammar.DAY_MONTH:
-//                dayInYear();
-//                break;
-//            case Grammar.TODAY:
-//                nunc();
-//            case Grammar.IS_LEAP:
-//                isLeap();
-//                break;
-//            case Grammar.READ_FILE:
-//                readFile();
-//                break;
-//            case Grammar.CLOSE_FILE:
-//                closeFile();
-//                break;
-            
-            
-                
+            case Grammar.BODY_PROC:
+                methodBody = true;
+                break;
+            case Grammar.FUNC_FLAGS_ON:
+                beginFunction(token);
+                break;
+            case Grammar.CHECK_RETURN:
+                checkReturn(token);
+                break;
         }
     }
     private void savePosition(Token token){
@@ -454,11 +426,17 @@ public class SemanticAnalyzer {
         }
     }
     private void defineMethod(Category category, Token token){
-        if(globalTable.contains(token.getLexeme()) || typeTable.exists(token.getLexeme())){
+        if(!methodBody && (globalTable.contains(token.getLexeme()) || typeTable.exists(token.getLexeme()))){
             semanticError(2, token);
         }else{
-            lastIdentifier = token.getLexeme();
-            globalTable.insert(token.getLexeme(), category);        
+            if(methodBody){
+                currentIdentifier = new Identifier();
+                currentIdentifier.setCategory(category);
+                currentIdentifier.setName(token.getLexeme());
+            }else{
+                lastIdentifier = token.getLexeme();
+                globalTable.insert(token.getLexeme(), category);        
+            }
         }
         isReferenced = false;
     }
@@ -469,28 +447,51 @@ public class SemanticAnalyzer {
         }
     }
     private void defineParameter(Token token){
-        if(globalTable.get(lastIdentifier).containsParameter(token.getLexeme())){
+        if(methodBody){
+            currentIdentifier.getParameters().add(new Parameter(token.getLexeme(), currentType, isReferenced));
+        }else if(globalTable.get(lastIdentifier).containsParameter(token.getLexeme())){
             globalTable.putParameter(lastIdentifier, token.getLexeme()+"-err", isReferenced, currentType);
             semanticError(7, token);
         }else{
             globalTable.putParameter(lastIdentifier, token.getLexeme(), isReferenced, currentType);
         }
     }
+    private void saveReturnType(Token token){
+        if(typeTable.exists(token.getLexeme())){
+            if(methodBody)
+                currentIdentifier.setType(typeTable.get(token.getLexeme()));
+            else
+                globalTable.modify(lastIdentifier, typeTable.get(token.getLexeme()));
+        }else
+            semanticError(1, token);
+    }
+    private void beginFunction(Token token){
+        canUseReturn = true;
+        if(!globalTable.get(currentIdentifier.getName()).equals(currentIdentifier)){
+            semanticError(13, getPosition(token), currentIdentifier.getName());
+        }
+        currentIdentifier = globalTable.get(currentIdentifier.getName());
+    }
     private void findSymbol(Token token){
         currentType = null;
         if(globalTable.contains(token.getLexeme())){
-            currentIdentifier = globalTable.get(token.getLexeme());
-            row = token.getIntegerProperty("row");
-            col = token.getIntegerProperty("column");
+            invocations.push(globalTable.get(token.getLexeme()));
+            parameterOrder.push(new ArrayList<>());
+            positions.push(token);
         }else{
             semanticError(8, token);
         }
     }
-    private void putIdentifierOnStack(){
+    private void putIdentifierOnStack(Token token){
         if(currentType != null){
            parallelStack.push(currentType);
-        }else if(currentIdentifier != null && !isAttribute){
-            parallelStack.push(currentIdentifier.getType());
+        }else if(!invocations.isEmpty() && !isAttribute){
+            Identifier identifier = invocations.pop();
+            if(identifier.getCategory()==Category.PROCEDURE){
+                //semanticError(12, getPosition(token),identifier.getName());
+                parallelStack.push(new Type(-2, identifier.getName()));
+            }else
+                parallelStack.push(identifier.getType());
         }else
             parallelStack.push(typeTable.get("$error"));
         isAttribute = false;
@@ -505,10 +506,50 @@ public class SemanticAnalyzer {
             if(currentType==null){               
                 semanticError(9, token, oldType.getName(), token.getLexeme());
             }
-        }else if(currentIdentifier != null){
-            currentType = currentIdentifier.getType().getAttribute(token.getLexeme());
+        }else if(!invocations.isEmpty()){
+            Identifier identifier = invocations.pop();
+            currentType = identifier.getType().getAttribute(token.getLexeme());
             if(currentType==null){
-                semanticError(9, token, currentIdentifier.getName(), token.getLexeme());
+                semanticError(9, token, identifier.getName(), token.getLexeme());
+            }
+        }
+    }
+    private void checkProc(Token token){
+        if(!invocations.isEmpty()){
+            Identifier identifier = invocations.peek();
+            if(!identifier.isMethod()){
+                semanticError(10, getPosition(token), identifier.getName());
+                identifier.setParameterNumber(-1);
+            }
+        }
+    }
+    private void checkReturn(Token token){
+        if(!canUseReturn)
+            semanticError(14, getPosition(token), "");
+    }
+    private void popParameter(Token token){
+        if(!invocations.isEmpty()){
+            Identifier identifier = invocations.peek();
+            if(identifier.isMethod()){
+                Type t = parallelStack.peek();
+               parameterOrder.peek().add(parallelStack.pop());
+            }else
+                parallelStack.pop();
+        }
+    }
+    private void checkParameters(Token token){
+        if(!invocations.isEmpty()){
+            Identifier identifier = invocations.peek();
+            if(identifier.isMethod()){
+                List<Type> order = parameterOrder.pop();
+                boolean matched = order.size() == identifier.getParameters().size();
+                for(int i=0;i<order.size()&&matched;i++)
+                    matched = matched && Type.isCompatible(order.get(i).getCode(), identifier.getParameters().get(i).getType().getCode());
+                if(!matched){
+                    String str = order.toString().replace("[", "(").replace("]", ")");
+                    str = identifier.getName()+str;
+                    semanticError(11, getPosition(token), str,identifier.toString());
+                }
             }
         }
     }
@@ -520,177 +561,7 @@ public class SemanticAnalyzer {
             parallelStack.push(arrayStack.pop().getType());
         else
             parallelStack.push(currentType);
-    }
-    private void incrementum(){
-        Type expected = typeTable.get("numerus");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(expected);
-    }
-    private void decrementum(){
-        Type expected = typeTable.get("numerus");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(expected);
-    }
-    private void non(){
-        Type expected = typeTable.get("dualis");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(expected);
-    }
-    private void upperCase(){
-        Type expected = typeTable.get("imago");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(expected);
-    }
-    private void lowerCase(){
-        Type expected = typeTable.get("imago");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(expected);
-    }
-    private void isAlpha(){
-        Type expected = typeTable.get("imago");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("dualis"));
-    }
-    private void isDigit(){
-        Type expected = typeTable.get("imago");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("dualis"));
-    }
-    private void length(){
-        Type expected = typeTable.get("catena");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("numerus"));
-    }
-    private void integerPart(){
-        Type expected = typeTable.get("fractio");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }else
-            parallelStack.push(typeTable.get("numerus"));
-    }
-    private void round(){
-        Type expected = typeTable.get("fractio");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("numerus"));
-    }
-    private void annus(){
-        Type expected = typeTable.get("gregorius");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("numerus"));
-    }
-    private void mensis(){
-        Type expected = typeTable.get("gregorius");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("numerus"));
-    }
-    private void dies(){
-        Type expected = typeTable.get("gregorius");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("numerus"));
-    }
-    private void nunc(){
-        Type expected = typeTable.get("gregorius");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("gregorius"));
-    }
-    private void weekDay(){
-        Type expected = typeTable.get("gregorius");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("numerus"));
-    }
-    private void dayInYear(){
-        Type expected = typeTable.get("gregorius");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("fractio"));
-    }
-    private void isLeap(){
-        Type expected = typeTable.get("gregorius");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("dualis"));
-    }
-    private void readFile(){
-        Type expected = typeTable.get("liber");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("catena"));
-    }
-    private void closeFile(){
-        Type expected = typeTable.get("liber");
-        Type received = parallelStack.pop();
-        received = fixType(received, expected);
-        if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, positions.pop(),received.toString(),expected.toString());
-        }
-        parallelStack.push(typeTable.get("liber"));
+        currentType = null;
     }
     private void popNumerus(Token token){
         Type expected = typeTable.get("numerus");
@@ -749,6 +620,7 @@ public class SemanticAnalyzer {
         }
     }
     private void pushNumerus(){
+        System.out.println("dfdfdf");
         parallelStack.push(typeTable.get("numerus"));
     }
     private void pushImago(){

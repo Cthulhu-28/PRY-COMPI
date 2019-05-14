@@ -70,30 +70,40 @@ public abstract class Grammar
 	public static final int PARAM_TYPE = 250;
 	public static final int PARAM_DEF = 251;
 	public static final int REF_PARAM = 252;
-	public static final int REG_LIT = 253;
-	public static final int REG_LIT_END = 254;
-	public static final int ARR_LIT = 255;
-	public static final int ARR_LIT_END = 256;
-	public static final int ATTR_NEXT = 257;
-	public static final int ID_STACK = 258;
-	public static final int ID_STACK_PUT = 259;
-	public static final int LIT_STACK = 260;
-	public static final int LIT_STACK_PUT = 261;
-	public static final int SAVE_POS = 262;
-	public static final int POP_NUMERUS = 263;
-	public static final int PUSH_NUMERUS = 264;
-	public static final int POP_DUALIS = 265;
-	public static final int PUSH_DUALIS = 266;
-	public static final int POP_IMAGO = 267;
-	public static final int PUSH_IMAGO = 268;
-	public static final int POP_CATENA = 269;
-	public static final int POP_FRACTIO = 270;
-	public static final int POP_GREGORIUS = 271;
-	public static final int PUSH_GREGORIUS = 272;
-	public static final int POP_LIBER = 273;
-	public static final int PUSH_CATENA = 274;
-	public static final int PUSH_LIBER = 275;
-	public static final int PUSH_FRACTIO = 276;
+	public static final int BODY_PROC = 253;
+	public static final int FUNC_FLAGS_ON = 254;
+	public static final int FUNC_FLAGS_OFF = 255;
+	public static final int PROC_FLAGS_ON = 256;
+	public static final int PROC_FLAGS_OFF = 257;
+	public static final int REG_LIT = 258;
+	public static final int REG_LIT_END = 259;
+	public static final int ARR_LIT = 260;
+	public static final int ARR_LIT_END = 261;
+	public static final int ATTR_NEXT = 262;
+	public static final int ID_STACK = 263;
+	public static final int ID_STACK_PUT = 264;
+	public static final int LIT_STACK = 265;
+	public static final int LIT_STACK_PUT = 266;
+	public static final int CHECK_PROC = 267;
+	public static final int CHECK_PARAM = 268;
+	public static final int POP_PARAM = 269;
+	public static final int SAVE_POS = 270;
+	public static final int POP_NUMERUS = 271;
+	public static final int PUSH_NUMERUS = 272;
+	public static final int POP_DUALIS = 273;
+	public static final int PUSH_DUALIS = 274;
+	public static final int POP_IMAGO = 275;
+	public static final int PUSH_IMAGO = 276;
+	public static final int POP_CATENA = 277;
+	public static final int POP_FRACTIO = 278;
+	public static final int POP_GREGORIUS = 279;
+	public static final int PUSH_GREGORIUS = 280;
+	public static final int POP_LIBER = 281;
+	public static final int PUSH_CATENA = 282;
+	public static final int PUSH_LIBER = 283;
+	public static final int PUSH_FRACTIO = 284;
+	public static final int CHECK_RETURN = 285;
+	public static final int POP_RETURN = 286;
         
         public static final int LIST_STATEMENT = 217;
         public static final int IMPONO_EXPRESSION = 210;
@@ -135,7 +145,7 @@ public abstract class Grammar
 	 */
 	public static final boolean isSemanticSymbol(int numSimbolo)
 	{
-            return ((231 <= numSimbolo) && (numSimbolo <= 276));
+            return ((231 <= numSimbolo) && (numSimbolo <= 286));
 	}
 
 	/**
