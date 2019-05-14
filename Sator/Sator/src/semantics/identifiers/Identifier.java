@@ -1,16 +1,18 @@
-package semantics.table;
+package semantics.identifiers;
 
 import java.util.ArrayList;
 import java.util.List;
+import semantics.literals.Literal;
 
 /**
  *
  * @author admin
  */
 public class Identifier {
+    private String name;
     private Category category;
     private Type type;
-    private String initialValue;
+    private Literal initialValue;
     private List<Parameter> parameters = new ArrayList<>();
 
     public Category getCategory() {
@@ -29,11 +31,11 @@ public class Identifier {
         this.type = type;
     }
 
-    public String getInitialValue() {
+    public Literal getInitialValue() {
         return initialValue;
     }
 
-    public void setInitialValue(String initialValue) {
+    public void setInitialValue(Literal initialValue) {
         this.initialValue = initialValue;
     }
 
@@ -43,6 +45,21 @@ public class Identifier {
 
     public void setParameters(List<Parameter> parameters) {
         this.parameters = parameters;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+    
+    public boolean containsParameter(String name){
+        for(Parameter p : parameters)
+            if(p.getName().equals(name))
+                return true;
+        return false;
     }
     
     

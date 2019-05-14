@@ -3,24 +3,43 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package semantics.table;
+package semantics.identifiers;
 
 import java.util.ArrayList;
 import java.util.List;
 import utils.HashMap;
 
 /**
- *
- * @author admin
+ * Represents the type of a lieteral or identifier. It contains
+ * all the needed attributes to declare a specific type
+ * @author Steven Moya
  */
 public class Type {
     
+    /**
+     * Unique code that identifes the type
+     */
     private int code;
+    /**
+     * Unique name that identifies the type
+     */
     private String name;
+    /**
+     * For custom types it represents the in which is based
+     */
     private Type baseType;
     private Type Parent;
+    /**
+     * Stores sequentally the dimension of the type if it's an array
+     */
     private List<Integer> dimension;
+    /**
+     * Stores the attributes of the record
+     */
     private HashMap<String,Type> attributes;
+    /**
+     * Stores the order type of the record's attributes
+     */
     private List<Type> typeOrder;
     public Type(){
         code = -1;
@@ -61,6 +80,13 @@ public class Type {
 
     public Type getBaseType() {
         return baseType;
+    }
+    public Type getBaseTypeDepth(){
+        Type t = getBaseType();
+        while(t!=null && t.code>=7){
+            t = t.getBaseType();
+        }
+        return t;
     }
 
     public void setBaseType(Type baseType) {
@@ -105,6 +131,7 @@ public class Type {
         attributes.put(type.getName(), type);
         typeOrder.add(type);
     }
+    
     public boolean matchType(List<Type> list){
         boolean matched = true;
         if(typeOrder != null && typeOrder.size() != list.size())
@@ -141,31 +168,6 @@ public class Type {
             str += typeOrder.get(i).getBaseType().toString() +  "->";
         }           
         return str;
-    }
-    public static int nextCode(){
-        return codes++;
-    }
-    private static int codes = 7;
-    public static final int NUMERUS = 0;
-    public static final int IMAGO = 1;
-    public static final int FRACTIO = 2;
-    public static final int CATENA = 3;
-    public static final int LIBER = 4;
-    public static final int DUALIS = 5;
-    public static final int GREGORIUS = 6;
-    
-    public static final int TYPE_TO_TOKEN[] = {120, 104, 96, 72, -1, 87, 100};
-    
-    public static String typeName(int tokenCode){
-        switch(tokenCode){
-            case 120: return "numerus";
-            case 104: return "imago";
-            case 96: return "fractio";
-            case 72: return "catena";
-            case 87: return "dualis";
-            case 100: return "gregorius";
-        }
-        return null;
     }
 
     @Override
@@ -209,4 +211,43 @@ public class Type {
         return this.equals(other.baseType) || other.equals(this.baseType);
     }
     
+    public static int nextCode(){
+        return codes++;
+    }
+    
+    private static int codes = 7;
+    public static final int NUMERUS = 0;
+    public static final int IMAGO = 1;
+    public static final int FRACTIO = 2;
+    public static final int CATENA = 3;
+    public static final int LIBER = 4;
+    public static final int DUALIS = 5;
+    public static final int GREGORIUS = 6;
+    
+    public static final int TYPE_TO_TOKEN[] = {120, 104, 96, 72, -1, 87, 100};
+    
+    public static String typeName(int tokenCode){
+        switch(tokenCode){
+            case 120: return "numerus";
+            case 104: return "imago";
+            case 96: return "fractio";
+            case 72: return "catena";
+            case 87: return "dualis";
+            case 100: return "gregorius";
+        }
+        return null;
+    }
+    
+    private static final byte TYPE_COMPATIBILY[][] =  {    /*N I F C L D G*/  
+                                                       /*N*/{1,1,1,1,0,1,1},
+                                                       /*I*/{1,1,1,1,0,1,1},
+                                                       /*F*/{1,1,1,1,0,1,1},
+                                                       /*C*/{1,1,1,1,0,1,1},
+                                                       /*L*/{0,0,0,0,1,0,0},
+                                                       /*D*/{1,1,1,1,0,1,1},
+                                                       /*G*/{1,1,1,1,0,1,1},
+                                                       };
+    public static boolean isCompatible(int from, int to){
+        return from < 7 && to < 7 &&  TYPE_COMPATIBILY[from][to] == 1;
+    }
 }

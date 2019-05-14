@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import semantics.literals.ArrayLiteral;
 import semantics.literals.SimpleLiteral;
-import semantics.table.Type;
+import semantics.identifiers.Type;
 
 /**
  *
@@ -17,37 +17,31 @@ import semantics.table.Type;
  */
 public class Test {
     public static void main(String args[]){
-        ArrayLiteral l = new ArrayLiteral();
-        ArrayLiteral a = new ArrayLiteral();
-        ArrayLiteral b = new ArrayLiteral();
-        ArrayLiteral c = new ArrayLiteral();
+        Type t1 = new Type(0, "int");
+        Type t2 = new Type(1, "intx");
         
-        Type t = new Type(0, "aa");
-        Type t2 = new Type(1, "cc");
-        t2.addDimension(3);
-        t2.addDimension(4);
+        ArrayLiteral array = new ArrayLiteral();
         
-        a.addLiteral(new SimpleLiteral(t, "1"));
-        a.addLiteral(new SimpleLiteral(t, "1"));
-        a.addLiteral(new SimpleLiteral(t, "1"));
-        a.addLiteral(new SimpleLiteral(t, "1"));
-        
-        b.addLiteral(new SimpleLiteral(t, "1"));
-        b.addLiteral(new SimpleLiteral(t, "1"));
-        b.addLiteral(new SimpleLiteral(t, "1"));
-        b.addLiteral(new SimpleLiteral(t, "1"));
+        ArrayLiteral array1 = new ArrayLiteral();
+        array1.addLiteral(new SimpleLiteral(t1, "1"));
+        array1.addLiteral(new SimpleLiteral(t1, "2"));
+        array1.addLiteral(new SimpleLiteral(t1, "3"));
         
         
-        c.addLiteral(new SimpleLiteral(t, "1"));
-        c.addLiteral(new SimpleLiteral(t, "1"));
-        c.addLiteral(new SimpleLiteral(t, "1"));
-        c.addLiteral(new SimpleLiteral(t, "1"));
+        ArrayLiteral array2 = new ArrayLiteral();
+        array2.addLiteral(new SimpleLiteral(t1, "1"));
+        array2.addLiteral(new SimpleLiteral(t1, "2"));
+        array2.addLiteral(new SimpleLiteral(t1, "3"));
+        array2.addLiteral(array1);
         
-        l.addLiteral(a);
-        l.addLiteral(b);
-        l.addLiteral(c);
-        
-        System.out.println(l.matchDimension(t2));
+        array.addLiteral(array1);
+        array.addLiteral(array2);
+
+        Type t = array.getType();
+        System.out.println(array1.getType());
+        System.out.println(array2.getType());
+        System.out.println(array1.getType().equals(array2.getType()));
+        System.out.println(t== null ? null : t.toString());
     }
     
     public static boolean t1(List<Integer> arr){

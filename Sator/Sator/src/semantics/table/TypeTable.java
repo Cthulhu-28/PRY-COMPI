@@ -5,11 +5,12 @@
  */
 package semantics.table;
 
+import semantics.identifiers.Type;
 import utils.HashMap;
 
 /**
  *
- * @author admin
+ * @author 
  */
 public class TypeTable {
     private final HashMap<String,Type> map = new HashMap<String, Type>() {
@@ -20,12 +21,13 @@ public class TypeTable {
             for(int i=0;i<str.length();i++){
                 hash = hash*31 + str.charAt(i);
             }
-            return hash % this.SIZE;
+            return Math.abs(hash) % this.SIZE;
         }
     };
     public TypeTable(){
         for(Type t : TYPES)
             map.put(t.getName(), t);
+        map.put("$error", new Type(-1, "$error"));
     }
     public boolean exists(String key){
         return map.contains(key);

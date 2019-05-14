@@ -1,7 +1,7 @@
 .model small
 .stack 0ffffh 
 .data
-	varC db 04,"hola",27 dup(0)
+	varC db 7,"1234567",23 dup(0)
     varN dw 2
     varN2 dw 4
 

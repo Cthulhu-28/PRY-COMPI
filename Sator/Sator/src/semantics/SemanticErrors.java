@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package semantics.table;
+package semantics;
 
 import parser.*;
 
@@ -13,22 +13,31 @@ import parser.*;
  */
 public class SemanticErrors {
     static final String[] ERRORS = {
-        /* 1  */ "Tipo {token} desconocido",
-        /* 2  */ "El identificador {token} ya se encuentra definido",
+        /* 1  */ "Tipo {token1} desconocido",
+        /* 2  */ "El identificador {token1} ya se encuentra definido",
         /* 3  */ "Tipos incompatibles: {token1} no puede convertirse a {token2}",
-        /* 4  */ "El atributo {token} ya estaba definido",
+        /* 4  */ "El atributo {token1} ya estaba definido",
         /* 5  */ "La dimensión del arreglo debe ser positiva",
-        /* 6  */ "Arreglo inválido: se esparaba un arreglo de tipo {token}"
+        /* 6  */ "Arreglo inválido: se esparaba un arreglo de tipo {token}",
+        /* 7  */ "El parámetro {token1} ya se encuentra definido",
+        /* 8  */ "El identificador {token1} no existe",
+        /* 9  */ "Acceso incorrecto: {token1} no posee el atributo {token2}"
     };
     private static String getError(int code, int row, int col){
         return "SM-"+Math.abs(code)+": "+ERRORS[Math.abs(code)-1] + " en la línea " + row + " columna "+col;
     }
     public static String getError(int code, int row, int col, String tkn1){
         String error = getError(code, row, col);
-        return error.replace("{token}", tkn1);
+        return error.replace("{token1}", tkn1);
     }
     public static String getError(int code, int row, int col, String tkn1, String tkn2){
         String error = getError(code, row, col);
         return error.replace("{token1}", tkn1).replace("{token2}", tkn2);
+    }
+    public static String getError(int code, int row, int col, String... tokens){
+        String error = getError(code, row, col);
+        for(int i=0;i<tokens.length;i++)
+            error = error.replace("{token"+(i+1)+"}", tokens[i]);
+        return error;
     }
 }

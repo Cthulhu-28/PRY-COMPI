@@ -30,4 +30,8 @@ public class Stack<E> {
     public boolean isEmpty(){
         return first==null;
     }
+    public void clear(){
+        while(!isEmpty())
+            pop();
+    }
 }

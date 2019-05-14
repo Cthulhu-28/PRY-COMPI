@@ -5,7 +5,7 @@
  */
 package semantics.literals;
 
-import semantics.table.Type;
+import semantics.identifiers.Type;
 
 /**
  *
@@ -18,5 +18,7 @@ public interface Literal {
     public boolean matchDimension(Type type);
     
     public boolean matchDimension(Type type, int idx);
+    
+    public Type getType();
     
 }

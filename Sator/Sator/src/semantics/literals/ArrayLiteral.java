@@ -7,11 +7,11 @@ package semantics.literals;
 
 import java.util.ArrayList;
 import java.util.List;
-import semantics.table.Type;
+import semantics.identifiers.Type;
 
 /**
  *
- * @author admin
+ * @author Steven Moya
  */
 public class ArrayLiteral implements Literal{
     
@@ -39,5 +39,28 @@ public class ArrayLiteral implements Literal{
             return leafCount()==type.getDimension().get(idx) && literals.stream().allMatch(l->l.matchDimension(type, idx+1));
         }
         return false;
+    }
+    @Override
+    public Type getType(){
+        Type type = new Type(Type.nextCode(), "");
+        Type t=null;
+        boolean valid = true;
+        type.addDimension(leafCount());
+        if(leafCount()>0)
+            t = literals.get(0).getType();
+        for(int i=1;i<literals.size() && t != null;i++){
+            valid = valid && t.equals(literals.get(i).getType());
+        }
+        if(!valid)
+            return null;
+        if(t!=null){
+            if(t.isArray()){
+                for(Integer i : t.getDimension())
+                    type.addDimension(i);
+                type.setBaseType(t.getBaseType());
+            }else
+                type.setBaseType(t);
+        }
+        return type;
     }
 }

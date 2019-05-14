@@ -5,7 +5,7 @@
  */
 package semantics.literals;
 
-import semantics.table.Type;
+import semantics.identifiers.Type;
 
 /**
  *
@@ -20,6 +20,7 @@ public class SimpleLiteral implements Literal{
         this.value = value;
     }
 
+    @Override
     public Type getType() {
         return type;
     }
@@ -48,4 +49,5 @@ public class SimpleLiteral implements Literal{
     public boolean matchDimension(Type type, int idx){
         return idx >= type.getDimension().size();
     }
+   
 }

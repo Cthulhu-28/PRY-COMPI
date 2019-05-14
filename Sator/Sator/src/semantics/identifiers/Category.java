@@ -3,11 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package semantics.table;
+package semantics.identifiers;
 
 /**
- *
- * @author admin
+ * Represents the different categories that an identifier
+ * might have
+ * @see semantics.identifiers.Identifier
+ * @author Steven Moya
  */
 public enum Category {
     VARIABLE("Variable"),

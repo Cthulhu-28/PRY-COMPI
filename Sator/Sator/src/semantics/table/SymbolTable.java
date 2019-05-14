@@ -5,6 +5,11 @@
  */
 package semantics.table;
 
+import semantics.identifiers.Identifier;
+import semantics.identifiers.Parameter;
+import semantics.identifiers.Type;
+import semantics.identifiers.Category;
+import semantics.literals.Literal;
 import utils.*;
 
 public class SymbolTable extends HashMap<String,Identifier>{
@@ -18,18 +23,20 @@ public class SymbolTable extends HashMap<String,Identifier>{
         for(int i=0;i<str.length();i++){
             hash = hash*31 + str.charAt(i);
         }
-        return hash % this.SIZE;
+        return Math.abs(hash) % this.SIZE;
     }
     
     public void insert(String key, Category category){
         Identifier identifier = new Identifier();
         identifier.setCategory(category);
+        identifier.setName(key);
         put(key, identifier);
     }
     public void insert(String key, Category category, Type type){
         Identifier identifier = new Identifier();
         identifier.setCategory(category);
         identifier.setType(type);
+        identifier.setName(key);
         put(key, identifier);
     }
     public void modify(String key, Type type){
@@ -44,7 +51,7 @@ public class SymbolTable extends HashMap<String,Identifier>{
             identifier.setCategory(category);
         }
     }
-    public void modify(String key, String initialValue){
+    public void modify(String key, Literal initialValue){
         Identifier identifier = get(key);
         if(identifier != null){
             identifier.setInitialValue(initialValue);
@@ -55,6 +62,10 @@ public class SymbolTable extends HashMap<String,Identifier>{
         if(identifier != null){
             identifier.getParameters().add(new Parameter(name, type, referenced));
         }
+    }
+    public boolean constainsParameter(String key, String param){
+        Identifier identifier = get(key);
+        return identifier != null && identifier.containsParameter(param);
     }
     
 }
