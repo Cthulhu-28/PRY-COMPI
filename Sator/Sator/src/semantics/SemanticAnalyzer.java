@@ -282,6 +282,9 @@ public class SemanticAnalyzer {
             case Grammar.POP_ID_SIGLA:
                 popIdSilgla();
                 break;
+            case Grammar.POP_TYPE:
+                popType(token);
+                break;
                 
         }
     }
@@ -843,6 +846,15 @@ public class SemanticAnalyzer {
         Type received = parallelStack.pop();
         received = fixType(received, expected);
         if(!Type.isCompatible(received.getCode(), expected.getCode())){
+            semanticError(3, getPosition(token),received.toString(),expected.toString());
+        }
+    }
+    private void popType(Token token){
+        Type received = parallelStack.pop();
+        Type expected = parallelStack.pop();
+        if(!expected.equals(received)){
+            semanticError(3, getPosition(token),received.toString(),expected.toString());
+        }else if(!Type.isCompatible(received.getCode(), expected.getCode())){
             semanticError(3, getPosition(token),received.toString(),expected.toString());
         }
     }
