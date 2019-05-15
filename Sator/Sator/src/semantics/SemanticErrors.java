@@ -31,7 +31,9 @@ public class SemanticErrors {
         /* 16 */ "Se detectó mas de una sentencia detrimentum",
         /* 17 */ "Inicio ilegal de expresión: la sentencia neco solo debe usarse en: aeger, panis, tempus, itero, decusis y procedimientos",
         /* 18 */ "Inicio ilegal de expresión: la sentencia pergo solo debe usarse en: panis, tempus, itero y decusis",
-        /* 19 */ "Inicio ilegal de expresión: la sentencia revello solo debe usarse en: probare"
+        /* 19 */ "Inicio ilegal de expresión: la sentencia revello solo debe usarse en: probare",
+        /* 20 */ "Acceso ilegal: el arreglo {token1} posee {token2} niveles de indexación y se recibió {token3}",
+        /* 21 */ "Uso incorrecto: el identificador {token1} no es un arreglo"
     };
     private static String getError(int code, int row, int col){
         return "SM-"+Math.abs(code)+": "+ERRORS[Math.abs(code)-1] + ", en la línea " + row + " columna "+col;

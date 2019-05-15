@@ -50,6 +50,7 @@ public class SemanticAnalyzer {
     private final Stack<Type> parallelStack = new Stack<>();
     private final Stack<Identifier> invocations = new Stack<>();
     private final Stack<List<Type>> parameterOrder = new Stack<>();
+    private final Stack<Integer> accessCount = new Stack<>();
     
     private boolean methodBody = false;
     
@@ -160,6 +161,12 @@ public class SemanticAnalyzer {
                 break;
             case Grammar.CHECK_PARAM:
                 checkParameters(token);
+                break;
+            case Grammar.ADD_ACCESS:
+                addCount();
+                break;
+            case Grammar.CHECK_ARRAY:
+                checkArray(token);
                 break;
             case Grammar.POP_PARAM:
                 popParameter(token);
@@ -598,6 +605,9 @@ public class SemanticAnalyzer {
         }
         if(globalTable.contains(token.getLexeme())){
             invocations.push(globalTable.get(token.getLexeme()));
+            if(invocations.peek().getType().isArray()){
+                accessCount.push(0);
+            }
             parameterOrder.push(new ArrayList<>());
             positions.push(token);
         }else{
@@ -612,6 +622,8 @@ public class SemanticAnalyzer {
             if(identifier.getCategory()==Category.PROCEDURE){
                 //semanticError(12, getPosition(token),identifier.getName());
                 parallelStack.push(new Type(-2, identifier.getName()));
+            }else if(identifier.getType().isArray()){
+                parallelStack.push(identifier.getType().getBaseType());
             }else
                 parallelStack.push(identifier.getType());
         }else
@@ -657,6 +669,19 @@ public class SemanticAnalyzer {
                parameterOrder.peek().add(parallelStack.pop());
             }else
                 parallelStack.pop();
+        }
+    }
+    private void addCount(){
+        if(!invocations.isEmpty() && invocations.peek().getType().isArray())
+            accessCount.editTop(accessCount.peek()+1);
+    }
+    private void checkArray(Token token){
+        if(!invocations.isEmpty() && invocations.peek().getType().isArray()){
+            Integer count = accessCount.pop();
+            int array = invocations.peek().getType() == null ? 0 : invocations.peek().getType().getDimension().size();
+            if(count != array){
+                semanticError(20, getPosition(token), invocations.peek().getName(), array+"", count+"");
+            }
         }
     }
     private void pushIdSigla(Token token){
@@ -716,6 +741,7 @@ public class SemanticAnalyzer {
             }
         }
     }
+    
     private void readLiteralType(Token token){
         if(Type.typeName(token.getCode()) != null)
             currentType = typeTable.get(Type.typeName(token.getCode()));

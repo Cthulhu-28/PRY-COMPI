@@ -81,44 +81,46 @@ public abstract class Grammar
 	public static final int ARR_LIT = 261;
 	public static final int ARR_LIT_END = 262;
 	public static final int ATTR_NEXT = 263;
-	public static final int ID_STACK = 264;
-	public static final int ID_STACK_PUT = 265;
-	public static final int LIT_STACK = 266;
-	public static final int LIT_STACK_PUT = 267;
-	public static final int CHECK_PROC = 268;
-	public static final int CHECK_PARAM = 269;
-	public static final int POP_PARAM = 270;
-	public static final int SAVE_POS = 271;
-	public static final int POP_NUMERUS = 272;
-	public static final int PUSH_NUMERUS = 273;
-	public static final int POP_DUALIS = 274;
-	public static final int PUSH_DUALIS = 275;
-	public static final int POP_IMAGO = 276;
-	public static final int PUSH_IMAGO = 277;
-	public static final int POP_CATENA = 278;
-	public static final int POP_FRACTIO = 279;
-	public static final int POP_GREGORIUS = 280;
-	public static final int PUSH_GREGORIUS = 281;
-	public static final int POP_LIBER = 282;
-	public static final int PUSH_CATENA = 283;
-	public static final int PUSH_LIBER = 284;
-	public static final int PUSH_FRACTIO = 285;
-	public static final int LOOP_FLAGS_ON = 286;
-	public static final int LOOP_FLAGS_OFF = 287;
-	public static final int CHECK_FOR_ID = 288;
-	public static final int POP_ARRAY = 289;
-	public static final int CHECK_BREAK = 290;
-	public static final int CHECK_CONTINUE = 291;
-	public static final int CHECK_RETURN = 292;
-	public static final int POP_RETURN = 293;
-	public static final int CHECK_REVELLO = 294;
-	public static final int PUSH_DEFAULT = 295;
-	public static final int POP_DEFAULT = 296;
-	public static final int CHECK_DEFAULT = 297;
-	public static final int PUSH_ID_SIGLA = 298;
-	public static final int POP_ID_SIGLA = 299;
-	public static final int TRY_FLAGS_ON = 300;
-	public static final int TRY_GLAGS_OFF = 301;
+	public static final int POP_NUMERUS = 264;
+	public static final int ADD_ACCESS = 265;
+	public static final int ID_STACK = 266;
+	public static final int ID_STACK_PUT = 267;
+	public static final int LIT_STACK = 268;
+	public static final int LIT_STACK_PUT = 269;
+	public static final int CHECK_ARRAY = 270;
+	public static final int CHECK_PROC = 271;
+	public static final int CHECK_PARAM = 272;
+	public static final int POP_PARAM = 273;
+	public static final int SAVE_POS = 274;
+	public static final int PUSH_NUMERUS = 275;
+	public static final int POP_DUALIS = 276;
+	public static final int PUSH_DUALIS = 277;
+	public static final int POP_IMAGO = 278;
+	public static final int PUSH_IMAGO = 279;
+	public static final int POP_CATENA = 280;
+	public static final int POP_FRACTIO = 281;
+	public static final int POP_GREGORIUS = 282;
+	public static final int PUSH_GREGORIUS = 283;
+	public static final int POP_LIBER = 284;
+	public static final int PUSH_CATENA = 285;
+	public static final int PUSH_LIBER = 286;
+	public static final int PUSH_FRACTIO = 287;
+	public static final int LOOP_FLAGS_ON = 288;
+	public static final int LOOP_FLAGS_OFF = 289;
+	public static final int CHECK_FOR_ID = 290;
+	public static final int POP_ARRAY = 291;
+	public static final int CHECK_BREAK = 292;
+	public static final int CHECK_CONTINUE = 293;
+	public static final int CHECK_RETURN = 294;
+	public static final int POP_RETURN = 295;
+	public static final int CHECK_REVELLO = 296;
+	public static final int PUSH_DEFAULT = 297;
+	public static final int POP_DEFAULT = 298;
+	public static final int CHECK_DEFAULT = 299;
+	public static final int PUSH_ID_SIGLA = 300;
+	public static final int POP_ID_SIGLA = 301;
+	public static final int TRY_FLAGS_ON = 302;
+	public static final int TRY_GLAGS_OFF = 303;;
         
         public static final int LIST_STATEMENT = 217;
         public static final int IMPONO_EXPRESSION = 210;
@@ -160,7 +162,7 @@ public abstract class Grammar
 	 */
 	public static final boolean isSemanticSymbol(int numSimbolo)
 	{
-            return ((231 <= numSimbolo) && (numSimbolo <= 301));
+            return ((231 <= numSimbolo) && (numSimbolo <= 303));
 	}
 
 	/**

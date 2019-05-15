@@ -18,6 +18,11 @@ public class Stack<E> {
     public E peek(){
         return first == null ? null : first.getValue();
     }
+    public void editTop(E value){
+        if(first != null){
+            first.setValue(value);
+        }
+    }
     public E pop(){
         if(first!=null){
             Node<E> node = first;
