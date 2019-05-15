@@ -10,6 +10,7 @@ import java.util.List;
 import semantics.literals.ArrayLiteral;
 import semantics.literals.SimpleLiteral;
 import semantics.identifiers.Type;
+import semantics.literals.RecordLiteral;
 
 /**
  *
@@ -17,31 +18,49 @@ import semantics.identifiers.Type;
  */
 public class Test {
     public static void main(String args[]){
+        
+        
+        
+        
+        
         Type t1 = new Type(0, "int");
-        Type t2 = new Type(1, "intx");
+        Type t2 = new Type(1, "bool");
+        RecordLiteral record = new RecordLiteral();
+        RecordLiteral record1 = new RecordLiteral();
         
-        ArrayLiteral array = new ArrayLiteral();
+        record.addLiteral(new SimpleLiteral(t1, "1"));
+        record.addLiteral(new SimpleLiteral(t2, "false"));
         
-        ArrayLiteral array1 = new ArrayLiteral();
-        array1.addLiteral(new SimpleLiteral(t1, "1"));
-        array1.addLiteral(new SimpleLiteral(t1, "2"));
-        array1.addLiteral(new SimpleLiteral(t1, "3"));
+        record1.addLiteral(new SimpleLiteral(t1, "1"));
+        record1.addLiteral(new SimpleLiteral(t2, "false"));
+        record.addLiteral(record1);
+        
+        Type t3 = new Type(677, "JAJA");
+        Type t4 = new Type(45, "yu");
+        t4.setBaseType(t1);
+        Type t5 = new Type(425, "yud");
+        t5.setBaseType(t2);
+        t3.addAtrribute(t4);
+        t3.addAtrribute(t5);
         
         
-        ArrayLiteral array2 = new ArrayLiteral();
-        array2.addLiteral(new SimpleLiteral(t1, "1"));
-        array2.addLiteral(new SimpleLiteral(t1, "2"));
-        array2.addLiteral(new SimpleLiteral(t1, "3"));
-        array2.addLiteral(array1);
+        Type t6 = new Type(6277, "JAwJA");
+        Type t7 = new Type(4511, "yuwwd");
+        t7.setBaseType(t1);
+        Type t8 = new Type(42895, "yu2d");
+        t8.setBaseType(t2);
+        t6.addAtrribute(t7);
+        t6.addAtrribute(t8);
         
-        array.addLiteral(array1);
-        array.addLiteral(array2);
-
-        Type t = array.getType();
-        System.out.println(array1.getType());
-        System.out.println(array2.getType());
-        System.out.println(array1.getType().equals(array2.getType()));
-        System.out.println(t== null ? null : t.toString());
+        Type t9 = new Type(6433, "sdfw");
+        t9.setBaseType(t6);
+        t3.addAtrribute(t9);
+        
+        System.out.println(t3);
+        
+        System.out.println(record.getType());
+        System.out.println(record.getType().equals(t3));
+        System.out.println(record.match(t3));
     }
     
     public static boolean t1(List<Integer> arr){

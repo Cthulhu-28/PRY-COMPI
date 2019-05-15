@@ -26,10 +26,15 @@ public class SemanticErrors {
         /* 11 */ "Uso incorrecto: la rutina no se puede llamar con los tipos dados. Se recibió {token1} y se esperaba {token2}",
         /* 12 */ "{token1} no posee valor de retorno",
         /* 13 */ "La definición de la rutina {token1} no coincide con su protoipo",
-        /* 14 */ "Inicio ilegal de expresión: la sentencia reditus solo usarse dentro de funciones"
+        /* 14 */ "Inicio ilegal de expresión: la sentencia reditus solo puede usarse dentro de funciones",
+        /* 15 */ "La función {token1} debe tener al menos una sentencia de retorno",
+        /* 16 */ "Se detectó mas de una sentencia detrimentum",
+        /* 17 */ "Inicio ilegal de expresión: la sentencia neco solo debe usarse en: aeger, panis, tempus, itero, decusis y procedimientos",
+        /* 18 */ "Inicio ilegal de expresión: la sentencia pergo solo debe usarse en: panis, tempus, itero y decusis",
+        /* 19 */ "Inicio ilegal de expresión: la sentencia revello solo debe usarse en: probare"
     };
     private static String getError(int code, int row, int col){
-        return "SM-"+Math.abs(code)+": "+ERRORS[Math.abs(code)-1] + " en la línea " + row + " columna "+col;
+        return "SM-"+Math.abs(code)+": "+ERRORS[Math.abs(code)-1] + ", en la línea " + row + " columna "+col;
     }
     public static String getError(int code, int row, int col, String tkn1){
         String error = getError(code, row, col);

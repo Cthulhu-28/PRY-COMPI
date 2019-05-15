@@ -2268,6 +2268,7 @@ public enum States implements State{
 				case "\n": return FinalStates.q93;
 				case "\t": return FinalStates.q93;
 				case "\r": return FinalStates.q93;
+                                case "\0": return FinalStates.q93;
 				default: 
 					if (input.charAt(0)>96 && input.charAt(0)<123)
 						return States.q601;

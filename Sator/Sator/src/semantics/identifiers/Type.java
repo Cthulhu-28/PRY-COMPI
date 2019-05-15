@@ -83,6 +83,8 @@ public class Type {
     }
     public Type getBaseTypeDepth(){
         Type t = getBaseType();
+        if(t==null)
+            return this;
         while(t!=null && t.code>=7){
             t = t.getBaseType();
         }
@@ -194,7 +196,7 @@ public class Type {
             if(other.typeOrder==null)
                 return false;
             if(this.typeOrder.equals(other.typeOrder))
-                return this.baseType.equals(other.baseType);
+                return true;
         }else{
             if(other.typeOrder != null)
                 return false;
@@ -208,6 +210,8 @@ public class Type {
             if(other.dimension != null)
                 return false;
         }
+        if(baseType != null && other.baseType != null && baseType.equals(other.baseType))
+            return true;
         return this.equals(other.baseType) || other.equals(this.baseType);
     }
     
@@ -250,4 +254,9 @@ public class Type {
     public static boolean isCompatible(int from, int to){
         return from < 7 && to < 7 &&  TYPE_COMPATIBILY[from][to] == 1;
     }
+
+    public List<Type> getTypeOrder() {
+        return typeOrder;
+    }
+    
 }

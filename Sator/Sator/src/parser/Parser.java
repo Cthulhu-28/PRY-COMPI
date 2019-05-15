@@ -85,6 +85,8 @@ public class Parser {
         
         if(!stack.isEmpty()){
             int rule = stack.pop();
+            if((rule-initial)<0 || CT.getCode()<0)
+                System.out.println("");
             if(Grammar.getParsingTable(rule-initial, Grammar.END_MARKER)<0)
                 stack.push(rule);
             if(!stack.isEmpty()){
