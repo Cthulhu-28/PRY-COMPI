@@ -105,23 +105,24 @@ public abstract class Grammar
 	public static final int PUSH_CATENA = 285;
 	public static final int PUSH_LIBER = 286;
 	public static final int PUSH_FRACTIO = 287;
-	public static final int POP_TYPE = 288;
-	public static final int LOOP_FLAGS_ON = 289;
-	public static final int LOOP_FLAGS_OFF = 290;
-	public static final int CHECK_FOR_ID = 291;
-	public static final int POP_ARRAY = 292;
-	public static final int CHECK_BREAK = 293;
-	public static final int CHECK_CONTINUE = 294;
-	public static final int CHECK_RETURN = 295;
-	public static final int POP_RETURN = 296;
-	public static final int CHECK_REVELLO = 297;
-	public static final int PUSH_DEFAULT = 298;
-	public static final int POP_DEFAULT = 299;
-	public static final int CHECK_DEFAULT = 300;
-	public static final int PUSH_ID_SIGLA = 301;
-	public static final int POP_ID_SIGLA = 302;
-	public static final int TRY_FLAGS_ON = 303;
-	public static final int TRY_GLAGS_OFF = 304;
+	public static final int CHECK_IS_MEMORY = 288;
+	public static final int POP_TYPE = 289;
+	public static final int LOOP_FLAGS_ON = 290;
+	public static final int LOOP_FLAGS_OFF = 291;
+	public static final int CHECK_FOR_ID = 292;
+	public static final int POP_ARRAY = 293;
+	public static final int CHECK_BREAK = 294;
+	public static final int CHECK_CONTINUE = 295;
+	public static final int CHECK_RETURN = 296;
+	public static final int POP_RETURN = 297;
+	public static final int CHECK_REVELLO = 298;
+	public static final int PUSH_DEFAULT = 299;
+	public static final int POP_DEFAULT = 300;
+	public static final int CHECK_DEFAULT = 301;
+	public static final int PUSH_ID_SIGLA = 302;
+	public static final int POP_ID_SIGLA = 303;
+	public static final int TRY_FLAGS_ON = 304;
+	public static final int TRY_GLAGS_OFF = 305;
         
         public static final int LIST_STATEMENT = 217;
         public static final int IMPONO_EXPRESSION = 210;
@@ -163,7 +164,7 @@ public abstract class Grammar
 	 */
 	public static final boolean isSemanticSymbol(int numSimbolo)
 	{
-            return ((231 <= numSimbolo) && (numSimbolo <= 304));
+            return ((231 <= numSimbolo) && (numSimbolo <= 305));
 	}
 
 	/**

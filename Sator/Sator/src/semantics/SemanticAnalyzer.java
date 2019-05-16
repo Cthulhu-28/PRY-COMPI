@@ -64,8 +64,12 @@ public class SemanticAnalyzer {
     private final Stack<Boolean> revelloStack = new Stack<>();
     
     private Stack<Token> positions = new Stack<>();
+    //private final Stack<Identifier> last = new Stack<>();
+    private Identifier last = null;
     
     private boolean isAttribute = false;
+    private boolean useOperator=false;
+    
     
     public void analyze(int symbol, Token token){
         switch(symbol){
@@ -234,6 +238,12 @@ public class SemanticAnalyzer {
             case Grammar.FUNC_FLAGS_OFF:
                 endFunction(token);
                 break;
+            case Grammar.PROC_FLAGS_ON:
+                beginProcedure(token);
+                break;
+            case Grammar.PROC_FLAGS_OFF:
+                endProcedure(token);
+                break;
             case Grammar.CHECK_RETURN:
                 checkReturn(token);
                 break;
@@ -285,8 +295,48 @@ public class SemanticAnalyzer {
             case Grammar.POP_TYPE:
                 popType(token);
                 break;
+            case Grammar.CHECK_IS_MEMORY:
+                checkIsMemory(token);
+                break;
                 
         }
+    }
+    private void checkIsMemory(Token token){
+        if(useOperator){
+            semanticError(22, token);
+        }
+        else if(last == null){
+            semanticError(22, token);
+        }else if(last.getCategory()==Category.CONSTANT){
+            semanticError(23, token);
+        }else if(last.getCategory()!=Category.VARIABLE){
+            semanticError(22, token);
+        }
+        useOperator = false;
+        last = null;
+    }
+    private boolean contains(String token){
+        if(methodBody){
+            if(localTable.contains(token))
+                return true;
+            else if(currentMethod.containsParameter(token))
+                return true;
+        }
+        return globalTable.contains(token) || typeTable.exists(token);
+    }
+    private boolean containsSymbol(String token){
+        if(methodBody){
+            if(localTable.contains(token))
+                return true;
+            else if(currentMethod.containsParameter(token))
+                return true;
+        }
+        return globalTable.contains(token);
+    }
+    private SymbolTable selectTable(){
+        if(methodBody)
+            return localTable;
+        return globalTable;
     }
     private void savePosition(Token token){
         if(positions.isEmpty())
@@ -303,6 +353,7 @@ public class SemanticAnalyzer {
         currentType = null;
         isAttribute = false;
         isReferenced = false;
+        useOperator = false;
     }
     private void saveConstantType(Token token){
         currentType = typeTable.get(token.getLexeme());
@@ -376,11 +427,12 @@ public class SemanticAnalyzer {
         }
     }
     private void defineVariable(Token token){
-        if(globalTable.contains(token.getLexeme())){
+        //if(globalTable.contains(token.getLexeme())){
+        if(contains(token.getLexeme())){
             semanticError(2, token);
         }else{
             lastIdentifier = token.getLexeme();
-            globalTable.insert(token.getLexeme(), Category.VARIABLE,currentType);
+            selectTable().insert(token.getLexeme(), Category.VARIABLE,currentType);
             
         }
     }
@@ -399,7 +451,7 @@ public class SemanticAnalyzer {
             }else{
                 if(typeMatchLiteral(currentType, token)){
                     Literal literal = new SimpleLiteral(currentType, token.getLexeme());
-                    globalTable.modify(lastIdentifier,literal);
+                    selectTable().modify(lastIdentifier,literal);
                 }
                 else
                     semanticErrorType(3, token);
@@ -483,12 +535,13 @@ public class SemanticAnalyzer {
     }
     private void saveArrayVariable(Token token){
         if(currentType != null){
-            if(globalTable.contains(token.getLexeme()) || typeTable.exists(token.getLexeme()))
+            //if(globalTable.contains(token.getLexeme()) || typeTable.exists(token.getLexeme()))
+            if(contains(token.getLexeme()))
                 semanticError(2, token);
             else{
                 typeTable.put(currentType.getName(), currentType);
                 lastIdentifier = token.getLexeme();
-                globalTable.insert(lastIdentifier, Category.VARIABLE, currentType);
+                selectTable().insert(lastIdentifier, Category.VARIABLE, currentType);
             }
         }
     }
@@ -554,7 +607,7 @@ public class SemanticAnalyzer {
                 currentMethod.setName(token.getLexeme());
             }else{
                 lastIdentifier = token.getLexeme();
-                globalTable.insert(token.getLexeme(), category);        
+                globalTable.insert(token.getLexeme(), category);  
             }
         }
         isReferenced = false;
@@ -587,7 +640,7 @@ public class SemanticAnalyzer {
     private void beginFunction(Token token){
         canUseReturn = true;
         if(!globalTable.get(currentMethod.getName()).equals(currentMethod)){
-            semanticError(13, getPosition(token), currentIdentifier.getName());
+            semanticError(13, getPosition(token), currentMethod.getName());
         }
         currentMethod = globalTable.get(currentMethod.getName());
     }
@@ -595,9 +648,25 @@ public class SemanticAnalyzer {
         if(!returnFlag){
             semanticError(15, getPosition(token), currentIdentifier.getName());
         }
+        methodBody = false;
         currentMethod = null;
         returnFlag = false;
         canUseReturn = false;
+        localTable = new SymbolTable();
+        System.gc();
+    }
+    private void beginProcedure(Token token){
+        breakStack.push(true);
+        if(!globalTable.get(currentMethod.getName()).equals(currentMethod)){
+            semanticError(13, getPosition(token), currentMethod.getName());
+        }
+        currentMethod = globalTable.get(currentMethod.getName());
+    }
+    private void endProcedure(Token token){
+        methodBody = false;
+        currentMethod = null;
+        if(!breakStack.isEmpty())
+            breakStack.pop();
         localTable = new SymbolTable();
         System.gc();
     }
@@ -606,8 +675,26 @@ public class SemanticAnalyzer {
         if(currentType!=null){
             return;
         }
+        
         if(globalTable.contains(token.getLexeme())){
             invocations.push(globalTable.get(token.getLexeme()));
+            //last.push(invocations.peek());
+            if(invocations.peek().getType() !=null && invocations.peek().getType().isArray()){
+                accessCount.push(0);
+            }
+            parameterOrder.push(new ArrayList<>());
+            positions.push(token);
+        }else if(methodBody && localTable.contains(token.getLexeme())){
+            invocations.push(localTable.get(token.getLexeme()));
+            //last.push(invocations.peek());
+            if(invocations.peek().getType() !=null && invocations.peek().getType().isArray()){
+                accessCount.push(0);
+            }
+            parameterOrder.push(new ArrayList<>());
+            positions.push(token);
+        }else if (methodBody && currentIdentifier != null && currentIdentifier.containsParameter(token.getLexeme())){
+            invocations.push(currentIdentifier.getParameter(token.getLexeme()));
+            //last.push(invocations.peek());
             if(invocations.peek().getType().isArray()){
                 accessCount.push(0);
             }
@@ -622,9 +709,11 @@ public class SemanticAnalyzer {
            parallelStack.push(currentType);
         }else if(!invocations.isEmpty() && !isAttribute){
             Identifier identifier = invocations.pop();
+            if(invocations.isEmpty())
+                last = identifier;
             if(identifier.getCategory()==Category.PROCEDURE){
                 //semanticError(12, getPosition(token),identifier.getName());
-                parallelStack.push(new Type(-2, identifier.getName()));
+                parallelStack.push(new Type(-2, "método sin retorno"));
             }else if(identifier.getType().isArray()){
                 parallelStack.push(identifier.getType().getBaseType());
             }else
@@ -852,10 +941,16 @@ public class SemanticAnalyzer {
     private void popType(Token token){
         Type received = parallelStack.pop();
         Type expected = parallelStack.pop();
+        if(expected.getCode()==-1 || received.getCode()==-1)
+            return;
+        if(expected.getCode()==-1)
+            expected=received;
+        if(received.getCode()==-1)
+            received=expected;
         if(!expected.equals(received)){
-            semanticError(3, getPosition(token),received.toString(),expected.toString());
-        }else if(!Type.isCompatible(received.getCode(), expected.getCode())){
-            semanticError(3, getPosition(token),received.toString(),expected.toString());
+            //semanticError(3, getPosition(token),received.toString(),expected.toString());
+            if(!Type.isCompatible(received.getCode(), expected.getCode()))
+                semanticError(3, getPosition(token),received.toString(),expected.toString());
         }
     }
     private void popArray(Token token){
@@ -880,6 +975,18 @@ public class SemanticAnalyzer {
             if(!Type.isCompatible(received.getBaseTypeDepth().getCode(), expected.getCode())){
                 semanticError(3, token,received.toString(),expected.toString());
             }
+        }else if(methodBody && localTable.contains(token.getLexeme())){
+            Type expected = typeTable.get("numerus");
+            Type received = localTable.get(token.getLexeme()).getType().getBaseTypeDepth();
+            if(!Type.isCompatible(received.getBaseTypeDepth().getCode(), expected.getCode())){
+                semanticError(3, token,received.toString(),expected.toString());
+            }
+        }else if(methodBody && currentMethod != null && currentMethod.containsParameter(token.getLexeme())){
+            Type expected = typeTable.get("numerus");
+            Type received = currentMethod.getParameter(token.getLexeme()).getType().getBaseTypeDepth();
+            if(!Type.isCompatible(received.getBaseTypeDepth().getCode(), expected.getCode())){
+                semanticError(3, token,received.toString(),expected.toString());
+            }
         }else
             semanticError(8, token);
     }
@@ -897,26 +1004,32 @@ public class SemanticAnalyzer {
     private void tryFlagsOff(Token token){
         revelloStack.pop();
     }
-    
     private void pushNumerus(){
+        useOperator = true;
         parallelStack.push(typeTable.get("numerus"));
     }
     private void pushImago(){
+        useOperator = true;
         parallelStack.push(typeTable.get("imago"));
     }
     private void pushCatena(){
+        useOperator = true;
         parallelStack.push(typeTable.get("catena"));
     }
     private void pushFractio(){
+        useOperator = true;
         parallelStack.push(typeTable.get("fractio"));
     }
     private void pushLiber(){
+        useOperator = true;
         parallelStack.push(typeTable.get("liber"));
     }
     private void pushDualis(){
+        useOperator = true;
         parallelStack.push(typeTable.get("dualis"));
     }
     private void pushGregorius(){
+        useOperator = true;
         parallelStack.push(typeTable.get("gregorius"));
     }
     private Token getPosition(Token token){

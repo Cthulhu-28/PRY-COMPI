@@ -252,7 +252,7 @@ public class Type {
                                                        /*G*/{1,1,1,1,0,1,1},
                                                        };
     public static boolean isCompatible(int from, int to){
-        return from < 7 && to < 7 &&  TYPE_COMPATIBILY[from][to] == 1;
+        return from >=0 && to >=0 && from < 7 && to < 7 &&  TYPE_COMPATIBILY[from][to] == 1;
     }
 
     public List<Type> getTypeOrder() {

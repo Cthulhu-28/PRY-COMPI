@@ -33,7 +33,10 @@ public class SemanticErrors {
         /* 18 */ "Inicio ilegal de expresión: la sentencia pergo solo debe usarse en: panis, tempus, itero y decusis",
         /* 19 */ "Inicio ilegal de expresión: la sentencia revello solo debe usarse en: probare",
         /* 20 */ "Acceso ilegal: el arreglo {token1} posee {token2} niveles de indexación y se recibió {token3}",
-        /* 21 */ "Uso incorrecto: el identificador {token1} no es un arreglo"
+        /* 21 */ "Uso incorrecto: el identificador {token1} no es un arreglo",
+        /* 22 */ "El lado izquierdo del operador de asignación requiere un referencia a memoria",
+        /* 23 */ "No se puede asignar un valor a una constante",
+        /* 24 */ "Sin retorno. Los procedimientos no retornan",
     };
     private static String getError(int code, int row, int col){
         return "SM-"+Math.abs(code)+": "+ERRORS[Math.abs(code)-1] + ", en la línea " + row + " columna "+col;

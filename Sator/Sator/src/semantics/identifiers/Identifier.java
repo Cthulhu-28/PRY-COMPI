@@ -72,7 +72,18 @@ public class Identifier {
                 return true;
         return false;
     }
-
+    public Identifier getParameter(String name){
+        for(Parameter p : parameters){
+            if(p.getName().equals(name)){
+                Identifier identifier = new Identifier();
+                identifier.setName(name);
+                identifier.setCategory(Category.VARIABLE);
+                identifier.setType(p.getType());
+                return identifier;
+            }
+        }
+        return null;
+    }
     @Override
     public String toString() {
         if(isMethod()){
@@ -105,6 +116,8 @@ public class Identifier {
             return false;
         }
         final Identifier other = (Identifier) obj;
+        if(category==Category.PROCEDURE && other.category == Category.PROCEDURE)
+            return name.equals(other.name) && category.equals(other.category) && parameters.equals(other.parameters);
         return type != null && other.type != null && name.equals(other.name) && category.equals(other.category) && type.equals(other.type) && parameters.equals(other.parameters);
     }
     
