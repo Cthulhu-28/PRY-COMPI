@@ -1,5 +1,8 @@
 package utils;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Stack<E> {
     private Node<E> first;
     
@@ -38,5 +41,14 @@ public class Stack<E> {
     public void clear(){
         while(!isEmpty())
             pop();
+    }
+    public List<E> toList(){
+        List<E> list = new ArrayList<>();
+        Node<E> node = first;
+        while(node != null){
+            list.add(node.getValue());
+            node = node.getNext();
+        }
+        return list;
     }
 }

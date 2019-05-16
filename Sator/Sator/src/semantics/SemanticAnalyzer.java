@@ -707,6 +707,8 @@ public class SemanticAnalyzer {
     private void putIdentifierOnStack(Token token){
         if(currentType != null){
            parallelStack.push(currentType);
+           last = new Identifier();
+           last.setCategory(Category.VARIABLE);
         }else if(!invocations.isEmpty() && !isAttribute){
             Identifier identifier = invocations.pop();
             if(invocations.isEmpty())
@@ -797,7 +799,13 @@ public class SemanticAnalyzer {
     }
     private Type siglaFind(Token token){
         if(!siglaTypes.isEmpty()){
-            return siglaTypes.peek().getAttribute(token.getLexeme());
+            for(Type t : siglaTypes.toList()){
+                Type type = t.getAttribute(token.getLexeme());
+                if(type!=null)
+                    return type;
+            }
+            return null;
+            //return siglaTypes.peek().getAttribute(token.getLexeme());
         }
         return null;
     }

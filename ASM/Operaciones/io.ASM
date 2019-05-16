@@ -1,7 +1,8 @@
 code segment
-	public legoNumerus,scriboNumerus,legoGregorius,scriboGregorius,legoDualis,scriboDualis,legoFractio,scriboFractio
+	public legoNumerus,scriboNumerus,legoGregorius,scriboGregorius,legoDualis,scriboDualis,legoFractio,scriboFractio,legoImago,scriboImago
 	assume cs:code
 	intExpected db 13,10,"Exceptis: numerus expectata",10,13,"$"
+	imagoExpected db 13,10,"Exceptis: imago expectata",10,13,"$"
 	gregoriusExpected db 13,10,"Exceptis: gregorius expectata",10,13,"$"
 	boolExpected db 13,10,"Exceptis: dualis expectata",10,13,"$"
 	fractioExpected db 13,10,"Exceptis: fractio expectata",10,13,"$"
@@ -915,5 +916,51 @@ code segment
 		retf 2*2
 		
 	scriboFractio endp
+
+	legoImago proc far
+	locals @@
+		mov bp,sp
+		add bp,2
+		xor cx,cx
+	@@cicle:
+		mov ah,08h
+		int 21h
+		cmp al,13
+	je @@endCicle ;keeps reading the string until the "enter" key
+		xor ah,ah
+		push ax
+		inc cx
+		mov dl,al
+		mov ah,02h
+		int 21h
+	jmp @@cicle	
+	@@endCicle:
+		cmp cx,1
+		ja @@error
+		pop ax
+		cmp ax,7fh
+		ja @@error
+		mov [bp+2],ax
+		retf
+	@@error:
+		lea dx,imagoExpected
+		mov ah,09h
+		int 21h
+		mov ax, 4c4dh
+		int 21h
+	legoImago endp
+
+	scriboImago proc far
+	locals @@
+		mov bp,sp
+		add bp,2
+		mov ax, [bp+2]
+		mov ah, 02h
+		mov dl, al
+		int 21h
+
+		retf 2*1 ;Cleans the parameters
+	scriboImago endp
+
 code ends
 end
