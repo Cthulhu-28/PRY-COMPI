@@ -94,8 +94,8 @@ public class Parser {
                 error(24);
             }
         }
-        if(noErrors)
-            System.out.println("Compilación exitosa");
+//        if(noErrors)
+//            System.out.println("Compilación exitosa");
     }
     private void nextToken() throws Exception{
         CT = scanner.nextToken();

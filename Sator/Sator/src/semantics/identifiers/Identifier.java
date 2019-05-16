@@ -3,6 +3,7 @@ package semantics.identifiers;
 import java.util.ArrayList;
 import java.util.List;
 import semantics.literals.Literal;
+import semantics.table.TypeTable;
 
 /**
  *
@@ -121,5 +122,94 @@ public class Identifier {
         return type != null && other.type != null && name.equals(other.name) && category.equals(other.category) && type.equals(other.type) && parameters.equals(other.parameters);
     }
     
+    public static List<Identifier> IO (){
+        List<Identifier> list = new ArrayList<>();
+        
+        Identifier identifier = new Identifier();
+        identifier.setName("scribonumerus");
+        identifier.setCategory(Category.PROCEDURE);
+        identifier.getParameters().add(new Parameter("value", TypeTable.TYPES[0]));
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setName("scriboimago");
+        identifier.setCategory(Category.PROCEDURE);
+        identifier.getParameters().add(new Parameter("value", TypeTable.TYPES[1]));
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setName("scribofractio");
+        identifier.setCategory(Category.PROCEDURE);
+        identifier.getParameters().add(new Parameter("value", TypeTable.TYPES[2]));
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setName("scribocatena");
+        identifier.setCategory(Category.PROCEDURE);
+        identifier.getParameters().add(new Parameter("value", TypeTable.TYPES[3]));
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setName("scriboliber");
+        identifier.setCategory(Category.PROCEDURE);
+        identifier.getParameters().add(new Parameter("value", TypeTable.TYPES[4]));
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setName("scribodualis");
+        identifier.setCategory(Category.PROCEDURE);
+        identifier.getParameters().add(new Parameter("value", TypeTable.TYPES[5]));
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setName("scribogregorius");
+        identifier.setCategory(Category.PROCEDURE);
+        identifier.getParameters().add(new Parameter("value", TypeTable.TYPES[6]));
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setCategory(Category.FUNCTION);
+        identifier.setName("legonumerus");
+        identifier.setType(TypeTable.TYPES[0]);
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setCategory(Category.FUNCTION);
+        identifier.setName("legoimago");
+        identifier.setType(TypeTable.TYPES[1]);
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setCategory(Category.FUNCTION);
+        identifier.setName("legofractio");
+        identifier.setType(TypeTable.TYPES[2]);
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setCategory(Category.FUNCTION);
+        identifier.setName("legocatena");
+        identifier.setType(TypeTable.TYPES[3]);
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setCategory(Category.FUNCTION);
+        identifier.setName("legoliber");
+        identifier.setType(TypeTable.TYPES[4]);
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setCategory(Category.FUNCTION);
+        identifier.setName("legodualis");
+        identifier.setType(TypeTable.TYPES[5]);
+        list.add(identifier);
+        
+        identifier = new Identifier();
+        identifier.setCategory(Category.FUNCTION);
+        identifier.setName("legogregorius");
+        identifier.setType(TypeTable.TYPES[6]);
+        list.add(identifier);
+        
+        return list;
+    }
     
 }

@@ -18,11 +18,16 @@ public class SymbolTable extends HashMap<String,Identifier>{
     
     @Override
     public int hashCode(String key) {
-        int hash = 31;
+        int hash =0;
         String str = key.toLowerCase();
         for(int i=0;i<str.length();i++){
-            hash = hash*31 + str.charAt(i);
+            hash += str.charAt(i);
+            hash += hash << 10;
+            hash ^= hash >> 6;
         }
+        hash += hash << 3;
+        hash ^= hash >> 11;
+        hash += hash <<15;
         return Math.abs(hash) % this.SIZE;
     }
     

@@ -70,6 +70,11 @@ public class SemanticAnalyzer {
     private boolean isAttribute = false;
     private boolean useOperator=false;
     
+    public SemanticAnalyzer(){
+        for(Identifier i : Identifier.IO()){
+            globalTable.put(i.getName(), i);
+        }
+    }
     
     public void analyze(int symbol, Token token){
         switch(symbol){
@@ -1041,8 +1046,8 @@ public class SemanticAnalyzer {
         parallelStack.push(typeTable.get("gregorius"));
     }
     private Token getPosition(Token token){
-//        if(!positions.isEmpty())
-//            return positions.pop();
+        if(!positions.isEmpty())
+            return positions.pop();
         return token;
     }
     private Type fixType(Type type, Type expected){

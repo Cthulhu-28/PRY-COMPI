@@ -37,6 +37,17 @@ code segment
 		mov word ptr [bx], ax
 	ret 2
 	openWrite endp
+	openRead proc near
+		mov bp,sp
+		mov ah,3dh
+		mov al,00
+		mov dx, offset [bp+2]
+		int 21h
+		mov bx,[bp+2]
+		add bx,128
+		mov word ptr [bx], ax
+	ret 2
+	openRead endp
 	scripturam proc near
 	locals @@
 		mov bp,sp
@@ -78,62 +89,56 @@ code segment
 		int 21h
 	ret 2*34
 	scripturam endp
+	lectio proc near
+		locals @@
+		mov bp, sp
+		mov di,[bp+2]
+		
+		mov bx,di
+
+		
+		mov ah,3fh
+		mov bx,di
+		add bx,131
+		mov dx,bx
+		mov cx,31
+		mov bx,di
+		add bx,128
+		mov bx, word ptr [bx]
+		int 21h
+		mov si,6
+		mov bx,di
+		add bx,131
+		mov word ptr [bp+4],ax
+	@@ciclo:
+		mov dl, byte ptr [bx]
+		xor dh,dh
+		mov word ptr [bp+si],dx
+		add si,2
+		inc bx
+		dec ax
+		cmp ax,0
+	jne @@ciclo
+		ret 2
+	lectio endp
 	prope proc near
 		mov bp,sp
+		
+		add bx,128
+		mov ax,4200h
+		mov bx, word ptr [bx]
+		xor cx,cx
+		xor dx,dx
+		int 21h
+		
 		mov bx,[bp+2]
+		add bx,128
+		mov bx, word ptr [bx]
 		mov ah,3eh
 		int 21h
 		ret 2
 	prope endp
-	write proc near
-		mov bp,sp
-		mov ax,[bp+2]
-		
-		push bx
-		
-		mov bx,ax
-		and bx ,8000h
-		cmp bx,8000h
-		jne noSign
-		push ax
-		mov ah,02
-		mov dl,"-"
-		int 21h
-		pop ax
-		dec ax
-		xor ax,0ffffh
-		
-		
-	noSign:	
-		pop bx
-		push AX
-		push BX
-		push CX
-		push DX
-
-		xor cx, cx
-		mov bx, 10
-	ciclo1: 
-		xor dx, dx
-		div bx
-		push dx
-		inc cx
-		cmp ax, 0
-		jne ciclo1
-		mov ah, 02h
-	ciclo2: 
-		pop DX
-		add dl, 30h
-		int 21h
-		loop ciclo2
-
-		pop DX
-		pop CX
-		pop BX
-		pop AX
-		
-		ret 2
-	write endp
+	
 	read proc near
 	locals @@
 		mov bp,sp
@@ -166,6 +171,24 @@ code segment
 	@@return:
 		ret
 	read endp
+	writeC proc near
+	locals @@
+		mov bp,sp
+		add bp,2
+		mov cx,[bp]
+		cmp cx,0
+		je @@return
+		
+	print:
+		add bp,2
+		mov dx,[bp]
+		mov ah,02h
+		int 21h
+	loop print
+	
+	@@return:
+		ret 2*32 ;Cleans the parameters
+	writeC endp
 
 	start:	
 		mov ax, data
@@ -227,6 +250,34 @@ code segment
 		push dx
 		call prope
 		
+		lea dx,var
+		push dx
+		call openRead
+		
+		lea dx,line
+		mov ah,09h
+		int 21h
+		
+		lea dx,var
+		push dx
+		call lectio
+		xor bx,bx
+		pam2:
+			pop ax
+			mov varC[bx],al
+			inc bx
+			cmp bx,31
+		jbe pam2
+		
+		mov bx,31
+		sendI3:
+			dec bx
+			mov al,varC[bx]
+			xor ah,ah
+			push ax
+			cmp bx,0
+		ja sendI3
+		call writeC
 		mov ax, 4c4dh
 		int 21h
 code ends

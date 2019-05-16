@@ -17,7 +17,7 @@ import java.util.Objects;
 public abstract class HashMap <K,V> implements Iterable<HashMap.Pair>{
     
     protected final Pair<K,V> table[];
-    protected final int SIZE = 10;
+    protected final int SIZE = 31;
     
     public HashMap(){
         table = new Pair[SIZE];

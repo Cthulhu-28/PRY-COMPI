@@ -16,11 +16,16 @@ public class TypeTable {
     private final HashMap<String,Type> map = new HashMap<String, Type>() {
         @Override
         public int hashCode(String key) {
-            int hash = 31;
+            int hash =0;
             String str = key.toLowerCase();
             for(int i=0;i<str.length();i++){
-                hash = hash*31 + str.charAt(i);
+                hash += str.charAt(i);
+                hash += hash << 10;
+                hash ^= hash >> 6;
             }
+            hash += hash << 3;
+            hash ^= hash >> 11;
+            hash += hash <<15;
             return Math.abs(hash) % this.SIZE;
         }
     };
@@ -50,7 +55,7 @@ public class TypeTable {
     public void put(String name, Type type){
         map.put(name, type);
     }
-    private final Type TYPES[] = {
+    public static final Type TYPES[] = {
         new Type(Type.NUMERUS, "numerus"),
         new Type(Type.IMAGO, "imago"),
         new Type(Type.FRACTIO, "fractio"),
