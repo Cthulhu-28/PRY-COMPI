@@ -1,0 +1,32 @@
+nomen test029 .
+commutabilis
+	liber l .
+	numerus N .
+	imago I .
+exemplar
+	efficio fib ( numerus a ) : numerus . 
+	directus dummy ( catena C , C1 . gregorius date ) .
+corpus
+	efficio fib ( numerus a ) : numerus . 
+	commutabilis
+		liber l .
+		ordo [ 2 ] autem imago letras . 
+		catena a .
+	initum
+		neco .
+		reditus letras [ 1 ] .
+	finis
+	
+	directus dummy ( catena C , C1 . gregorius date ) .
+	commutabilis
+		liber l .
+		ordo [ 2 ] autem imago letras . 
+		catena a .
+	initum
+		reditus letras [ 1 ] .
+		neco .
+	finis
+	
+firmamentum
+	N := l . 
+	N := dummy (  ) .

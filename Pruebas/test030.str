@@ -1,0 +1,10 @@
+nomen test029 .
+commutabilis
+	liber l .
+	numerus N .
+	ordo [ 2 ] [ 4 ] autem numerus ARRAY .
+	ordo [ 2 ] [ 4 ] [ 5 ] [ 7 ] autem numerus ARR .
+firmamentum
+	ARRAY [ ARR [ 0 ] [ ARRAY [ 0 ] [ 3 ] ] ] .
+	ARRAY [ 1 ] [ ARRAY [ 0 ] [ 0 ] ] .
+	l := 34|1 .

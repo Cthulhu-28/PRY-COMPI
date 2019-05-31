@@ -3,7 +3,7 @@ Prueba 004
 Cálculo del área de un círculo
 #>
 nomen test004
-perpestus
+perpetus
 	fractio PI dito 3141|1000 .
 commutabilis
 	numerus R .

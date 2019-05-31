@@ -1,0 +1,85 @@
+nomen test015 .
+perpetus
+	numerus N dito 4 .
+	catena STR dito "Hola, mundo" .
+	fractio ratio dito 23|891 .
+furibundus
+	EDAD sum numerus .
+	COORD sum coniugo
+				numerus X .
+				numerus Y .
+			  dixi .
+commutabilis
+	gregorius FECHA est 2019$4$4 , ayer .
+	numerus D est 0 .
+	ordo [4] autem imago LISTA est { 'a' , 'b' , 'c' , 'd' } .
+	liber FILE .
+exemplar
+	efficio FIB ( NUMERUS N ) : NUMERUS .
+	directus PRINT ( ign CATENA s1 , s2 . CATENA X ) .
+corpus
+	efficio FIB ( NUMERUS N ) : NUMERUS .
+	commutabilis
+		numerus AUX est 0 .
+	initum
+		in N < 1 certus
+			reditus N . .
+		reditus FIB ( N - 1 ) + FIB ( N - 2 ) .
+	finis
+	
+	directus PRINT ( ign CATENA s1 , s2 . CATENA X ) .
+	initum
+		s1 := X .
+	finis
+	
+firmamentum
+    COORD @ X := 0 .
+	D @@ 3 := '3' .
+	D := D + 4 - decrementum D * ( D / 3 ) .
+	D := FIB ( D ) .
+	FILE patentibus scribo  ligo "C" .
+	FILE ligo "C" .
+	LISTA [1] := 'V' .
+	nunc ayer .
+	D := annus ayer .
+	D := D & 5 |> 2 .
+	panis D := 0 auctum 5 gradus 1 opus
+	initum
+		LISTA [ D ] := 'X' .
+	finis
+	tempus D < 67 opus
+	initum
+		FECHA := incrementum D .
+	finis
+	itero
+		decrementum D .
+	usque D = 0 .
+	decusis LISTA cum LISTA per D opus
+	initum
+		fib ( D ) .
+		in D = 3 mentiri
+			neco . .
+	finis
+	aeger D
+	initum
+		casus 1 opus
+			pergo .
+		detrimentum
+			D := -7 .
+	finis
+	in D < 3 certus
+		in D > 6 mentiri
+			D := 7 .
+		certus
+			D := 58 . .
+	mentiri
+		D := 0 . .
+	sigla COORD opus
+		X := 5 .
+		X := 1 .
+	dixi
+	probare
+		in D < 100 certus
+			revello . .
+	captare
+		D := 5 .

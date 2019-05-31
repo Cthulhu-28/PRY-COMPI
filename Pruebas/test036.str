@@ -1,0 +1,8 @@
+nomen test036 .
+commutabilis
+	numerus N . 
+	catena X est ":v" . 
+	gregorius g est 2000$1$1 . 
+firmamentum
+   N :=  5 + 4 * 7 / N . 
+   X := "god is woman" . 

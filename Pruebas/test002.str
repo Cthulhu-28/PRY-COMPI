@@ -20,7 +20,7 @@ corpus
 	commutabilis
 		Punto P .
 	initum
-		P@X: = X .
+		P@X := X .
 		P@Y := Y .
 		reditus P .
 	finis

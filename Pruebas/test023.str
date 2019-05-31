@@ -1,0 +1,25 @@
+nomen test023 .
+perpetus
+	numerus A dito 0rM .
+furibundus
+	EDAD sum numerus .
+	RATIO sum fractio .
+	PAR sum coniugo
+		PAR Z .
+	dixi .
+	REG sum coniugo
+		numerus A .
+		imago B .
+		catena C .
+	dixi .
+commutabilis
+	numerus N est 5 , W .
+	RATIO R .
+	RATIO r2 est 5|2 .
+	REG S est <- 4 , '4' , "5" -> .
+	ordo [ 3 ] [ 4 ] autem numerus ARR est { { 1 , 2 , 3 , 4 } ,
+										  { 5 , 6 , 7 , 8 } ,
+										  { 9 , 10 , 11 , 12 } } .
+	ordo [ 3 ] autem imago AR .
+firmamentum
+    scribonumerus ( 55 ) .

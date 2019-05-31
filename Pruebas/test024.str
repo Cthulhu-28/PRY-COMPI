@@ -1,0 +1,27 @@
+nomen test024 .
+furibundus
+	Grow sum coniugo
+		fractio rate . 
+		gregorius date .
+	dixi . 
+	Salario sum coniugo
+		numerus monto .
+		Grow rate .
+	dixi . 
+	Cliente sum coniugo
+		numerus edad .
+		catena nombre .
+		Salario sal .
+	dixi .
+commutabilis
+	Cliente C1 .
+	numerus A .
+exemplar
+	efficio PRINT ( ) : catena .
+	directus PRINT2 ( ) .
+	efficio fib ( numerus a , b . catena c . ign gregorius g ) : numerus .
+firmamentum
+	C1 @ sal @ rate @ date .
+	C1 @ sal @ rate .
+	C1 .
+	4 .

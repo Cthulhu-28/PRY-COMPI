@@ -1,0 +1,18 @@
+<#Test 11
+este programa prueba la identificacion de todos los terminales
+#>
+-335
+123
+0rMMMIX
+2300$4$2
+veridicus
+falsidicus
+'2'
+"hola"
+'\t'
+"\n"
+12|45
+-34|23
+34|2|1
+0rMVXM
+"hola \f amigo"

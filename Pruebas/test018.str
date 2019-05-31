@@ -1,0 +1,6 @@
+nomen test016 .
+firmamentum
+    A := a
+	A := 3 + C .
+	A := 6
+	A := a + b .

@@ -1,0 +1,42 @@
+nomen test027 .
+commutabilis
+	liber l .
+firmamentum
+	aeger 3
+	initum
+		detrimentum
+			2 * 8 + 3|5 .
+			neco .
+		casus 1 opus
+			3 + 5 . 
+		casus 2 opus
+			3 + 5 . 
+			aeger 5
+			initum
+				detrimentum
+					2 * 8 + 3|5 .
+				casus 1 opus
+					3 + 5 . 
+				casus 2 opus
+					3 + 5 . 
+				detrimentum
+					2 * 8 + 3|5 .
+					aeger 5
+					initum
+						detrimentum
+							2 * 8 + 3|5 .
+						detrimentum
+							2 * 8 + 3|5 .
+						casus 1 opus
+							3 + 5 . 
+						casus 2 opus
+							3 + 5 . 
+						detrimentum
+							2 * 8 + 3|5 .
+							neco .
+					finis
+			finis
+		detrimentum
+			2 * 8 + 3|5 .
+	finis 
+	neco .

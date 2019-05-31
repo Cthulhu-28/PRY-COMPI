@@ -1,0 +1,11 @@
+nomen test035 .
+commutabilis
+	numerus N . 
+	catena X est ":v" . 
+	gregorius g est 2000$1$1 . 
+firmamentum
+   incrementum N . 
+   decrementum N . 
+   annus g . 
+   non veridicus . 
+   ( 3 + 4 ) - 5 * incrementum 8 . 

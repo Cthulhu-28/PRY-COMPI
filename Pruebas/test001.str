@@ -4,7 +4,7 @@ Fibonacci
 #>
 nomen test001
 commutabilis
-	numerus a est 3 , b est 100, c , d  est -9 .
+	numerus a est 3 , b est 100, c , d  est 2008$4$4 .
 exemplar
 	efficio fibo (numerus N) : numerus .
 corpus

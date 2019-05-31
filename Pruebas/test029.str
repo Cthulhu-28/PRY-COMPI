@@ -1,0 +1,28 @@
+nomen test028 .
+furibundus
+	Lugar sum coniugo
+		catena direc .
+		numerus code .
+	dixi .
+	Cliente sum coniugo
+		numerus edad .
+		Lugar l . 
+		catena name .
+	dixi .
+commutabilis
+	liber l .
+	numerus N .
+	Cliente C est <- 12 , <- "A" , 45  -> -> .
+firmamentum
+	{ { 2 , 3 } , { 3 , 7 } } + <- 4 , 4 -> .
+	decusis { 'a' , 'b' } cum { 4 , 5 , 2 , 9 } per N opus
+	initum
+		N := 2 .
+	finis
+	sigla C opus
+		sigla l opus
+			code := 5 . 
+			name := "w" .
+		dixi
+	dixi
+	N := 23 .

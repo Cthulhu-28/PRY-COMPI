@@ -1,0 +1,27 @@
+nomen test033 .
+perpetus
+	numerus A dito 56 . 
+ 	catena C dito "hola xd" . 
+	imago I dito 'd' . 
+	gregorius G dito 2019$5$30 . 
+	catena BR dito "\n" . 
+	liber L dito 5 . 
+	fractio F dito 23|5 . 
+	dualis D1 dito veridicus .
+	dualis D2 dito falsidicus . 
+	numerus R dito 0xAB . 
+furibundus
+	EDAD sum numerus . 
+	TEXTO sum catena .
+commutabilis
+	numerus N , N2 est 23 . 
+	EDAD D est 67 . 
+	TEXTO T est "\t :v" . 
+	ordo [ 3 ] autem numerus ARR est { 3 , 4 , 5 } . 
+	ordo [ 3 ] [ 3 ] autem numerus ARR2 est { { 3 , 4 , 5 } , { 3 , 4 , 5 } , { 3 , 4 , 5 } } . 
+	ordo [ 3 ] [ 3 ] autem numerus ARR3 . 
+	ordo [ 100 ] autem liber files . 
+	ordo [ 2 ] [ 3 ] autem catena SD est { { "a" , "b" , "c" } , { "d" , "e" , "f" } } . 
+firmamentum
+    N + 5 . 
+	3 + 4 .

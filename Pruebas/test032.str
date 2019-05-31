@@ -1,0 +1,29 @@
+nomen test032 .
+perpetus
+	fractio f dito 3|4 .
+furibundus
+	REG sum coniugo 
+				numerus A .
+				numerus B .
+			dixi .
+commutabilis
+	liber l .
+	numerus N .
+	imago I .
+	REG R .
+exemplar
+	efficio fib ( numerus a ) : numerus . 
+corpus
+	efficio fib ( numerus a ) : numerus . 
+	commutabilis
+		ordo [ 2 ] autem imago letras . 
+		catena jaja .
+	initum
+		reditus letras [ 1 ] .
+	finis
+firmamentum
+	3 + 4 := 1 .
+	3 := 23 .
+	f := 4 .
+	R @ A := 3 .
+	

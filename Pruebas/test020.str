@@ -1,0 +1,8 @@
+nomen test016 .
+firmamentum
+    sigla REG opus
+		X := 5 .
+		Y := 7
+		Z := 6 .
+	dixi
+	r := 6 .

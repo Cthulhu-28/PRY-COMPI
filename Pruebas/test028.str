@@ -1,0 +1,40 @@
+nomen test028 .
+commutabilis
+	liber l .
+	numerus N .
+firmamentum
+	probare
+		revello .
+	captare
+		4 + 5 .
+	panis N := 3 auctum 50 gradus 1 opus
+	initum
+		5 + 2 .
+		neco .
+		pergo .
+		in N < 2 certus
+		initum
+			panis N := 3 auctum 50 gradus 1 opus
+			initum
+				5 + 2 .
+				neco .
+				pergo .
+				
+			finis 
+		finis .
+	finis 
+	tempus N > 34 opus
+	initum
+		neco .
+		34 + 12 .
+		pergo .
+		tempus N > 34 opus
+		initum
+			neco .
+			34 + 12 .
+			pergo .
+			revello .
+		finis
+	finis
+	neco .
+	pergo .
