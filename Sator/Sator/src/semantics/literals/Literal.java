@@ -5,6 +5,7 @@
  */
 package semantics.literals;
 
+import java.util.List;
 import semantics.identifiers.Type;
 
 /**
@@ -18,6 +19,8 @@ public interface Literal {
     public boolean matchDimension(Type type);
     
     public boolean matchDimension(Type type, int idx);
+    
+    public List<Literal> toList();
     
     public Type getType();
     

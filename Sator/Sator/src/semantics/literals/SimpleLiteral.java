@@ -5,6 +5,9 @@
  */
 package semantics.literals;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
 import semantics.identifiers.Type;
 
 /**
@@ -49,5 +52,46 @@ public class SimpleLiteral implements Literal{
     public boolean matchDimension(Type type, int idx){
         return idx >= type.getDimension().size();
     }
+    @Override
+    public String toString(){
+        return value;
+    }
+
+    @Override
+    public List<Literal> toList() {
+        List<Literal> list = new ArrayList<>();
+        list.add(this);
+        return list;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 3;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final SimpleLiteral other = (SimpleLiteral) obj;
+        if (!Objects.equals(this.value, other.value)) {
+            return false;
+        }
+        if (!Objects.equals(this.type, other.type)) {
+            return false;
+        }
+        return true;
+    }
+
+    
+    
    
 }

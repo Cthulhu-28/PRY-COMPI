@@ -90,8 +90,13 @@ public class Parser {
             if(Grammar.getParsingTable(rule-initial, Grammar.END_MARKER)<0)
                 stack.push(rule);
             if(!stack.isEmpty()){
-                noErrors=false;
-                error(24);
+                rule = stack.pop();
+                if(rule==Grammar.CG_CLOSE){
+                    semanticAnalyzer.analyze(rule, CT);
+                }else{
+                    noErrors=false;
+                    error(24);
+                }
             }
         }
 //        if(noErrors)

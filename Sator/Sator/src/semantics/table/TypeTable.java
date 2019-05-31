@@ -38,6 +38,8 @@ public class TypeTable {
         return map.contains(key);
     }
     public Type get(String key){
+        if(key==null)
+            return new Type(0, "");
         return map.get(key);
     }
     public Type get(int code){

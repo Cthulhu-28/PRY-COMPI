@@ -48,4 +48,9 @@ public class RecordLiteral implements Literal{
         }
         return type;
     }
+
+    @Override
+    public List<Literal> toList() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

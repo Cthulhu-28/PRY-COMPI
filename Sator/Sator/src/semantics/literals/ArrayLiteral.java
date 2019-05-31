@@ -7,6 +7,7 @@ package semantics.literals;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import semantics.identifiers.Type;
 
 /**
@@ -62,5 +63,17 @@ public class ArrayLiteral implements Literal{
                 type.setBaseType(t);
         }
         return type;
+    }
+    @Override
+    public String toString(){
+        return "{"+String.join(",", toList().stream().map(l->l.toString()).collect(Collectors.toList()))+"}";
+    }
+    @Override
+    public List<Literal> toList(){
+        List<Literal> list = new ArrayList<>();
+        for(Literal l : literals){
+            list.addAll(l.toList());
+        }
+        return list;
     }
 }

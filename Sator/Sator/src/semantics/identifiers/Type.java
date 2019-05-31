@@ -171,7 +171,20 @@ public class Type {
         }           
         return str;
     }
-
+    public String getDataSize(){
+        Type t = getBaseTypeDepth();
+        return TYPE[t.getCode()];
+    }
+    public int getSize(){
+        Type t = getBaseTypeDepth();
+        if(isArray()){
+            t = getBaseType().getBaseTypeDepth();
+            int base = SIZE[t.getCode()];
+            int mul=dimension.stream().reduce(1, (a,b)->a*b);
+            return base * mul;
+        }
+        return SIZE[t.getCode()];
+    }
     @Override
     public int hashCode() {
         int hash = 5;
@@ -241,6 +254,9 @@ public class Type {
         }
         return null;
     }
+    
+    private static final String TYPE[]={"dw","db","dw","db","db","db","db"};
+    private static final int SIZE[]={2,1,2,32,165,1,3};
     
     private static final byte TYPE_COMPATIBILY[][] =  {    /*N I F C L D G*/  
                                                        /*N*/{1,1,1,1,0,1,1},

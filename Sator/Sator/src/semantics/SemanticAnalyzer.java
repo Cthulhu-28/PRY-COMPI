@@ -5,6 +5,8 @@
  */
 package semantics;
 
+import generator.CodeGenerator;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 import parser.grammar.Grammar;
@@ -40,10 +42,12 @@ public class SemanticAnalyzer {
     
     private Type currentType;
     private Type attr;
-    private List<Type> recordLiteral = new ArrayList<>();
+    private final List<Type> recordLiteral = new ArrayList<>();
     
     private Identifier currentIdentifier;
     private Identifier currentMethod;
+    private Identifier genratorIdentifier;
+    private Literal currentLiteral;
     
     private final Stack<ArrayLiteral> arrayStack = new Stack<>();
     private final Stack<RecordLiteral> recordStack = new Stack<>();
@@ -63,12 +67,14 @@ public class SemanticAnalyzer {
     private boolean canUseReturn = false;
     private final Stack<Boolean> revelloStack = new Stack<>();
     
-    private Stack<Token> positions = new Stack<>();
+    private final Stack<Token> positions = new Stack<>();
     //private final Stack<Identifier> last = new Stack<>();
     private Identifier last = null;
     
     private boolean isAttribute = false;
     private boolean useOperator=false;
+    
+    private CodeGenerator generator;
     
     public SemanticAnalyzer(){
         for(Identifier i : Identifier.IO()){
@@ -76,7 +82,7 @@ public class SemanticAnalyzer {
         }
     }
     
-    public void analyze(int symbol, Token token){
+    public void analyze(int symbol, Token token) throws FileNotFoundException{
         switch(symbol){
             case Grammar.RESET:
                 reset();
@@ -303,7 +309,135 @@ public class SemanticAnalyzer {
             case Grammar.CHECK_IS_MEMORY:
                 checkIsMemory(token);
                 break;
-                
+            case Grammar.CG_INIT:
+                generator = new CodeGenerator(token.getLexeme());
+                break;
+            case Grammar.CG_CLOSE:
+                generator.close();
+                break;
+            case Grammar.CG_DATA_SEGMENT:
+                generator.createDataSegment();
+                break;
+            case Grammar.CG_WRITE_VAR:
+                generator.addVariable(currentIdentifier);
+                break;
+            case Grammar.CG_CODE_SEG:
+                generator.createCodeSegment();
+                break;
+            case Grammar.CG_WRITE_LIT:
+                generator.putLiteral(currentLiteral);
+                break;
+            case Grammar.CG_WRITE_STACK:
+                generator.writePush(genratorIdentifier);
+                break;
+            case Grammar.CG_INC:
+                generator.incrementum();
+                break;
+            case Grammar.CG_DEC:
+                generator.decrementum();
+                break;
+            case Grammar.CG_NON:
+                generator.non();
+                break;
+            case Grammar.CG_UPPER:
+                generator.upper();
+                break;
+            case Grammar.CG_LOWER:
+                generator.lower();
+                break;
+            case Grammar.CG_ALPHA:
+                generator.isAlpha();
+                break;
+            case Grammar.CG_DIGIT:
+                generator.isDigit();
+                break;
+            case Grammar.CG_LENGTH:
+                generator.length();
+                break;
+            case Grammar.CG_FLOOR:
+                generator.floor();
+                break;
+            case Grammar.CG_ROUND:
+                generator.round();
+                break;
+            case Grammar.CG_ANNUS:
+                generator.annus();
+                break;
+            case Grammar.CG_MENSIS:
+                generator.mensis();
+                break;
+            case Grammar.CG_DIES:
+                generator.dies();
+                break;
+            case Grammar.CG_NUNCS:
+                generator.nunc();
+                break;
+            case Grammar.CG_DAY:
+                generator.day();
+                break;
+            case Grammar.CG_WEEK:
+                generator.week();
+                break;
+            case Grammar.CG_LEAP:
+                generator.isLeap();
+                break;
+            case Grammar.CG_CONCAT:
+                generator.concat();
+                break;
+            case Grammar.CG_CONTAINS:
+                generator.concat();
+                break;
+            case Grammar.CG_MULT:
+                generator.mul();
+                break;
+            case Grammar.CG_DIV:
+                generator.div();
+                break;
+            case Grammar.CG_MOD:
+                generator.modulus();
+                break;
+            case Grammar.CG_FRAC_MUL:
+                generator.fracMul();
+                break;
+            case Grammar.GG_FRAC_DIV:
+                generator.fracDiv();
+                break;
+            case Grammar.CG_PLUS:
+                generator.plus();
+                break;
+            case Grammar.CG_SUB:
+                generator.subtract();
+                break;
+            case Grammar.CG_FRAC_PLUS:
+                generator.fracPlus();
+                break;
+            case Grammar.CG_FRAC_MINUS:
+                generator.fracSubtract();
+                break;
+            case Grammar.CG_DATE_ADD:
+                generator.dateAdd();
+                break;
+            case Grammar.CG_DATE_MINU:
+                generator.dateMinus();
+                break;
+            case Grammar.CG_LESS:
+                generator.less();
+                break;
+            case Grammar.CG_EQ:
+                generator.equal();
+                break;
+            case Grammar.CG_DIFF:
+                generator.different();
+                break;
+            case Grammar.CG_AND:
+                generator.and();
+                break;
+            case Grammar.CG_XOR:
+                generator.xor();
+                break;
+            case Grammar.CG_OR:
+                generator.or();
+                break;
         }
     }
     private void checkIsMemory(Token token){
@@ -371,6 +505,9 @@ public class SemanticAnalyzer {
             semanticError(2, token);
         }else{
             lastIdentifier = token.getLexeme();
+            currentIdentifier = new Identifier();
+            currentIdentifier.setName(token.getLexeme());
+            currentIdentifier.setType(currentType);
             globalTable.insert(token.getLexeme(), Category.CONSTANT,currentType);  
         }
     }
@@ -378,13 +515,14 @@ public class SemanticAnalyzer {
         if(currentType != null){
             if(typeMatchLiteral(currentType, token)){
                 Literal literal = new SimpleLiteral(currentType, token.getLexeme());
+                currentIdentifier.setInitialValue(literal);
                 globalTable.modify(lastIdentifier, literal);
             }
             else
                 semanticErrorType(3, token);
             }
         currentType = null;
-        lastIdentifier = "";
+        //lastIdentifier = "";
     }
     private void defineType(Token token){
         if(typeTable.exists(token.getLexeme()) || globalTable.contains(token.getLexeme())){
@@ -438,6 +576,7 @@ public class SemanticAnalyzer {
         }else{
             lastIdentifier = token.getLexeme();
             selectTable().insert(token.getLexeme(), Category.VARIABLE,currentType);
+            currentIdentifier = selectTable().get(lastIdentifier);
             
         }
     }
@@ -457,13 +596,19 @@ public class SemanticAnalyzer {
                 if(typeMatchLiteral(currentType, token)){
                     Literal literal = new SimpleLiteral(currentType, token.getLexeme());
                     selectTable().modify(lastIdentifier,literal);
+                    currentIdentifier = selectTable().get(lastIdentifier);
                 }
                 else
                     semanticErrorType(3, token);
                 currentType = null;
             }
         }
-        lastIdentifier = "";
+        if(currentType==null){
+            lastIdentifier="";
+            return;
+        }
+        if(!currentType.isArray())
+            lastIdentifier = "";
     }
     private void addRecordAttrLiteral(Token token){
         if(currentType != null){
@@ -547,6 +692,7 @@ public class SemanticAnalyzer {
                 typeTable.put(currentType.getName(), currentType);
                 lastIdentifier = token.getLexeme();
                 selectTable().insert(lastIdentifier, Category.VARIABLE, currentType);
+                currentIdentifier = selectTable().get(lastIdentifier);
             }
         }
     }
@@ -564,6 +710,9 @@ public class SemanticAnalyzer {
                     if(!literal.match(currentType.getBaseType()) || !literal.matchDimension(currentType))
                         semanticErrorLiteral(6);
                     currentType = null;
+                    selectTable().modify(lastIdentifier,literal);
+                    currentIdentifier = selectTable().get(lastIdentifier);
+                    //generator.addVariable(currentIdentifier);
                     lastIdentifier="";
                 }
             }else{
@@ -723,8 +872,10 @@ public class SemanticAnalyzer {
                 parallelStack.push(new Type(-2, "método sin retorno"));
             }else if(identifier.getType().isArray()){
                 parallelStack.push(identifier.getType().getBaseType());
-            }else
+            }else{
+                genratorIdentifier = identifier;
                 parallelStack.push(identifier.getType());
+            }
         }else
             parallelStack.push(typeTable.get("$error"));
         isAttribute = false;
@@ -848,16 +999,22 @@ public class SemanticAnalyzer {
     }
     
     private void readLiteralType(Token token){
-        if(Type.typeName(token.getCode()) != null)
+        if(Type.typeName(token.getCode()) != null){
             currentType = typeTable.get(Type.typeName(token.getCode()));
+            currentLiteral = new SimpleLiteral(currentType, token.getLexeme());
+        }
         else
             currentType = null;
     }
     private void putLiteralOnStack(){
-        if(!arrayStack.isEmpty())
-            parallelStack.push(arrayStack.pop().getType());
-        else if(!recordStack.isEmpty())
-            parallelStack.push(recordStack.pop().getType());
+        if(!arrayStack.isEmpty()){
+            currentLiteral = arrayStack.pop();
+            parallelStack.push(currentLiteral.getType());
+        }
+        else if(!recordStack.isEmpty()){
+            currentLiteral = arrayStack.pop();
+            parallelStack.push(currentLiteral.getType());
+        }
         else
             parallelStack.push(currentType);
         currentType = null;

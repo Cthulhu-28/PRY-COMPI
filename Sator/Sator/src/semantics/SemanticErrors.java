@@ -18,7 +18,7 @@ public class SemanticErrors {
         /* 3  */ "Tipos incompatibles: {token1} no puede convertirse a {token2}",
         /* 4  */ "El atributo {token1} ya estaba definido",
         /* 5  */ "La dimensión del arreglo debe ser positiva",
-        /* 6  */ "Arreglo inválido: se esparaba un arreglo de tipo {token}",
+        /* 6  */ "Arreglo inválido: se esparaba un arreglo de tipo {token1}",
         /* 7  */ "El parámetro {token1} ya se encuentra definido",
         /* 8  */ "El identificador {token1} no existe",
         /* 9  */ "Acceso incorrecto: {token1} no posee el atributo {token2}",

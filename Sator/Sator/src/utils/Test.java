@@ -5,8 +5,11 @@
  */
 package utils;
 
+import generator.FileGenerator;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
+import generator.LiteralWriter;
 import semantics.literals.ArrayLiteral;
 import semantics.literals.SimpleLiteral;
 import semantics.identifiers.Type;
@@ -17,50 +20,8 @@ import semantics.literals.RecordLiteral;
  * @author admin
  */
 public class Test {
-    public static void main(String args[]){
-        
-        
-        
-        
-        
-        Type t1 = new Type(0, "int");
-        Type t2 = new Type(1, "bool");
-        RecordLiteral record = new RecordLiteral();
-        RecordLiteral record1 = new RecordLiteral();
-        
-        record.addLiteral(new SimpleLiteral(t1, "1"));
-        record.addLiteral(new SimpleLiteral(t2, "false"));
-        
-        record1.addLiteral(new SimpleLiteral(t1, "1"));
-        record1.addLiteral(new SimpleLiteral(t2, "false"));
-        record.addLiteral(record1);
-        
-        Type t3 = new Type(677, "JAJA");
-        Type t4 = new Type(45, "yu");
-        t4.setBaseType(t1);
-        Type t5 = new Type(425, "yud");
-        t5.setBaseType(t2);
-        t3.addAtrribute(t4);
-        t3.addAtrribute(t5);
-        
-        
-        Type t6 = new Type(6277, "JAwJA");
-        Type t7 = new Type(4511, "yuwwd");
-        t7.setBaseType(t1);
-        Type t8 = new Type(42895, "yu2d");
-        t8.setBaseType(t2);
-        t6.addAtrribute(t7);
-        t6.addAtrribute(t8);
-        
-        Type t9 = new Type(6433, "sdfw");
-        t9.setBaseType(t6);
-        t3.addAtrribute(t9);
-        
-        System.out.println(t3);
-        
-        System.out.println(record.getType());
-        System.out.println(record.getType().equals(t3));
-        System.out.println(record.match(t3));
+    public static void main(String args[]) throws FileNotFoundException{
+        System.out.println(LiteralWriter.toFractio("1|0xAB"));
     }
     
     public static boolean t1(List<Integer> arr){

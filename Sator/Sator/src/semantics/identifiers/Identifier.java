@@ -98,7 +98,7 @@ public class Identifier {
         }
         return getName();
     }
-
+    
     @Override
     public int hashCode() {
         int hash = 7;

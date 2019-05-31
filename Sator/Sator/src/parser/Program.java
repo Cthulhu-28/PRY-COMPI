@@ -15,7 +15,7 @@ public class Program {
 //            if(args.length<1){
 //                throw new Exception("Un parámetro esperados");
 //            }
-            String path = "C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 3\\Pruebas\\test032.str";//args[0];
+            String path = "C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 4\\Pruebas\\test035.str"; //args[0];
             Parser parser = Parser.initParser(path);
             parser.parse();
         } catch (Exception e) {
