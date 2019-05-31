@@ -1,26 +1,24 @@
 nomen test035 .
 commutabilis
 	numerus N . 
-   numerus L .
    numerus T .
 firmamentum
    N := legonumerus( ) . 
-   L := &# N .
-   T := L .
+   T := 1.
 
-   tempus L > 1 opus
+   tempus N > 10 opus
    initum
       N := N / 10 .
-      L := decrementum L .
+      T := incrementum T .
    finis
 
    in N >= 5  certus
       T := incrementum T . 
    .
-
+   N := 1 .
    tempus T > 1 opus
    initum
       L := L * 10 .
       T := decrementum T .
    finis
-   scribonumerus( L ) .
+   scribonumerus( N ) .
