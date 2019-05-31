@@ -156,22 +156,23 @@ public abstract class Grammar
 	public static final int CG_SET_DAY = 336;
 	public static final int CHECK_IS_MEMORY = 337;
 	public static final int POP_TYPE = 338;
-	public static final int LOOP_FLAGS_ON = 339;
-	public static final int LOOP_FLAGS_OFF = 340;
-	public static final int CHECK_FOR_ID = 341;
-	public static final int POP_ARRAY = 342;
-	public static final int CHECK_BREAK = 343;
-	public static final int CHECK_CONTINUE = 344;
-	public static final int CHECK_RETURN = 345;
-	public static final int POP_RETURN = 346;
-	public static final int CHECK_REVELLO = 347;
-	public static final int PUSH_DEFAULT = 348;
-	public static final int POP_DEFAULT = 349;
-	public static final int CHECK_DEFAULT = 350;
-	public static final int PUSH_ID_SIGLA = 351;
-	public static final int POP_ID_SIGLA = 352;
-	public static final int TRY_FLAGS_ON = 353;
-	public static final int TRY_GLAGS_OFF = 354;
+	public static final int CG_ASSIGN = 339;
+	public static final int LOOP_FLAGS_ON = 340;
+	public static final int LOOP_FLAGS_OFF = 341;
+	public static final int CHECK_FOR_ID = 342;
+	public static final int POP_ARRAY = 343;
+	public static final int CHECK_BREAK = 344;
+	public static final int CHECK_CONTINUE = 345;
+	public static final int CHECK_RETURN = 346;
+	public static final int POP_RETURN = 347;
+	public static final int CHECK_REVELLO = 348;
+	public static final int PUSH_DEFAULT = 349;
+	public static final int POP_DEFAULT = 350;
+	public static final int CHECK_DEFAULT = 351;
+	public static final int PUSH_ID_SIGLA = 352;
+	public static final int POP_ID_SIGLA = 353;
+	public static final int TRY_FLAGS_ON = 354;
+	public static final int TRY_GLAGS_OFF = 355;
         
         public static final int LIST_STATEMENT = 217;
         public static final int IMPONO_EXPRESSION = 210;
@@ -213,7 +214,7 @@ public abstract class Grammar
 	 */
 	public static final boolean isSemanticSymbol(int numSimbolo)
 	{
-            return ((231 <= numSimbolo) && (numSimbolo <= 354));
+            return ((231 <= numSimbolo) && (numSimbolo <= 355));
 	}
 
 	/**

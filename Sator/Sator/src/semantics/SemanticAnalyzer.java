@@ -328,7 +328,8 @@ public class SemanticAnalyzer {
                 generator.putLiteral(currentLiteral);
                 break;
             case Grammar.CG_WRITE_STACK:
-                generator.writePush(genratorIdentifier);
+                if(token.getCode()!=27)
+                    generator.writePush(genratorIdentifier);
                 break;
             case Grammar.CG_INC:
                 generator.incrementum();
@@ -438,6 +439,10 @@ public class SemanticAnalyzer {
             case Grammar.CG_OR:
                 generator.or();
                 break;
+            case Grammar.CG_ASSIGN:
+                generator.assignValue(last);
+                last=null;
+                break;
         }
     }
     private void checkIsMemory(Token token){
@@ -452,7 +457,7 @@ public class SemanticAnalyzer {
             semanticError(22, token);
         }
         useOperator = false;
-        last = null;
+        //last = null;
     }
     private boolean contains(String token){
         if(methodBody){

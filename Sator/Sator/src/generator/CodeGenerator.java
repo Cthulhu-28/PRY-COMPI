@@ -127,7 +127,7 @@ public class CodeGenerator {
         writePush(identifier);
     }
     public void writePush(Identifier identifier){
-         Type type = identifier.getType().getBaseTypeDepth();
+        Type type = identifier.getType().getBaseTypeDepth();
         switch(type.getCode()){
             case Type.NUMERUS:
                 fileGenerator.printf("\tpush %s", identifier.getName());
@@ -300,6 +300,46 @@ public class CodeGenerator {
            }
 
        }
+    }
+    public void assignValue(Identifier identifier){
+        Type type = identifier.getType().getBaseTypeDepth();
+        switch(type.getCode()){
+            case Type.NUMERUS:
+                fileGenerator.printf("\tpop %s", identifier.getName());
+                break;
+            case Type.DUALIS:
+                fileGenerator.printf("\tpop ax");
+                fileGenerator.printf("\txor ah,ah");
+                fileGenerator.printf("\tmov %s,al",identifier.getName());
+                break;
+            case Type.FRACTIO:
+                fileGenerator.printf("\tpop ax");
+                fileGenerator.printf("\tmov word ptr %s[0]", identifier.getName());
+                fileGenerator.printf("\tpop ax");
+                fileGenerator.printf("\tmov word ptr %s[2]", identifier.getName());
+                break;
+            case Type.GREGORIUS:
+                fileGenerator.printf("\tpop ax");
+                fileGenerator.printf("\tpop dx");
+                fileGenerator.printf("\tmov byte ptr %s[0],dl", identifier.getName());
+                fileGenerator.printf("\tmov byte ptr %s[1],ah", identifier.getName());
+                fileGenerator.printf("\tmov byte ptr %s[2],al", identifier.getName());
+                
+                break;
+            case Type.LIBER:
+               // fileGenerator.printf("\tlea ax,%s", identifier.getName());
+               // fileGenerator.printf("\tpush ax");
+            default:
+                String tag = TagGenerator.getGenerator().nextTag();                
+                fileGenerator.printf("\txor bx,bx");
+                fileGenerator.printf("%s:",tag);
+                fileGenerator.printf("\tpop ax");
+                fileGenerator.printf("\tmov %s[bx],al",identifier.getName());
+                fileGenerator.printf("\tinc bx");
+                fileGenerator.printf("\tcmp bx,32");
+                fileGenerator.printf("jbe %s",tag);
+                break;
+        }
     }
     
     
