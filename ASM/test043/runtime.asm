@@ -518,7 +518,7 @@ loop print
 @@return:
 	ret 2*32 ;Cleans the parameters
 scribocatena endp
-num_2_img proc near
+num_2_imago proc near
 		mov bp,sp
 		mov ax,[bp+2]
 		mov bx,256
@@ -526,7 +526,7 @@ num_2_img proc near
 		div bx
 		mov [bp+4],dx
 		ret 2
-num_2_img endp
+num_2_imago endp
 
 num_2_greg proc near
 	mov bp,sp
@@ -590,7 +590,7 @@ num_2_greg proc near
 	mov [bp+4],dx ;1er byte
 	ret 
 num_2_greg endp
-num_2_cat proc near
+num_2_catena proc near
 	locals @@
 	mov bp,sp
 	mov ax,[bp+2]
@@ -648,7 +648,7 @@ num_2_cat proc near
 	
 @@return:
 	ret 2
-num_2_cat endp
+num_2_catena endp
 num_2_dual proc near
 	locals @@
 	mov bp,sp
@@ -892,24 +892,3 @@ difer proc near
 	mov word ptr [bp+4], 0
 	ret 2 *1
 difer endp
-index proc near
-locals @@
-	mov bp, sp
-	mov di, 6
-	mov cx, [bp+4];nuemro
-	mov bx, [bp+2];char
-@@revisa:
-	mov ax, [bp+di]
-	cmp ax, bx
-	je @@true
-	add di, 2
-	loop @@revisa
-	mov word ptr [bp+66], 0
-	ret 2*32
-@@true:
-	dec cx
-	mov ax, [bp+4]
-	sub ax, cx
-	mov  word ptr [bp+66], ax
-	ret 2*32
-index endp

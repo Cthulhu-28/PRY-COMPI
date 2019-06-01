@@ -93,7 +93,10 @@ public class CodeGenerator {
         if(identifier.getInitialValue()==null){
             if(identifier.getType().isArray())
                 type = identifier.getType();
-            fileGenerator.printf("%s %s %s %d dup (0)","\t" ,identifier.getName(),"db",type.getSize());
+            if(identifier.getType().getCode()==Type.NUMERUS)
+                fileGenerator.printf("%s %s %s %d","\t" ,identifier.getName(),"dw",0);
+            else
+                fileGenerator.printf("%s %s %s %d dup (0)","\t" ,identifier.getName(),"db",type.getSize());
         }else{
             if(identifier.getType().isArray()){
                 Type t = identifier.getType().getBaseType().getBaseTypeDepth();
@@ -159,6 +162,11 @@ public class CodeGenerator {
                 fileGenerator.printf("\tpush ax");
                 fileGenerator.printf("\tmov ah,byte ptr %s[1]", identifier.getName());
                 fileGenerator.printf("\tmov al,byte ptr %s[2]", identifier.getName());
+                fileGenerator.printf("\tpush ax");
+                break;
+            case Type.IMAGO:
+                fileGenerator.printf("\txor ax,ax");
+                fileGenerator.printf("\tmov al,%s[0]", identifier.getName());
                 fileGenerator.printf("\tpush ax");
                 break;
             case Type.LIBER:
@@ -230,6 +238,9 @@ public class CodeGenerator {
     }
     public void concat(){
         fileGenerator.printf("\tcall concat");
+    }
+    public void index(){
+        fileGenerator.printf("\tcall index");
     }
     public void mul(){
         fileGenerator.printf("\tcall multi");

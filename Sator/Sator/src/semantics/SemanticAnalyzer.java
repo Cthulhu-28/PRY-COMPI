@@ -392,7 +392,7 @@ public class SemanticAnalyzer {
                 generator.concat();
                 break;
             case Grammar.CG_CONTAINS:
-                generator.concat();
+                generator.index();
                 break;
             case Grammar.CG_MULT:
                 generator.mul();

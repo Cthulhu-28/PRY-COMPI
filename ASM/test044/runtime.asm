@@ -892,24 +892,3 @@ difer proc near
 	mov word ptr [bp+4], 0
 	ret 2 *1
 difer endp
-index proc near
-locals @@
-	mov bp, sp
-	mov di, 6
-	mov cx, [bp+4];nuemro
-	mov bx, [bp+2];char
-@@revisa:
-	mov ax, [bp+di]
-	cmp ax, bx
-	je @@true
-	add di, 2
-	loop @@revisa
-	mov word ptr [bp+66], 0
-	ret 2*32
-@@true:
-	dec cx
-	mov ax, [bp+4]
-	sub ax, cx
-	mov  word ptr [bp+66], ax
-	ret 2*32
-index endp
