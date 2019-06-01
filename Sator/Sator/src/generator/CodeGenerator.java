@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import semantics.identifiers.Identifier;
 import semantics.identifiers.Type;
 import semantics.literals.Literal;
-import semantics.table.SymbolTable;
 import utils.HashMap;
 import utils.Stack;
 
@@ -28,6 +27,7 @@ public class CodeGenerator {
     private final Stack<String> instrucStack = new Stack<>();
     private final Stack<String> continueStack = new Stack<>();
     private final Stack<String> breakStack = new Stack<>();
+    private final Stack<Identifier> forStack = new Stack<>();
     private final HashMap<Literal,Identifier> literalsPool = new HashMap<Literal, Identifier>() {
         @Override
         public int hashCode(Literal key) {
@@ -424,6 +424,13 @@ public class CodeGenerator {
         fileGenerator.printf("%s:", salir);
         breakStack.pop();
         continueStack.pop();
+    }
+    public void putForId(Identifier identifier){
+        forStack.push(identifier);
+    }
+    public void assignFor(){
+        Identifier identifier = forStack.peek();
+        fileGenerator.printf("\tpop %s",identifier.getName());
     }
     
     

@@ -161,26 +161,29 @@ public abstract class Grammar
 	public static final int LOOP_FLAGS_ON = 341;
 	public static final int LOOP_FLAGS_OFF = 342;
 	public static final int CHECK_FOR_ID = 343;
-	public static final int CG_WHILE_1 = 344;
-	public static final int CG_WHILE_2 = 345;
-	public static final int CG_WHILE_3 = 346;
-	public static final int POP_ARRAY = 347;
-	public static final int CHECK_BREAK = 348;
-	public static final int CHECK_CONTINUE = 349;
-	public static final int CHECK_RETURN = 350;
-	public static final int POP_RETURN = 351;
-	public static final int CHECK_REVELLO = 352;
-	public static final int PUSH_DEFAULT = 353;
-	public static final int POP_DEFAULT = 354;
-	public static final int CG_IF_CERTUS = 355;
-	public static final int CG_IF_THEN = 356;
-	public static final int CG_IF_ELSE = 357;
-	public static final int CG_IF_MENTIRI = 358;
-	public static final int CHECK_DEFAULT = 359;
-	public static final int PUSH_ID_SIGLA = 360;
-	public static final int POP_ID_SIGLA = 361;
-	public static final int TRY_FLAGS_ON = 362;
-	public static final int TRY_GLAGS_OFF = 363;
+	public static final int CG_SAVE_FOR_ID = 344;
+	public static final int CG_ASSIGN_FOR = 345;
+	public static final int CG_WHILE_1 = 346;
+	public static final int CG_WHILE_2 = 347;
+	public static final int CG_WHILE_3 = 348;
+	public static final int POP_ARRAY = 349;
+	public static final int CHECK_BREAK = 350;
+	public static final int CHECK_CONTINUE = 351;
+	public static final int CHECK_RETURN = 352;
+	public static final int POP_RETURN = 353;
+	public static final int CHECK_REVELLO = 354;
+	public static final int PUSH_DEFAULT = 355;
+	public static final int POP_DEFAULT = 356;
+	public static final int CG_IF_CERTUS = 357;
+	public static final int CG_IF_THEN = 358;
+	public static final int CG_IF_ELSE = 359;
+	public static final int CG_IF_MENTIRI = 360;
+	public static final int CHECK_DEFAULT = 361;
+	public static final int PUSH_ID_SIGLA = 362;
+	public static final int POP_ID_SIGLA = 363;
+	public static final int TRY_FLAGS_ON = 364;
+	public static final int TRY_GLAGS_OFF = 365;
+
         
         public static final int LIST_STATEMENT = 217;
         public static final int IMPONO_EXPRESSION = 210;
@@ -222,7 +225,7 @@ public abstract class Grammar
 	 */
 	public static final boolean isSemanticSymbol(int numSimbolo)
 	{
-            return ((231 <= numSimbolo) && (numSimbolo <= 363));
+            return ((231 <= numSimbolo) && (numSimbolo <= 365));
 	}
 
 	/**
