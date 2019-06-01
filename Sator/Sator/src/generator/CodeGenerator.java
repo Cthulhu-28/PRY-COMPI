@@ -157,12 +157,12 @@ public class CodeGenerator {
                 fileGenerator.printf("\tpush %s[0]", identifier.getName());
                 break;
             case Type.GREGORIUS:
-                fileGenerator.printf("\txor ax,ax");
-                fileGenerator.printf("\tmov al,byte ptr %s[0]", identifier.getName());
-                fileGenerator.printf("\tpush ax");
+                fileGenerator.printf("\txor dx,dx");
+                fileGenerator.printf("\tmov dl,byte ptr %s[0]", identifier.getName());
                 fileGenerator.printf("\tmov ah,byte ptr %s[1]", identifier.getName());
                 fileGenerator.printf("\tmov al,byte ptr %s[2]", identifier.getName());
                 fileGenerator.printf("\tpush ax");
+                fileGenerator.printf("\tpush dx");
                 break;
             case Type.IMAGO:
                 fileGenerator.printf("\txor ax,ax");
@@ -338,9 +338,13 @@ public class CodeGenerator {
                 break;
             case Type.FRACTIO:
                 fileGenerator.printf("\tpop ax");
-                fileGenerator.printf("\tmov word ptr %s[0]", identifier.getName());
+                fileGenerator.printf("\tmov word ptr %s[0],ax", identifier.getName());
                 fileGenerator.printf("\tpop ax");
-                fileGenerator.printf("\tmov word ptr %s[2]", identifier.getName());
+                fileGenerator.printf("\tmov word ptr %s[2],ax", identifier.getName());
+                break;
+            case Type.IMAGO:
+                fileGenerator.printf("\tpop ax");
+                fileGenerator.printf("\tmov %s,al", identifier.getName());
                 break;
             case Type.GREGORIUS:
                 fileGenerator.printf("\tpop ax");
