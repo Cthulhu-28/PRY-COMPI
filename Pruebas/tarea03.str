@@ -1,0 +1,38 @@
+nomen tarea01 .
+commutabilis
+	numerus N . 
+    numerus C .
+firmamentum
+    N := legonumerus( ) . 
+    C := 0 .
+    in N &? ‘0’ certus
+        C := incrementum C .
+    . 
+    in N &? ‘1’ certus
+        C := incrementum C .
+    . 
+    in N &? ‘2’ certus
+        C := incrementum C . 
+    . 
+    in N &? ‘3’ certus
+        C := incrementum C . 
+    . 
+    in N &? ‘4’ certus
+        C := incrementum C . 
+    . 
+    in N &? ‘5’ certus
+        C := incrementum C . 
+    . 
+    in N &? ‘6’ certus
+        C := incrementum C . 
+    . 
+    in N &? ‘7’ certus
+        C := incrementum C . 
+    . 
+    in N &? ‘8’ certus
+        C := incrementum C . 
+    . 
+    in N &? ‘9’ certus
+        C := incrementum C . 
+    . 
+    scribonumerus( C ) .

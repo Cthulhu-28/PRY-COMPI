@@ -1,0 +1,8 @@
+nomen tarea01 .
+commutabilis
+	numerus N . 
+    numerus L . 
+firmamentum
+   N := legonumerus( ) . 
+   L := &# N .
+   scribonumerus( L ) .
