@@ -49,6 +49,7 @@ public class SemanticAnalyzer {
     private Identifier genratorIdentifier;
     private Identifier assign;
     private Identifier callIdentifier;
+    private Identifier forIdentifier;
     private Literal currentLiteral;
     
     private final Stack<ArrayLiteral> arrayStack = new Stack<>();
@@ -482,6 +483,13 @@ public class SemanticAnalyzer {
             case Grammar.CG_CALL:
                 generator.call(callIdentifier);
                 callIdentifier=null;
+                break;
+            case Grammar.CG_SAVE_FOR_ID:
+                generator.putForId(forIdentifier);
+                forIdentifier=null;
+                break;
+            case Grammar.CG_ASSIGN_FOR:
+                generator.assignFor();
                 break;
         }
     }
@@ -1247,19 +1255,43 @@ public class SemanticAnalyzer {
             Type received = globalTable.get(token.getLexeme()).getType().getBaseTypeDepth();
             if(!Type.isCompatible(received.getBaseTypeDepth().getCode(), expected.getCode())){
                 semanticError(3, token,received.toString(),expected.toString());
+            }else{
+                String cast = received.cast(expected.getCode());
+                if(!cast.isEmpty()){
+                    Identifier identifier = new Identifier();
+                    identifier.setName(cast);
+                    generator.call(identifier);
+                }
             }
+            forIdentifier = globalTable.get(token.getLexeme());
         }else if(methodBody && localTable.contains(token.getLexeme())){
             Type expected = typeTable.get("numerus");
             Type received = localTable.get(token.getLexeme()).getType().getBaseTypeDepth();
             if(!Type.isCompatible(received.getBaseTypeDepth().getCode(), expected.getCode())){
                 semanticError(3, token,received.toString(),expected.toString());
+            }else{
+                String cast = received.cast(expected.getCode());
+                if(!cast.isEmpty()){
+                    Identifier identifier = new Identifier();
+                    identifier.setName(cast);
+                    generator.call(identifier);
+                }
             }
+            forIdentifier = localTable.get(token.getLexeme());
         }else if(methodBody && currentMethod != null && currentMethod.containsParameter(token.getLexeme())){
             Type expected = typeTable.get("numerus");
             Type received = currentMethod.getParameter(token.getLexeme()).getType().getBaseTypeDepth();
             if(!Type.isCompatible(received.getBaseTypeDepth().getCode(), expected.getCode())){
                 semanticError(3, token,received.toString(),expected.toString());
+            }else{
+                String cast = received.cast(expected.getCode());
+                if(!cast.isEmpty()){
+                    Identifier identifier = new Identifier();
+                    identifier.setName(cast);
+                    generator.call(identifier);
+                }
             }
+            forIdentifier = currentMethod.getParameter(token.getLexeme());
         }else
             semanticError(8, token);
     }
