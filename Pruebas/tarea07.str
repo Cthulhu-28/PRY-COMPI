@@ -1,0 +1,10 @@
+nomen tarea07 .
+commutabilis
+	numerus N . 
+    imago C .
+    numerus D .
+firmamentum
+    N := legonumerus( ) . 
+    C := legoimago( ) .
+    D := N &? C .
+    scribonumerus( D ) .

@@ -1,0 +1,17 @@
+nomen tarea08 .
+commutabilis
+	numerus N . 
+    imago C .
+    imago R .
+firmamentum
+    N := legonumerus( ) . 
+    C := '0' .
+    R := '0' .
+    tempus C <= '9' opus
+    initum
+        in N &? C certus
+            R := C .
+        .  
+        C := incrementum C .
+    finis
+    scriboimago ( R ) .
