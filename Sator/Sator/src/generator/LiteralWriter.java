@@ -87,7 +87,7 @@ public class LiteralWriter {
        return toNumerus(parts[0])+","+toNumerus(parts[1]);
     }
     public static String toDualis(String literal){
-        return literal.toLowerCase().equals("veridicus")?"0":"1";
+        return literal.toLowerCase().equals("veridicus")?"1":"0";
     }
         
     

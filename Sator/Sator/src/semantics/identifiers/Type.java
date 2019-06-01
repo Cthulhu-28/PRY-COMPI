@@ -254,7 +254,9 @@ public class Type {
         }
         return null;
     }
-    
+    public String cast(int code){
+        return CASTS[getCode()][code];
+    }
     private static final String TYPE[]={"dw","db","dw","db","db","db","db"};
     private static final int SIZE[]={2,1,2,32,165,1,3};
     
@@ -267,6 +269,16 @@ public class Type {
                                                        /*D*/{1,1,1,1,0,1,1},
                                                        /*G*/{1,1,1,1,0,1,1},
                                                        };
+    private static final String CASTS[][] =  {
+                                                {"","num_2_img","num_2_frac","num_2_cat","","num_2_dual","num_2_greg"},
+                                                {"img_2_num","","img_2_frac","img_2_cat","","img_2_dual","img_2_greg"},
+                                                {"frac_2_num","frac_2_img","","frac_2_cat","","frac_2_dual","frac_2_greg"},
+                                                {"cat_2_num","cat_2_img","cat_2_frac","","","cat_2_dual","cat_2_greg"},
+                                                {"","","","","","",""},
+                                                {"dual_2_num","dual_2_img","dual_2_frac","dual_2_cat","","","dual_2_greg"},
+                                                {"greg_2_num","greg_2_img","greg_2_frac","greg_2_cat","","greg_2_dual",""},
+
+                                             };
     public static boolean isCompatible(int from, int to){
         return from >=0 && to >=0 && from < 7 && to < 7 &&  TYPE_COMPATIBILY[from][to] == 1;
     }

@@ -47,6 +47,7 @@ public class SemanticAnalyzer {
     private Identifier currentIdentifier;
     private Identifier currentMethod;
     private Identifier genratorIdentifier;
+    private Identifier assign;
     private Identifier callIdentifier;
     private Literal currentLiteral;
     
@@ -332,6 +333,8 @@ public class SemanticAnalyzer {
                 if(genratorIdentifier!=null && token.getCode()!=27 && genratorIdentifier.getCategory()!=Category.FUNCTION && genratorIdentifier.getCategory()!=Category.PROCEDURE){
                     generator.writePush(genratorIdentifier);
                     genratorIdentifier=null;
+                }else if(token.getCode()==27){
+                    assign=genratorIdentifier;
                 }
                 break;
             case Grammar.CG_INC:
@@ -452,8 +455,8 @@ public class SemanticAnalyzer {
                 generator.or();
                 break;
             case Grammar.CG_ASSIGN:
-                generator.assignValue(last);
-                last=null;
+                generator.assignValue(assign);
+                assign=null;
                 break;
             case Grammar.CG_IF_CERTUS:
                 generator.beginIfCertus();
@@ -1101,6 +1104,13 @@ public class SemanticAnalyzer {
         received = fixType(received, expected);
         if(!Type.isCompatible(received.getCode(), expected.getCode())){
             semanticError(3, getPosition(token),received.toString(),expected.toString());
+        }else{
+            String cast = received.cast(expected.getCode());
+            if(!cast.isEmpty()){
+                Identifier identifier = new Identifier();
+                identifier.setName(cast);
+                generator.call(identifier);
+            }
         }
     }
     private void popImago(Token token){
@@ -1109,6 +1119,13 @@ public class SemanticAnalyzer {
         received = fixType(received, expected);
         if(!Type.isCompatible(received.getCode(), expected.getCode())){
             semanticError(3, getPosition(token),received.toString(),expected.toString());
+        }else{
+            String cast = received.cast(expected.getCode());
+            if(!cast.isEmpty()){
+                Identifier identifier = new Identifier();
+                identifier.setName(cast);
+                generator.call(identifier);
+            }
         }
     }
     private void popCatena(Token token){
@@ -1117,6 +1134,13 @@ public class SemanticAnalyzer {
         received = fixType(received, expected);
         if(!Type.isCompatible(received.getCode(), expected.getCode())){
             semanticError(3, getPosition(token),received.toString(),expected.toString());
+        }else{
+            String cast = received.cast(expected.getCode());
+            if(!cast.isEmpty()){
+                Identifier identifier = new Identifier();
+                identifier.setName(cast);
+                generator.call(identifier);
+            }
         }
     }
     private void popFractio(Token token){
@@ -1125,6 +1149,13 @@ public class SemanticAnalyzer {
         received = fixType(received, expected);
         if(!Type.isCompatible(received.getCode(), expected.getCode())){
             semanticError(3, getPosition(token),received.toString(),expected.toString());
+        }else{
+            String cast = received.cast(expected.getCode());
+            if(!cast.isEmpty()){
+                Identifier identifier = new Identifier();
+                identifier.setName(cast);
+                generator.call(identifier);
+            }
         }
     }
     private void popLiber(Token token){
@@ -1133,6 +1164,13 @@ public class SemanticAnalyzer {
         received = fixType(received, expected);
         if(!Type.isCompatible(received.getCode(), expected.getCode())){
             semanticError(3, getPosition(token),received.toString(),expected.toString());
+        }else{
+            String cast = received.cast(expected.getCode());
+            if(!cast.isEmpty()){
+                Identifier identifier = new Identifier();
+                identifier.setName(cast);
+                generator.call(identifier);
+            }
         }
     }
     private void popDualis(Token token){
@@ -1141,6 +1179,13 @@ public class SemanticAnalyzer {
         received = fixType(received, expected);
         if(!Type.isCompatible(received.getCode(), expected.getCode())){
             semanticError(3, getPosition(token),received.toString(),expected.toString());
+        }else{
+            String cast = received.cast(expected.getCode());
+            if(!cast.isEmpty()){
+                Identifier identifier = new Identifier();
+                identifier.setName(cast);
+                generator.call(identifier);
+            }
         }
     }
     private void popGregorius(Token token){
@@ -1149,6 +1194,13 @@ public class SemanticAnalyzer {
         received = fixType(received, expected);
         if(!Type.isCompatible(received.getCode(), expected.getCode())){
             semanticError(3, getPosition(token),received.toString(),expected.toString());
+        }else{
+            String cast = received.cast(expected.getCode());
+            if(!cast.isEmpty()){
+                Identifier identifier = new Identifier();
+                identifier.setName(cast);
+                generator.call(identifier);
+            }
         }
     }
     private void popType(Token token){
@@ -1164,6 +1216,14 @@ public class SemanticAnalyzer {
             //semanticError(3, getPosition(token),received.toString(),expected.toString());
             if(!Type.isCompatible(received.getCode(), expected.getCode()))
                 semanticError(3, getPosition(token),received.toString(),expected.toString());
+            else{
+                String cast = received.cast(expected.getCode());
+                if(!cast.isEmpty()){
+                    Identifier identifier = new Identifier();
+                    identifier.setName(cast);
+                    generator.call(identifier);
+                }
+            }
         }
     }
     private void popArray(Token token){
