@@ -47,6 +47,7 @@ public class SemanticAnalyzer {
     private Identifier currentIdentifier;
     private Identifier currentMethod;
     private Identifier genratorIdentifier;
+    private Identifier callIdentifier;
     private Literal currentLiteral;
     
     private final Stack<ArrayLiteral> arrayStack = new Stack<>();
@@ -328,8 +329,10 @@ public class SemanticAnalyzer {
                 generator.putLiteral(currentLiteral);
                 break;
             case Grammar.CG_WRITE_STACK:
-                if(token.getCode()!=27)
+                if(genratorIdentifier!=null && token.getCode()!=27 && genratorIdentifier.getCategory()!=Category.FUNCTION && genratorIdentifier.getCategory()!=Category.PROCEDURE){
                     generator.writePush(genratorIdentifier);
+                    genratorIdentifier=null;
+                }
                 break;
             case Grammar.CG_INC:
                 generator.incrementum();
@@ -421,6 +424,15 @@ public class SemanticAnalyzer {
             case Grammar.CG_DATE_MINU:
                 generator.dateMinus();
                 break;
+            case Grammar.CG_GREATER:
+                generator.greater();;
+                break;
+            case Grammar.CG_GREATER_EQ:
+                generator.greaterEq();;
+                break;
+            case Grammar.CG_LESS_EQ:
+                generator.lessEq();;
+                break;
             case Grammar.CG_LESS:
                 generator.less();
                 break;
@@ -442,6 +454,31 @@ public class SemanticAnalyzer {
             case Grammar.CG_ASSIGN:
                 generator.assignValue(last);
                 last=null;
+                break;
+            case Grammar.CG_IF_CERTUS:
+                generator.beginIfCertus();
+                break;
+            case Grammar.CG_IF_MENTIRI:
+                generator.beginIfMentiri();
+                break;
+            case Grammar.CG_IF_THEN:
+                generator.thenBody();
+                break;
+            case Grammar.CG_IF_ELSE:
+                generator.elseBody();
+                break;
+            case Grammar.CG_WHILE_1:
+                generator.whileOne();
+                break;
+            case Grammar.CG_WHILE_2:
+                generator.whileTwo();
+                break;
+            case Grammar.CG_WHILE_3:
+                generator.whileThree();
+                break;
+            case Grammar.CG_CALL:
+                generator.call(callIdentifier);
+                callIdentifier=null;
                 break;
         }
     }
@@ -989,6 +1026,7 @@ public class SemanticAnalyzer {
     private void checkParameters(Token token){
         if(!invocations.isEmpty()){
             Identifier identifier = invocations.peek();
+            callIdentifier=identifier;
             if(identifier.isMethod()){
                 List<Type> order = parameterOrder.pop();
                 boolean matched = order.size() == identifier.getParameters().size();

@@ -13,6 +13,7 @@ import semantics.identifiers.Type;
 import semantics.literals.Literal;
 import semantics.table.SymbolTable;
 import utils.HashMap;
+import utils.Stack;
 
 /**
  *
@@ -23,6 +24,10 @@ public class CodeGenerator {
     private final FileGenerator fileGenerator;
     private final FileGenerator runtime;
     private final FileGenerator literals;
+    private final Stack<String> tagsStack = new Stack<>();
+    private final Stack<String> instrucStack = new Stack<>();
+    private final Stack<String> continueStack = new Stack<>();
+    private final Stack<String> breakStack = new Stack<>();
     private final HashMap<Literal,Identifier> literalsPool = new HashMap<Literal, Identifier>() {
         @Override
         public int hashCode(Literal key) {
@@ -46,12 +51,15 @@ public class CodeGenerator {
         f.mkdir();
         f = new File("output\\"+name);
         f.mkdir();
+        literals = new FileGenerator("output\\"+name+"\\literals.asm");
         name = "output"+"\\"+name+"\\"+name;
         fileGenerator = new FileGenerator(name+".asm");
         runtime = new FileGenerator(name+"_runtime.asm");
-        literals = new FileGenerator(name+"_literals.asm");
+        
     }
     public void close(){
+        fileGenerator.printf("\tmov ax,4c00h");
+        fileGenerator.printf("\tint 21h");
         fileGenerator.printf("end start");
         fileGenerator.close();
         runtime.close();
@@ -73,6 +81,9 @@ public class CodeGenerator {
                 return LiteralWriter.toGregorius(literal);
         }
         return "0";
+    }
+    public void call(Identifier identifier){
+        fileGenerator.printf("\tcall %s", identifier.getName());
     }
     public void addVariable(Identifier identifier){
         String size="";
@@ -102,10 +113,11 @@ public class CodeGenerator {
         fileGenerator.printf(".data");
     }
     public void createCodeSegment(){
-        fileGenerator.printf("\tinclude \"%s\"",name+"_literals.asm");
+        fileGenerator.printf("\tinclude %s","literals.asm");
         fileGenerator.printf(".code");
         fileGenerator.printf(".386");
-        fileGenerator.printf("\tinclude \"%s\"",name+"_runtime.asm"); fileGenerator.printf("start:");
+        fileGenerator.printf("\tinclude %s","runtime.asm"); 
+        fileGenerator.printf("start:");
         fileGenerator.printf("\tmov ax,@data");
         fileGenerator.printf("\tmov ds,ax");
     }
@@ -157,6 +169,7 @@ public class CodeGenerator {
                 fileGenerator.printf("\tmov bx, %d",type.getSize());
                 fileGenerator.printf("%s:",tag);
                 fileGenerator.printf("\tdec bx");
+                fileGenerator.printf("\txor ax,ax");
                 fileGenerator.printf("\tmov al,%s[bx]",identifier.getName());
                 fileGenerator.printf("\tpush ax");
                 fileGenerator.printf("\tcmp bx,0");
@@ -340,6 +353,66 @@ public class CodeGenerator {
                 fileGenerator.printf("jbe %s",tag);
                 break;
         }
+    }
+    public void beginIfCertus(){
+       fileGenerator.printf("\tpop ax");
+        fileGenerator.printf("\tcmp ax,0");
+        String tag = TagGenerator.getGenerator().nextTag();
+        String tag2 = TagGenerator.getGenerator().nextTag();
+        fileGenerator.printf("\tjne %s", tag);
+        tagsStack.push(tag2);
+        fileGenerator.printf("\tjmp %s", tag2);
+        fileGenerator.printf("%s:", tag);
+    }
+    public void beginIfMentiri(){
+        fileGenerator.printf("\tpop ax");
+        fileGenerator.printf("\tcmp ax,0");
+        String tag = TagGenerator.getGenerator().nextTag();
+        String tag2 = TagGenerator.getGenerator().nextTag();
+        fileGenerator.printf("\tje %s", tag);
+        tagsStack.push(tag2);
+        fileGenerator.printf("\tjmp %s", tag2);
+        fileGenerator.printf("%s:", tag);
+        
+    }
+    public void thenBody(){
+        String tag = TagGenerator.getGenerator().nextTag();
+        String tag2 = tagsStack.pop();
+        fileGenerator.printf("\tjmp %s", tag); 
+        fileGenerator.printf("%s:", tag2);
+        tagsStack.push(tag);
+    }
+    public void elseBody(){
+        String tag = tagsStack.pop();
+        fileGenerator.printf("%s:", tag);
+    }
+    
+    public void whileOne(){
+        String tag = TagGenerator.getGenerator().nextTag();
+        fileGenerator.printf("%s:",tag);
+        instrucStack.push(tag);
+        continueStack.push(tag);
+    }
+    public void whileTwo(){
+        fileGenerator.printf("\tpop ax");
+        fileGenerator.printf("\tcmp ax,0");
+        String tag = TagGenerator.getGenerator().nextTag();
+        fileGenerator.printf("\tjne %s", tag);
+        
+        String tagSalir = TagGenerator.getGenerator().nextTag();
+        fileGenerator.printf("\tjmp %s", tagSalir);
+        fileGenerator.printf("%s:", tag);
+        
+        instrucStack.push(tagSalir);
+        breakStack.push(tagSalir);
+    }
+    public void whileThree(){
+        String salir = instrucStack.pop();
+        String ciclo = instrucStack.pop();
+        fileGenerator.printf("\tjmp %s", ciclo);
+        fileGenerator.printf("%s:", salir);
+        breakStack.pop();
+        continueStack.pop();
     }
     
     

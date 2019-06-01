@@ -27,7 +27,7 @@ public class FileGenerator extends PrintWriter{
             return super.printf(string, os);
         }
         else
-            return super.printf("\n"+string, os);
+            return super.printf("\r\n"+string, os);
     }
 
     public String getPath() {

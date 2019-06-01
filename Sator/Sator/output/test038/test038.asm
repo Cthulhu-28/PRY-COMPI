@@ -5,25 +5,26 @@
 	 A db 2 dup (0)
 	 X db 2,58,118,29 dup (0)
 	 g db 0fa021h
-	include "test036_literals.asm"
+	include "test038_literals.asm"
 .code
 .386
-	include "test036_runtime.asm"
+	include "test038_runtime.asm"
 start:
 	mov ax,@data
 	mov ds,ax
+tag000:
 	push A
-	push N
+	push _lit000
+	call equal
 	pop ax
 	cmp ax,0
-
-je tag000:
-
-jmp tag001
-tag000:
-	push _lit000
-	pop A
+	jne tag001
+	jmp tag002
 tag001:
 	push _lit001
-	pop N
+	pop A
+	jmp tag000
+tag002:
+	push _lit001
+	pop A
 end start
