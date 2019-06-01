@@ -6,6 +6,6 @@ commutabilis
 firmamentum
     N := legonumerus( ) . 
     C := legoimago( ) .
-    D := &# N - ( C &? N ) .
+    D := &# N - ( N &? C ) .
     D := incrementum D .
     scribonumerus( D ) .
