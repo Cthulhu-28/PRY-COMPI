@@ -1,0 +1,8 @@
+nomen tarea09 .
+commutabilis
+	fractio F .
+    numerus D . 
+firmamentum
+    F := legofractio( ) . 
+    D := || F .
+    scribonumerus( D ) .
