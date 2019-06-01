@@ -12,14 +12,14 @@ package parser;
 public class Program {
     public static void main(String[] args){
         try {
-//            if(args.length<1){
-//                throw new Exception("Un parámetro esperados");
-//            }
-            String path = "C:\\Users\\admin\\Documents\\TEC\\2019\\I Semestre\\Compiladores e Interpretes\\Proyecto\\Etapa 4\\Pruebas\\tarea04.str"; //args[0];
+            if(args.length<1){
+                throw new Exception("Un parámetro esperados");
+            }
+            String path = args[0];
             Parser parser = Parser.initParser(path);
             parser.parse();
         } catch (Exception e) {
-            e.printStackTrace();
+            //e.printStackTrace();
             System.err.println(e.getMessage());
         }
     }
